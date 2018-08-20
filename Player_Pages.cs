@@ -60,14 +60,36 @@ namespace ExtensibleInventory {
 		}
 
 		public void ScrollPageUp() {
-			if( this.CurrentPage <= 0 ) { return; }
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.CanScrollPages ) {
+				Main.NewText( "Inventory scrolling disabled.", Color.Red );
+				return;
+			}
+			if( this.CanScrollPages() ) {
+				return;
+			}
+			if( this.CurrentPage <= 0 ) {
+				return;
+			}
 
 			this.DumpInventoryToPage( this.CurrentPage-- );
 			this.DumpPageToInventory( this.CurrentPage );
 		}
 
 		public void ScrollPageDown() {
-			if( this.CurrentPage >= (this.Pages.Count - 1) ) { return; }
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.CanScrollPages ) {
+				Main.NewText( "Inventory scrolling disabled.", Color.Red );
+				return;
+			}
+			if( this.CanScrollPages() ) {
+				return;
+			}
+			if( this.CurrentPage >= (this.Pages.Count - 1) ) {
+				return;
+			}
 
 			this.DumpInventoryToPage( this.CurrentPage++ );
 			this.DumpPageToInventory( this.CurrentPage );
@@ -93,9 +115,9 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool CanAddPages() {
+		public bool CanAddPage( int page_num ) {
 			var mymod = (ExtensibleInventoryMod)this.mod;
-
+			
 			if( !mymod.Config.CanAddPages ) {
 				return false;
 			}
@@ -103,7 +125,7 @@ namespace ExtensibleInventory {
 			return this.Pages.Count < mymod.Config.MaxPages;
 		}
 
-		public bool CanDeleteCurrentPage() {
+		public bool CanDeletePage( int page_num ) {
 			var mymod = (ExtensibleInventoryMod)this.mod;
 
 			if( !mymod.Config.CanDeletePages ) {
@@ -116,8 +138,14 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public bool InsertAtCurrentPage() {
-			if( !this.CanAddPages() ) {
-				Main.NewText( "Max pages reached.", Color.Yellow );
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.CanAddPages ) {
+				Main.NewText( "Page adding disabled.", Color.Red );
+				return false;
+			}
+			if( !this.CanAddPage( this.CurrentPage ) ) {
+				Main.NewText( "Max pages reached.", Color.Red );
 				return false;
 			}
 
@@ -128,8 +156,14 @@ namespace ExtensibleInventory {
 		}
 
 		public bool DeleteCurrentPage() {
-			if( !this.CanDeleteCurrentPage() ) {
-				Main.NewText( "Cannot delete non-empty inventory pages.", Color.Yellow );
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.CanDeletePages ) {
+				Main.NewText( "Page deletion disabled.", Color.Red );
+				return false;
+			}
+			if( !this.CanDeletePage( this.CurrentPage ) ) {
+				Main.NewText( "Cannot delete non-empty inventory pages.", Color.Red );
 				return false;
 			}
 

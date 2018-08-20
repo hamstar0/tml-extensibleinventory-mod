@@ -37,11 +37,11 @@ namespace ExtensibleInventory {
 		public override void Load() {
 			ExtensibleInventoryMod.Instance = this;
 
+			this.LoadConfig();
+
 			if( !Main.dedServ ) {
 				this.InitializeUI();
 			}
-
-			this.LoadConfig();
 		}
 
 		private void LoadConfig() {

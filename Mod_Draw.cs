@@ -70,47 +70,24 @@ namespace ExtensibleInventory {
 		}
 
 
-		public override void OnActivate() {
-			base.OnActivate();
-
-			if( Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
-				return;
-			}
-
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-
-			if( !myplayer.CanScrollPages() ) {
-				this.ButtonLeft.Deactivate();
-				this.ButtonRight.Deactivate();
-			}
-			if( !myplayer.CanAddPages() ) {
-				this.ButtonAdd.Deactivate();
-			}
-			if( !myplayer.CanDeleteCurrentPage() ) {
-				this.ButtonSub.Deactivate();
-			}
-		}
-
+		////////////////
 
 		public override void Draw( SpriteBatch sb ) {
 			base.Draw( sb );
-
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			
 			var pos = new Vector2( Main.mouseX, Main.mouseY + 16 );
-
-			if( myplayer.CanScrollPages() ) {
-				if( this.ButtonLeft.IsMouseHovering ) {
-					sb.DrawString( Main.fontMouseText, "Scroll inventory up", pos, Color.White );
-				}
-				if( this.ButtonRight.IsMouseHovering ) {
-					sb.DrawString( Main.fontMouseText, "Scroll inventory down", pos, Color.White );
-				}
-				if( this.ButtonAdd.IsMouseHovering ) {
-					sb.DrawString( Main.fontMouseText, "Add new inventory page", pos, Color.White );
-				}
-				if( this.ButtonSub.IsMouseHovering ) {
-					sb.DrawString( Main.fontMouseText, "Remove current inventory page", pos, Color.White );
-				}
+			
+			if( this.ButtonLeft.IsMouseHovering ) {
+				sb.DrawString( Main.fontMouseText, "Scroll inventory up", pos, Color.White );
+			}
+			if( this.ButtonRight.IsMouseHovering ) {
+				sb.DrawString( Main.fontMouseText, "Scroll inventory down", pos, Color.White );
+			}
+			if( this.ButtonAdd.IsMouseHovering ) {
+				sb.DrawString( Main.fontMouseText, "Add new inventory page", pos, Color.White );
+			}
+			if( this.ButtonSub.IsMouseHovering ) {
+				sb.DrawString( Main.fontMouseText, "Remove current inventory page", pos, Color.White );
 			}
 		}
 	}
