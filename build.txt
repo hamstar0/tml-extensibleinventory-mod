@@ -1,0 +1,7 @@
+author = hamstar
+version = 1.0.0
+displayName = Unlimited Inventory
+modReferences = HamstarHelpers@2.0.3.1
+buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
+languageVersion = 6
+homepage = https://forums.terraria.org/index.php?threads/licenses-unlock-items-as-you-progress.69438/
