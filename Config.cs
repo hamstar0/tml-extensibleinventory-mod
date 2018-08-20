@@ -13,7 +13,10 @@ namespace ExtensibleInventory {
 		public string VersionSinceUpdate = "";
 
 		public bool DebugInfoMode = false;
-		
+
+		public float OffsetX = 224f;
+		public float OffsetY = 256f;
+
 
 
 		////////////////

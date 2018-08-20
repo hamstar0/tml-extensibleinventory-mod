@@ -9,16 +9,18 @@ using Terraria.UI;
 namespace ExtensibleInventory {
 	internal class InventoryPageScrollerUI : UIState {
 		public override void OnInitialize() {
+			var mymod = ExtensibleInventoryMod.Instance;
+
 			UIImageButton button_left = new UIImageButton( ExtensibleInventoryMod.ButtonLeft );
-			button_left.Left.Set( 256f, 0f );
-			button_left.Top.Set( 256f, 0f );
+			button_left.Top.Set( mymod.Config.OffsetY, 0f );
+			button_left.Left.Set( mymod.Config.OffsetX, 0f );
 			button_left.OnClick += delegate( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer.ScrollPageUp();
 			};
 			UIImageButton button_right = new UIImageButton( ExtensibleInventoryMod.ButtonRight );
-			button_right.Left.Set( 288f, 0f );
-			button_right.Top.Set( 256f, 0f );
+			button_right.Top.Set( mymod.Config.OffsetY, 0f );
+			button_right.Left.Set( mymod.Config.OffsetX + 96f, 0f );
 			button_right.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer.ScrollPageDown();
@@ -66,6 +68,8 @@ namespace ExtensibleInventory {
 				
 				this.InvUI.Update( Main._drawInterfaceGameTime );
 				this.InvPageScroller.Draw( Main.spriteBatch );
+
+				Main.spriteBatch.DrawString( Main.fontMouseText,  )
 
 				return true;
 			};

@@ -5,7 +5,7 @@ using Terraria.ModLoader.IO;
 
 
 namespace ExtensibleInventory {
-	class ExtensibleInventoryPlayer : ModPlayer {
+	partial class ExtensibleInventoryPlayer : ModPlayer {
 		public const int BasePageCapacity = 40;
 
 

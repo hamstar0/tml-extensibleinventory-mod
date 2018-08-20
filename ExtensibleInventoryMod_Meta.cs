@@ -8,7 +8,7 @@ using Terraria.ModLoader;
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryMod : Mod {
 		public static string GithubUserName { get { return "hamstar0"; } }
-		public static string GithubProjectName { get { return "tml-unlimitedinventory-mod"; } }
+		public static string GithubProjectName { get { return "tml-extensibleinventory-mod"; } }
 
 		public static string ConfigFileRelativePath {
 			get { return ConfigurationDataBase.RelativePath + Path.DirectorySeparatorChar + ExtensibleInventoryConfigData.ConfigFileName; }

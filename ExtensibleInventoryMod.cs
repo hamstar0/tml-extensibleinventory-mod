@@ -28,9 +28,11 @@ namespace ExtensibleInventory {
 				AutoloadSounds = true
 			};
 			
-			this.ConfigJson = new JsonConfig<ExtensibleInventoryConfigData>( ExtensibleInventoryConfigData.ConfigFileName,
+			this.ConfigJson = new JsonConfig<ExtensibleInventoryConfigData>(
+				ExtensibleInventoryConfigData.ConfigFileName,
 				ConfigurationDataBase.RelativePath,
-				new ExtensibleInventoryConfigData() );
+				new ExtensibleInventoryConfigData()
+			);
 		}
 
 		public override void Load() {

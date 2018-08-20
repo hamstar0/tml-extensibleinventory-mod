@@ -1,6 +1,6 @@
 author = hamstar
 version = 1.0.0
-displayName = Unlimited Inventory
+displayName = Extensible Inventory
 modReferences = HamstarHelpers@2.0.3.1
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 languageVersion = 6
