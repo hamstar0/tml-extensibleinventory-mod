@@ -76,8 +76,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
+    <Content Include="ButtonAdd.png" />
     <Content Include="ButtonLeft.png" />
     <Content Include="ButtonRight.png" />
+    <Content Include="ButtonSub.png" />
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,5 @@
 using HamstarHelpers.Components.Config;
 using HamstarHelpers.Helpers.DebugHelpers;
-using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -59,9 +58,6 @@ namespace ExtensibleInventory {
 
 		public override void Unload() {
 			ExtensibleInventoryMod.Instance = null;
-
-			ExtensibleInventoryMod.ButtonRight = null;
-			ExtensibleInventoryMod.ButtonLeft = null;
 		}
 
 

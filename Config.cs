@@ -17,6 +17,12 @@ namespace ExtensibleInventory {
 		public float OffsetX = 192f;
 		public float OffsetY = 256f;
 
+		public bool CanScrollPages = true;
+		public bool CanAddPages = true;
+		public bool CanDeletePages = true;
+
+		public int MaxPages = 99;
+
 
 
 		////////////////

@@ -10,26 +10,50 @@ using Terraria.UI;
 
 namespace ExtensibleInventory {
 	internal class InventoryPageScrollerUI : UIState {
+		internal Texture2D ButtonRight;
+		internal Texture2D ButtonLeft;
+		internal Texture2D ButtonAdd;
+
+
+		////////////////
+
+		public InventoryPageScrollerUI( ExtensibleInventoryMod mymod ) : base() {
+			this.ButtonRight = mymod.GetTexture( "ButtonRight" );
+			this.ButtonLeft = mymod.GetTexture( "ButtonLeft" );
+			this.ButtonLeft = mymod.GetTexture( "ButtonAdd" );
+		}
+
 		public override void OnInitialize() {
 			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			UIImageButton button_left = new UIImageButton( ExtensibleInventoryMod.ButtonLeft );
+			UIImageButton button_left = new UIImageButton( this.ButtonLeft );
 			button_left.Top.Set( mymod.Config.OffsetY, 0f );
 			button_left.Left.Set( mymod.Config.OffsetX, 0f );
 			button_left.OnClick += delegate( UIMouseEvent evt, UIElement listening_elem ) {
-				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				myplayer.ScrollPageUp();
+				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				myplayer2.ScrollPageUp();
 			};
-			UIImageButton button_right = new UIImageButton( ExtensibleInventoryMod.ButtonRight );
+			UIImageButton button_right = new UIImageButton( this.ButtonRight );
 			button_right.Top.Set( mymod.Config.OffsetY, 0f );
 			button_right.Left.Set( mymod.Config.OffsetX + 112f, 0f );
 			button_right.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
-				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				myplayer.ScrollPageDown();
+				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				myplayer2.ScrollPageDown();
+			};
+			UIImageButton button_add = new UIImageButton( this.ButtonRight );
+			button_add.Top.Set( mymod.Config.OffsetY, 0f );
+			button_add.Left.Set( mymod.Config.OffsetX + 144f, 0f );
+			button_add.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				myplayer2.InsertAtCurrentPage();
 			};
 
 			base.Append( button_left );
 			base.Append( button_right );
+			if( myplayer.CanAddPages() ) {
+				base.Append( button_add );
+			}
 		}
 	}
 
@@ -37,25 +61,15 @@ namespace ExtensibleInventory {
 
 
 	partial class ExtensibleInventoryMod : Mod {
-		internal static Texture2D ButtonRight;
-		internal static Texture2D ButtonLeft;
-
-
-		////////////////
-
 		private UserInterface InvUI;
 		private InventoryPageScrollerUI InvPageScroller;
 
-
-
+		
 		////////////////
 
 		private void InitializeUI() {
-			ExtensibleInventoryMod.ButtonRight = this.GetTexture( "ButtonRight" );
-			ExtensibleInventoryMod.ButtonLeft = this.GetTexture( "ButtonLeft" );
-
 			this.InvUI = new UserInterface();
-			this.InvPageScroller = new InventoryPageScrollerUI();
+			this.InvPageScroller = new InventoryPageScrollerUI( this );
 			this.InvUI.SetState( this.InvPageScroller );
 		}
 
