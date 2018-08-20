@@ -66,7 +66,7 @@ namespace ExtensibleInventory {
 				Main.NewText( "Inventory scrolling disabled.", Color.Red );
 				return;
 			}
-			if( this.CanScrollPages() ) {
+			if( !this.CanScrollPages() ) {
 				return;
 			}
 			if( this.CurrentPage <= 0 ) {
@@ -84,7 +84,7 @@ namespace ExtensibleInventory {
 				Main.NewText( "Inventory scrolling disabled.", Color.Red );
 				return;
 			}
-			if( this.CanScrollPages() ) {
+			if( !this.CanScrollPages() ) {
 				return;
 			}
 			if( this.CurrentPage >= (this.Pages.Count - 1) ) {

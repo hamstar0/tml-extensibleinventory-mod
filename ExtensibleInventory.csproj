@@ -42,6 +42,7 @@
     <Compile Include="Player_Pages.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Mod.cs" />
+    <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HamstarHelpers">
