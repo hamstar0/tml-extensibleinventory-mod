@@ -37,10 +37,11 @@
     <Compile Include="API.cs" />
     <Compile Include="API_Call.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="ExtensibleInventoryMod_Draw.cs" />
-    <Compile Include="ExtensibleInventoryMod_Meta.cs" />
-    <Compile Include="ExtensibleInventoryPlayer.cs" />
-    <Compile Include="ExtensibleInventoryMod.cs" />
+    <Compile Include="Mod_Draw.cs" />
+    <Compile Include="Mod_Meta.cs" />
+    <Compile Include="Player_Pages.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Mod.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HamstarHelpers">
