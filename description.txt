@@ -1,1 +1,1 @@
-Implements an extensible, paginated inventory for players able to be scaled endlessly.
+Implements an extensible, paginated inventory for players, able to be scaled endlessly.

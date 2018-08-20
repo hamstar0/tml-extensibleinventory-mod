@@ -1,5 +1,5 @@
 # Extensible Inventory
 
-Implements an extensible, paginated inventory for players able to be scaled endlessly.
+Implements an extensible, paginated inventory for players, able to be scaled endlessly.
 
-https://forums.terraria.org/index.php?threads/encumbrance-inventory-use-burdens-your-movement.71971/
+https://forums.terraria.org/index.php?threads/extensible-inventory-limitless-paginated-inventory.72024/

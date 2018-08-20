@@ -4,4 +4,4 @@ displayName = Extensible Inventory
 modReferences = HamstarHelpers@2.0.3.1
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 languageVersion = 6
-homepage = https://forums.terraria.org/index.php?threads/licenses-unlock-items-as-you-progress.69438/
+homepage = https://forums.terraria.org/index.php?threads/extensible-inventory-limitless-paginated-inventory.72024/
