@@ -33,7 +33,7 @@ namespace ExtensibleInventory {
 			int curr_page = tags.GetInt( "curr_page" );
 
 			for( int i=0; i<pages; i++ ) {
-				Item[] page = new Item[ ExtensibleInventoryPlayer.BasePageCapacity ];
+				Item[] page = this.CreateBlankPage();
 				this.Pages.Add( page );
 
 				if( i == curr_page ) { continue; }

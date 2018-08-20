@@ -1,3 +1,5 @@
+using HamstarHelpers.Helpers.DebugHelpers;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
@@ -10,11 +12,20 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool IsCurrentPageEmpty() {
-			var page = this.Pages[this.CurrentPage];
+		public bool IsInventoryEmpty() {
+			for( int i = 10; i < 50; i++ ) {
+				if( !this.player.inventory[i].IsAir ) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public bool IsPageEmpty( int page_num ) {
+			var page = this.Pages[page_num];
 
 			for( int i=0; i<ExtensibleInventoryPlayer.BasePageCapacity; i++ ) {
-				if( page[i].active ) {
+				if( !page[i].IsAir ) {
 					return false;
 				}
 			}
@@ -99,13 +110,14 @@ namespace ExtensibleInventory {
 				return false;
 			}
 
-			return this.Pages.Count > 1 && this.IsCurrentPageEmpty();
+			return this.Pages.Count > 1 && this.IsInventoryEmpty();
 		}
 
 		////////////////
 
 		public bool InsertAtCurrentPage() {
 			if( !this.CanAddPages() ) {
+				Main.NewText( "Max pages reached.", Color.Yellow );
 				return false;
 			}
 
@@ -117,6 +129,7 @@ namespace ExtensibleInventory {
 
 		public bool DeleteCurrentPage() {
 			if( !this.CanDeleteCurrentPage() ) {
+				Main.NewText( "Cannot delete non-empty inventory pages.", Color.Yellow );
 				return false;
 			}
 
@@ -124,8 +137,8 @@ namespace ExtensibleInventory {
 
 			if( this.CurrentPage >= this.Pages.Count ) {
 				this.CurrentPage = this.Pages.Count - 1;
-				this.DumpPageToInventory( this.CurrentPage );
 			}
+			this.DumpPageToInventory( this.CurrentPage );
 
 			return true;
 		}

@@ -10,49 +10,107 @@ using Terraria.UI;
 
 namespace ExtensibleInventory {
 	internal class InventoryPageScrollerUI : UIState {
-		internal Texture2D ButtonRight;
-		internal Texture2D ButtonLeft;
-		internal Texture2D ButtonAdd;
+		internal Texture2D ButtonRightTex;
+		internal Texture2D ButtonLeftTex;
+		internal Texture2D ButtonAddTex;
+		internal Texture2D ButtonSubTex;
+
+		private UIImageButton ButtonLeft;
+		private UIImageButton ButtonRight;
+		private UIImageButton ButtonAdd;
+		private UIImageButton ButtonSub;
 
 
 		////////////////
 
 		public InventoryPageScrollerUI( ExtensibleInventoryMod mymod ) : base() {
-			this.ButtonRight = mymod.GetTexture( "ButtonRight" );
-			this.ButtonLeft = mymod.GetTexture( "ButtonLeft" );
-			this.ButtonLeft = mymod.GetTexture( "ButtonAdd" );
+			this.ButtonRightTex = mymod.GetTexture( "ButtonRight" );
+			this.ButtonLeftTex = mymod.GetTexture( "ButtonLeft" );
+			this.ButtonAddTex = mymod.GetTexture( "ButtonAdd" );
+			this.ButtonSubTex = mymod.GetTexture( "ButtonSub" );
 		}
+
 
 		public override void OnInitialize() {
 			var mymod = ExtensibleInventoryMod.Instance;
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			UIImageButton button_left = new UIImageButton( this.ButtonLeft );
-			button_left.Top.Set( mymod.Config.OffsetY, 0f );
-			button_left.Left.Set( mymod.Config.OffsetX, 0f );
-			button_left.OnClick += delegate( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonLeft = new UIImageButton( this.ButtonLeftTex );
+			this.ButtonLeft.Top.Set( mymod.Config.OffsetY, 0f );
+			this.ButtonLeft.Left.Set( mymod.Config.OffsetX, 0f );
+			this.ButtonLeft.OnClick += delegate( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.ScrollPageUp();
 			};
-			UIImageButton button_right = new UIImageButton( this.ButtonRight );
-			button_right.Top.Set( mymod.Config.OffsetY, 0f );
-			button_right.Left.Set( mymod.Config.OffsetX + 112f, 0f );
-			button_right.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonRight = new UIImageButton( this.ButtonRightTex );
+			this.ButtonRight.Top.Set( mymod.Config.OffsetY, 0f );
+			this.ButtonRight.Left.Set( mymod.Config.OffsetX + 112f, 0f );
+			this.ButtonRight.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.ScrollPageDown();
 			};
-			UIImageButton button_add = new UIImageButton( this.ButtonRight );
-			button_add.Top.Set( mymod.Config.OffsetY, 0f );
-			button_add.Left.Set( mymod.Config.OffsetX + 144f, 0f );
-			button_add.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonAdd = new UIImageButton( this.ButtonAddTex );
+			this.ButtonAdd.Top.Set( mymod.Config.OffsetY, 0f );
+			this.ButtonAdd.Left.Set( mymod.Config.OffsetX + 144f, 0f );
+			this.ButtonAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.InsertAtCurrentPage();
 			};
+			this.ButtonSub = new UIImageButton( this.ButtonSubTex );
+			this.ButtonSub.Top.Set( mymod.Config.OffsetY, 0f );
+			this.ButtonSub.Left.Set( mymod.Config.OffsetX + 172f, 0f );
+			this.ButtonSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				myplayer2.DeleteCurrentPage();
+			};
 
-			base.Append( button_left );
-			base.Append( button_right );
-			if( myplayer.CanAddPages() ) {
-				base.Append( button_add );
+			base.Append( this.ButtonLeft );
+			base.Append( this.ButtonRight );
+			base.Append( this.ButtonAdd );
+			base.Append( this.ButtonSub );
+		}
+
+
+		public override void OnActivate() {
+			base.OnActivate();
+
+			if( Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
+				return;
+			}
+
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+
+			if( !myplayer.CanScrollPages() ) {
+				this.ButtonLeft.Deactivate();
+				this.ButtonRight.Deactivate();
+			}
+			if( !myplayer.CanAddPages() ) {
+				this.ButtonAdd.Deactivate();
+			}
+			if( !myplayer.CanDeleteCurrentPage() ) {
+				this.ButtonSub.Deactivate();
+			}
+		}
+
+
+		public override void Draw( SpriteBatch sb ) {
+			base.Draw( sb );
+
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var pos = new Vector2( Main.mouseX, Main.mouseY + 16 );
+
+			if( myplayer.CanScrollPages() ) {
+				if( this.ButtonLeft.IsMouseHovering ) {
+					sb.DrawString( Main.fontMouseText, "Scroll inventory up", pos, Color.White );
+				}
+				if( this.ButtonRight.IsMouseHovering ) {
+					sb.DrawString( Main.fontMouseText, "Scroll inventory down", pos, Color.White );
+				}
+				if( this.ButtonAdd.IsMouseHovering ) {
+					sb.DrawString( Main.fontMouseText, "Add new inventory page", pos, Color.White );
+				}
+				if( this.ButtonSub.IsMouseHovering ) {
+					sb.DrawString( Main.fontMouseText, "Remove current inventory page", pos, Color.White );
+				}
 			}
 		}
 	}
@@ -65,6 +123,7 @@ namespace ExtensibleInventory {
 		private InventoryPageScrollerUI InvPageScroller;
 
 		
+
 		////////////////
 
 		private void InitializeUI() {
@@ -73,7 +132,9 @@ namespace ExtensibleInventory {
 			this.InvUI.SetState( this.InvPageScroller );
 		}
 
-		
+
+		////////////////
+
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
 			int layer_idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Inventory" ) );
 			if( layer_idx == -1 ) { return; }
