@@ -14,7 +14,7 @@ namespace ExtensibleInventory {
 
 		public bool DebugInfoMode = false;
 
-		public float OffsetX = 224f;
+		public float OffsetX = 192f;
 		public float OffsetY = 256f;
 
 

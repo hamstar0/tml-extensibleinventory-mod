@@ -61,5 +61,12 @@ namespace ExtensibleInventory {
 				this.Pages[page_num][i] = new Item();
 			}
 		}
+
+
+		////////////////
+
+		public string RenderPagePosition() {
+			return (this.CurrentPage+1) + " / " + this.Pages.Count;
+		}
 	}
 }

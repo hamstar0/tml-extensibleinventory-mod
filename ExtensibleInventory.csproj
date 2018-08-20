@@ -70,6 +70,9 @@
     <Reference Include="Terraria">
       <HintPath>C:\Program Files (x86)\Steam\steamapps\common\terraria\Terraria.exe</HintPath>
     </Reference>
+    <Reference Include="Terraria.Libraries.ReLogic.ReLogic">
+      <HintPath>..\..\..\Reference\Terraria.Libraries.ReLogic.ReLogic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />

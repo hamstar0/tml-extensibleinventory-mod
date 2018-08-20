@@ -49,6 +49,7 @@ namespace ExtensibleInventory {
 				}
 			}
 
+			this.CurrentPage = curr_page;
 			this.MaxPage = this.Pages.Count;
 		}
 

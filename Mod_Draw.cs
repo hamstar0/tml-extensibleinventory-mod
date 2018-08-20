@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Graphics;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
@@ -20,7 +22,7 @@ namespace ExtensibleInventory {
 			};
 			UIImageButton button_right = new UIImageButton( ExtensibleInventoryMod.ButtonRight );
 			button_right.Top.Set( mymod.Config.OffsetY, 0f );
-			button_right.Left.Set( mymod.Config.OffsetX + 96f, 0f );
+			button_right.Left.Set( mymod.Config.OffsetX + 112f, 0f );
 			button_right.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer.ScrollPageDown();
@@ -30,6 +32,7 @@ namespace ExtensibleInventory {
 			base.Append( button_right );
 		}
 	}
+
 
 
 
@@ -62,14 +65,21 @@ namespace ExtensibleInventory {
 			if( layer_idx == -1 ) { return; }
 
 			GameInterfaceDrawMethod control_ui = delegate {
-				if( !Main.playerInventory ) {
+				if( !Main.playerInventory || Main.myPlayer < 0 || Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
 					return true;
 				}
-				
-				this.InvUI.Update( Main._drawInterfaceGameTime );
-				this.InvPageScroller.Draw( Main.spriteBatch );
 
-				Main.spriteBatch.DrawString( Main.fontMouseText,  )
+				var mymod = ExtensibleInventoryMod.Instance;
+				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				string text = myplayer.RenderPagePosition();
+
+				float text_wid = Main.fontMouseText.MeasureString( text ).X;
+				var text_pos = new Vector2( mymod.Config.OffsetX + 20f + (48f - text_wid/2f), mymod.Config.OffsetY );
+
+				mymod.InvUI.Update( Main._drawInterfaceGameTime );
+				mymod.InvPageScroller.Draw( Main.spriteBatch );
+
+				Main.spriteBatch.DrawString( Main.fontMouseText, text, text_pos, Color.White );
 
 				return true;
 			};
