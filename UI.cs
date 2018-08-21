@@ -73,19 +73,24 @@ namespace ExtensibleInventory {
 		public override void Draw( SpriteBatch sb ) {
 			base.Draw( sb );
 
+			var mymod = ExtensibleInventoryMod.Instance;
 			var pos = new Vector2( Main.mouseX, Main.mouseY + 16 );
 
 			if( this.ButtonLeft.IsMouseHovering ) {
-				sb.DrawString( Main.fontMouseText, "Scroll inventory up", pos, Color.White );
+				string text = "Scroll inventory up" + (mymod.Config.CanScrollPages ? "" : " (disabled)");
+				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 			if( this.ButtonRight.IsMouseHovering ) {
-				sb.DrawString( Main.fontMouseText, "Scroll inventory down", pos, Color.White );
+				string text = "Scroll inventory down" + ( mymod.Config.CanScrollPages ? "" : " (disabled)" );
+				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 			if( this.ButtonAdd.IsMouseHovering ) {
-				sb.DrawString( Main.fontMouseText, "Add new inventory page", pos, Color.White );
+				string text = "Add new inventory page" + ( mymod.Config.CanAddPages ? "" : " (disabled)" );
+				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 			if( this.ButtonSub.IsMouseHovering ) {
-				sb.DrawString( Main.fontMouseText, "Remove current inventory page", pos, Color.White );
+				string text = "Remove current inventory page" + ( mymod.Config.CanDeletePages ? "" : " (disabled)" );
+				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 		}
 	}
