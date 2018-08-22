@@ -61,7 +61,7 @@ namespace ExtensibleInventory {
 			this.ButtonPageAdd = new UIImageButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				myplayer2.Library.CurrentBook.InsertAtCurrentPage( Main.LocalPlayer );
+				myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer );
 			};
 			this.ButtonPageSub = new UIImageButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
@@ -82,22 +82,23 @@ namespace ExtensibleInventory {
 		private void InitializeLibraryBooks() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			IDictionary<string, InventoryBook> enabled_books = myplayer.Library.EnabledBooks;
 			int i = 0;
 
-			if( myplayer.Library.Books.Count == 1 ) {
+			if( enabled_books.Count == 1 ) {
 				return;
 			}
 
 			this.ButtonBooks = new Dictionary<string, UIImageButton>();
 
-			foreach( string book_name in myplayer.Library.Books.Keys ) {
+			foreach( string book_name in enabled_books.Keys ) {
 				Texture2D tex = book_name == myplayer.Library.CurrentBook.Name ?
 					this.ButtonBookLitTex : this.ButtonBookTex;
 				
 				var button = new UIImageButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-					myplayer2.Library.SetBook( book_name );
+					myplayer2.Library.ChangeBook( book_name );
 
 					this.ButtonBooks[ book_name ].SetImage( this.ButtonBookTex );
 					button.SetImage( this.ButtonBookLitTex );

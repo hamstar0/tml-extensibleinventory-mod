@@ -1,31 +1,24 @@
 using System.Collections.Generic;
-using Terraria;
 using Terraria.ModLoader.IO;
 
 
 namespace ExtensibleInventory {
 	partial class InventoryLibrary {
-		internal IDictionary<string, InventoryBook> Books = new Dictionary<string, InventoryBook>();
+		private IDictionary<string, InventoryBook> Books = new Dictionary<string, InventoryBook>();
 
 		private string CurrBookName = "Default";
-		
-		////////////////
-
-		public InventoryBook CurrentBook {
-			get { return this.Books[ this.CurrBookName ]; }
-		}
 
 
 
 		////////////////
-		
-		public InventoryLibrary() {
-			this.Books[ this.CurrBookName ] = new InventoryBook( this.CurrBookName );
+
+		internal InventoryLibrary() {
+			this.Books[ this.CurrBookName ] = new InventoryBook( ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled, this.CurrBookName );
 		}
 
 		////////////////
 
-		public void Load( TagCompound tags ) {
+		internal void Load( TagCompound tags ) {
 			if( !tags.ContainsKey("book_count") || !tags.ContainsKey("curr_book") ) {
 				return;
 			}
@@ -37,7 +30,7 @@ namespace ExtensibleInventory {
 
 			for( int i=0; i< book_count; i++ ) {
 				string book_name = tags.GetString( "book_name_" + i );
-				var book = new InventoryBook( book_name );
+				var book = new InventoryBook( false, book_name );
 
 				book.Load( book_name.ToLower(), tags );
 
@@ -47,7 +40,7 @@ namespace ExtensibleInventory {
 			this.CurrBookName = curr_book_name;
 		}
 
-		public TagCompound Save( TagCompound tags ) {
+		internal TagCompound Save( TagCompound tags ) {
 			tags["book_count"] = this.Books.Count;
 			tags["curr_book"] = this.CurrBookName;
 
@@ -63,17 +56,6 @@ namespace ExtensibleInventory {
 			}
 
 			return tags;
-		}
-
-
-		////////////////
-		
-		public void SetBook( string name ) {
-			this.CurrentBook.DumpInventoryToCurrentPage( Main.LocalPlayer );
-
-			this.CurrBookName = name;
-
-			this.CurrentBook.DumpCurrentPageToInventory( Main.LocalPlayer );
 		}
 	}
 }

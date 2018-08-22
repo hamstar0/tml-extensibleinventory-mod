@@ -15,6 +15,8 @@ namespace ExtensibleInventory {
 		public bool DebugModeInfo = false;
 		public bool DebugModeReset = false;
 
+		public bool DefaultBookEnabled = true;
+
 		public float BookPositionX = 64f;
 		public float BookPositionY = 256f;
 		public float PagePositionX = 192f;
