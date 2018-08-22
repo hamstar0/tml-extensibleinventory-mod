@@ -11,7 +11,7 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool IsEnabled { get; private set; }
+		public bool IsEnabled { get; internal set; }
 		public string Name { get; private set; }
 
 		private readonly IList<Item[]> Pages = new List<Item[]>();

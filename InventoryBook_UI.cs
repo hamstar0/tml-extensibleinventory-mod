@@ -5,20 +5,12 @@ using Terraria;
 
 namespace ExtensibleInventory {
 	partial class InventoryBook {
-		public bool CanScrollPages() {
-			var mymod = ExtensibleInventoryMod.Instance;
-
-			return mymod.Config.CanScrollPages;
-		}
-
 		public void ScrollPageUp( Player player ) {
 			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanScrollPages ) {
-				Main.NewText( "Inventory scrolling disabled.", Color.Red );
-				return;
-			}
-			if( !this.CanScrollPages() ) {
+			string err;
+			
+			if( !this.CanScrollPages( out err ) ) {
+				Main.NewText( err, Color.Red );
 				return;
 			}
 			if( this.CurrentPageIdx <= 0 ) {
@@ -31,12 +23,10 @@ namespace ExtensibleInventory {
 
 		public void ScrollPageDown( Player player ) {
 			var mymod = ExtensibleInventoryMod.Instance;
+			string err;
 
-			if( !mymod.Config.CanScrollPages ) {
-				Main.NewText( "Inventory scrolling disabled.", Color.Red );
-				return;
-			}
-			if( !this.CanScrollPages() ) {
+			if( !this.CanScrollPages( out err ) ) {
+				Main.NewText( err, Color.Red );
 				return;
 			}
 			if( this.CurrentPageIdx >= (this.Pages.Count - 1) ) {
@@ -50,35 +40,26 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool CanAddPage( Player player, int page_num ) {
-			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanAddPages ) {
-				return false;
-			}
-
-			return this.Pages.Count < mymod.Config.MaxPages;
-		}
-
-		public bool CanDeletePage( Player player, int page_num ) {
-			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanDeletePages ) {
-				return false;
-			}
-
-			return this.Pages.Count > 1 && this.IsPlayerInventoryEmpty( player );
-		}
-
-
-		////////////////
-
 		public bool InsertAtCurrentPagePosition( Player player ) {
-			return this.InsertNewPage( player, this.CurrentPageIdx );
+			string err;
+			bool success = this.InsertNewPage( player, this.CurrentPageIdx, out err );
+
+			if( !success ) {
+				Main.NewText( err, Color.Red );
+			}
+
+			return success;
 		}
 
 		public bool DeleteCurrentPage( Player player ) {
-			return this.DeletePage( player, this.CurrentPageIdx );
+			string err;
+			bool success = this.DeleteEmptyPage( player, this.CurrentPageIdx, out err );
+
+			if( !success ) {
+				Main.NewText( err, Color.Red );
+			}
+
+			return success;
 		}
 	}
 }

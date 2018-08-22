@@ -11,6 +11,81 @@ namespace ExtensibleInventory {
 
 		////////////////
 
+		public bool CanScrollPages( out string err ) {
+			if( !this.IsEnabled ) {
+				err = this.Name + " inventory extension disabled.";
+				return false;
+			}
+
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !mymod.Config.CanScrollPages ) {
+				err = "Page scrolling disabled.";
+				return false;
+			}
+
+			err = "";
+			return true;
+		}
+
+		public bool CanAddPage( Player player, int page_num, out string err ) {
+			if( !this.IsEnabled ) {
+				err = this.Name + " inventory extension disabled.";
+				return false;
+			}
+
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !mymod.Config.CanAddPages ) {
+				err = "Page adding disabled.";
+				return false;
+			}
+
+			bool is_maxed = this.Pages.Count < mymod.Config.MaxPages;
+			
+			if( is_maxed ) {
+				err = "Max pages reached.";
+				return false;
+			}
+
+			err = "";
+			return true;
+		}
+
+		public bool CanDeletePage( Player player, int page_num, out string err ) {
+			if( !this.IsEnabled ) {
+				err = this.Name+" inventory extension disabled.";
+				return false;
+			}
+
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !mymod.Config.CanDeletePages ) {
+				err = "Page deletion disabled.";
+				return false;
+			}
+
+			bool min_pages = this.Pages.Count > 1;
+
+			if( !min_pages ) {
+				err = "Too few pages to delete any more.";
+				return false;
+			}
+
+			bool is_empty = this.IsPlayerInventoryEmpty( player );
+
+			if( !is_empty ) {
+				err = "Cannot delete non-empty inventory pages.";
+				return false;
+			}
+
+			err = "";
+			return true;
+		}
+
+
+		////////////////
+
 		public Item[] GetPageItems( int page_num ) {
 			return this.Pages[page_num];
 		}
@@ -38,33 +113,23 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool InsertNewPage( Player player, int page_num ) {
+		public bool InsertNewPage( Player player, int page_num, out string err ) {
+			if( !this.CanAddPage( player, page_num, out err ) ) {
+				return false;
+			}
+
 			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanAddPages ) {
-				Main.NewText( "Page adding disabled.", Color.Red );
-				return false;
-			}
-			if( !this.CanAddPage( player, page_num ) ) {
-				Main.NewText( "Max pages reached.", Color.Red );
-				return false;
-			}
-
+			
 			this.DumpInventoryToPage( player, page_num );
 			this.Pages.Insert( page_num, this.CreateBlankPage() );
-
+			
 			return true;
 		}
 
-		public bool DeletePage( Player player, int page_num ) {
+		public bool DeleteEmptyPage( Player player, int page_num, out string err ) {
 			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanDeletePages ) {
-				Main.NewText( "Page deletion disabled.", Color.Red );
-				return false;
-			}
-			if( !this.CanDeletePage( player, this.CurrentPageIdx ) ) {
-				Main.NewText( "Cannot delete non-empty inventory pages.", Color.Red );
+			
+			if( !this.CanDeletePage( player, this.CurrentPageIdx, out err ) ) {
 				return false;
 			}
 
@@ -77,11 +142,11 @@ namespace ExtensibleInventory {
 			} else {
 				this.DumpPageToInventory( player, page_num );
 			}
-
+			
 			return true;
 		}
 
-
+		
 		////////////////
 
 		public void DumpInventoryToCurrentPage( Player player ) {

@@ -32,6 +32,22 @@ namespace ExtensibleInventory {
 
 				ExtensibleInventoryAPI.RemoveBook( book_name );
 				return null;
+			case "EnableBook":
+				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
+
+				book_name = args[0] as string;
+				if( book_name == null ) { throw new Exception( "Invalid parameter book_name for API call " + call_type ); }
+
+				ExtensibleInventoryAPI.EnableBook( book_name );
+				return null;
+			case "DisableBook":
+				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
+
+				book_name = args[0] as string;
+				if( book_name == null ) { throw new Exception( "Invalid parameter book_name for API call " + call_type ); }
+
+				ExtensibleInventoryAPI.DisableBook( book_name );
+				return null;
 			case "CountBookPages":
 				if( args.Length < 1 ) { throw new Exception( "Insufficient parameters for API call " + call_type ); }
 
