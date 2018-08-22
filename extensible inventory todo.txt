@@ -1,0 +1,9 @@
+v1.1
+-	@Test books, book picker, and library
+-	Implement API to add books to library
+-	Implement book enable/disable
+
+-	@Test books
+-	Implement book picker on UI
+-	Implement concept of library
+-	Implement concept of books

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ModLoader.IO;
 
 
@@ -18,7 +19,7 @@ namespace ExtensibleInventory {
 
 		////////////////
 		
-		public void Initialize() {
+		public InventoryLibrary() {
 			this.Books[ this.CurrBookName ] = new InventoryBook( this.CurrBookName );
 		}
 
@@ -68,7 +69,11 @@ namespace ExtensibleInventory {
 		////////////////
 		
 		public void SetBook( string name ) {
+			this.CurrentBook.DumpInventoryToCurrentPage( Main.LocalPlayer );
+
 			this.CurrBookName = name;
+
+			this.CurrentBook.DumpCurrentPageToInventory( Main.LocalPlayer );
 		}
 	}
 }

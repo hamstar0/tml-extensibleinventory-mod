@@ -12,12 +12,15 @@ namespace ExtensibleInventory {
 
 		public string VersionSinceUpdate = "";
 
-		public bool DebugInfoMode = false;
+		public bool DebugModeInfo = false;
+		public bool DebugModeReset = false;
 
-		public float BookOffsetX = 64f;
-		public float BookOffsetY = 256f;
-		public float PageOffsetX = 192f;
-		public float PageOffsetY = 256f;
+		public float BookPositionX = 64f;
+		public float BookPositionY = 256f;
+		public float PagePositionX = 192f;
+		public float PagePositionY = 256f;
+		public float ChestOnOffsetX = 0f;
+		public float ChestOnOffsetY = 168f;
 
 		public bool CanScrollPages = true;
 		public bool CanAddPages = true;

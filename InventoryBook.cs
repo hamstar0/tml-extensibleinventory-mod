@@ -13,13 +13,19 @@ namespace ExtensibleInventory {
 		////////////////
 
 		private readonly IList<Item[]> Pages = new List<Item[]>();
-		private int CurrPageIdx = 0;
-		private int MaxPageIdx = 2;
+		private int CurrPageIdx;
+		private int MaxPageIdx;
 
 
 
 		////////////////
 		
+		public InventoryBook() {
+			this.Pages.Add( this.CreateBlankPage() );
+			this.Pages.Add( this.CreateBlankPage() );
+			this.MaxPageIdx = this.Pages.Count;
+		}
+
 		public bool IsInventoryEmpty( Player player ) {
 			for( int i = 10; i < 50; i++ ) {
 				if( !player.inventory[i].IsAir ) {
@@ -30,7 +36,7 @@ namespace ExtensibleInventory {
 		}
 
 		public bool IsPageEmpty( int page_num ) {
-			var page = this.Pages[page_num];
+			var page = this.Pages[ page_num ];
 
 			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
 				if( !page[i].IsAir ) {
@@ -106,14 +112,21 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		private void DumpInventoryToPage( Player player, int page_num ) {
+		public void DumpInventoryToCurrentPage( Player player ) {
+			this.DumpInventoryToPage( player, this.CurrPageIdx );
+		}
+		public void DumpCurrentPageToInventory( Player player ) {
+			this.DumpPageToInventory( player, this.CurrPageIdx );
+		}
+
+		internal void DumpInventoryToPage( Player player, int page_num ) {
 			for( int i=10; i<50; i++ ) {
-				this.Pages[page_num][i - 10] = player.inventory[i];
-				player.inventory[i] = new Item();
+				this.Pages[ page_num ][ i - 10 ] = player.inventory[ i ];
+				player.inventory[ i ] = new Item();
 			}
 		}
 
-		private void DumpPageToInventory( Player player, int page_num ) {
+		internal void DumpPageToInventory( Player player, int page_num ) {
 			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
 				player.inventory[i + 10] = this.Pages[page_num][i];
 				this.Pages[page_num][i] = new Item();
