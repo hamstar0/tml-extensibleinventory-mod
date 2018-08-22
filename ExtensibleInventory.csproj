@@ -47,6 +47,8 @@
     <Compile Include="InventoryLibrary.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Mod.cs" />
+    <Compile Include="UI_Layout.cs" />
+    <Compile Include="UI_Initialize.cs" />
     <Compile Include="UI.cs" />
   </ItemGroup>
   <ItemGroup>
