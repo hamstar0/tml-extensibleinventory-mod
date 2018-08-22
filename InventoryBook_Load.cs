@@ -5,7 +5,15 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class InventoryBook {
-		public InventoryBook() {
+		internal string Name;
+
+
+
+		////////////////
+		
+		public InventoryBook( string book_name ) {
+			this.Name = book_name;
+
 			this.ResetPages();
 		}
 

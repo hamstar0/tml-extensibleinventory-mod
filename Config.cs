@@ -4,7 +4,7 @@ using System;
 
 namespace ExtensibleInventory {
 	public class ExtensibleInventoryConfigData : ConfigurationDataBase {
-		public readonly static Version ConfigVersion = new Version( 1, 0, 0 );
+		public readonly static Version ConfigVersion = new Version( 1, 1, 0 );
 		public readonly static string ConfigFileName = "Extensible Inventory Config.json";
 
 
@@ -14,8 +14,10 @@ namespace ExtensibleInventory {
 
 		public bool DebugInfoMode = false;
 
-		public float OffsetX = 192f;
-		public float OffsetY = 256f;
+		public float BookOffsetX = 64f;
+		public float BookOffsetY = 256f;
+		public float PageOffsetX = 192f;
+		public float PageOffsetY = 256f;
 
 		public bool CanScrollPages = true;
 		public bool CanAddPages = true;

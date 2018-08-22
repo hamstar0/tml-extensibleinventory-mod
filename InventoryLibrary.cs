@@ -4,21 +4,22 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class InventoryLibrary {
-		private IDictionary<int, InventoryBook> Books = new Dictionary<int, InventoryBook>();
+		internal IDictionary<string, InventoryBook> Books = new Dictionary<string, InventoryBook>();
 
-		private int CurrBookIdx = 0;
+		private string CurrBookName = "Default";
 		
 		////////////////
 
-		public InventoryBook CurrentBook { get { return this.Books[this.CurrBookIdx]; } }
-
+		public InventoryBook CurrentBook {
+			get { return this.Books[ this.CurrBookName ]; }
+		}
 
 
 
 		////////////////
 		
 		public void Initialize() {
-			this.Books[0] = new InventoryBook();
+			this.Books[ this.CurrBookName ] = new InventoryBook( this.CurrBookName );
 		}
 
 		////////////////
@@ -31,23 +32,33 @@ namespace ExtensibleInventory {
 			this.Books.Clear();
 
 			int book_count = tags.GetInt( "book_count" );
-			int curr_book = tags.GetInt( "curr_book" );
+			string curr_book_name = tags.GetString( "curr_book" );
 
 			for( int i=0; i< book_count; i++ ) {
-				var book = new InventoryBook();
+				string book_name = tags.GetString( "book_name_" + i );
+				var book = new InventoryBook( book_name );
 
-				book.Load( i + "", tags );
+				book.Load( book_name.ToLower(), tags );
+
+				this.Books[ book_name ] = book;
 			}
 
-			this.CurrBookIdx = curr_book;
+			this.CurrBookName = curr_book_name;
 		}
 
 		public TagCompound Save( TagCompound tags ) {
 			tags["book_count"] = this.Books.Count;
-			tags["curr_book"] = this.CurrBookIdx;
+			tags["curr_book"] = this.CurrBookName;
 
-			for( int i=0; i<this.Books.Count; i++ ) {
-				this.Books[i].Save( i + "", tags );
+			int i = 0;
+			foreach( var kv in this.Books ) {
+				string book_name = kv.Key;
+				InventoryBook book = kv.Value;
+
+				tags["book_name_" + i] = book_name;
+				book.Save( book_name.ToLower(), tags );
+
+				i++;
 			}
 
 			return tags;
@@ -55,5 +66,9 @@ namespace ExtensibleInventory {
 
 
 		////////////////
+		
+		public void SetBook( string name ) {
+			this.CurrBookName = name;
+		}
 	}
 }

@@ -34,16 +34,9 @@ namespace ExtensibleInventory {
 				}
 
 				var mymod = ExtensibleInventoryMod.Instance;
-				var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				string text = myplayer.RenderPagePosition();
-
-				float text_wid = Main.fontMouseText.MeasureString( text ).X;
-				var text_pos = new Vector2( mymod.Config.OffsetX + 20f + (48f - text_wid/2f), mymod.Config.OffsetY );
 
 				mymod.InvUI.Update( Main._drawInterfaceGameTime );
 				mymod.InvPageScroller.Draw( Main.spriteBatch );
-
-				Main.spriteBatch.DrawString( Main.fontMouseText, text, text_pos, Color.White );
 
 				return true;
 			};

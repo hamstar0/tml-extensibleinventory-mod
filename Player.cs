@@ -4,9 +4,8 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryPlayer : ModPlayer {
-		private InventoryLibrary Library;
-
-
+		internal InventoryLibrary Library;
+		
 
 
 		////////////////
