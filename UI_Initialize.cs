@@ -28,15 +28,19 @@ namespace ExtensibleInventory {
 			this.ButtonPageAdd = new UIImageButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer );
-				Main.NewText( "Inventory page "+myplayer2.Library.CurrentBook.CurrentPageIdx+" added.", Color.LimeGreen );
+
+				if( myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer ) ) {
+					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " added.", Color.LimeGreen );
+				}
 			};
 
 			this.ButtonPageSub = new UIImageButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-				myplayer2.Library.CurrentBook.DeleteCurrentPage( Main.LocalPlayer );
-				Main.NewText( "Inventory page "+myplayer2.Library.CurrentBook.CurrentPageIdx+" removed.", Color.LimeGreen );
+
+				if( myplayer2.Library.CurrentBook.DeleteCurrentPage( Main.LocalPlayer ) ) {
+					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " removed.", Color.LimeGreen );
+				}
 			};
 
 			this.SetLayoutPositions( false );
@@ -51,32 +55,39 @@ namespace ExtensibleInventory {
 
 
 		private void InitializeLibraryBooks() {
-			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-			IDictionary<string, InventoryBook> enabled_books = myplayer.Library.EnabledBooks;
-			int i = 0;
+			IList<string> all_book_names = myplayer.Library.GetBookNames();
 
-			if( enabled_books.Count == 1 ) {
+			if( all_book_names.Count == 1 ) {
 				return;
 			}
 
 			this.ButtonBooks = new Dictionary<string, UIImageButton>();
 
-			foreach( string book_name in enabled_books.Keys ) {
-				Texture2D tex = book_name == myplayer.Library.CurrentBook.Name ?
-					this.ButtonBookLitTex : this.ButtonBookTex;
+			int i = 0;
+
+			foreach( string book_name in all_book_names ) {
+				string curr_book_name = book_name;
+				bool is_current_book = book_name == myplayer.Library.CurrentBook.Name;
+
+				Texture2D tex = is_current_book ?
+					this.ButtonBookLitTex :
+					myplayer.Library.IsBookEnabled( book_name ) ?
+						this.ButtonBookDimTex :
+						this.ButtonBookTex;
 				
 				var button = new UIImageButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-					myplayer2.Library.ChangeBook( book_name );
+					myplayer2.Library.ChangeCurrentBook( curr_book_name );
 
-					this.ButtonBooks[ book_name ].SetImage( this.ButtonBookTex );
+					this.ButtonBooks[ curr_book_name ].SetImage( this.ButtonBookTex );
 					button.SetImage( this.ButtonBookLitTex );
 				};
 
 				this.ButtonBooks[ book_name ] = button;
 				base.Append( button );
+
 				i++;
 			}
 		}

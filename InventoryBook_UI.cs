@@ -5,36 +5,40 @@ using Terraria;
 
 namespace ExtensibleInventory {
 	partial class InventoryBook {
-		public void ScrollPageUp( Player player ) {
+		public bool ScrollPageUp( Player player ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			string err;
 			
 			if( !this.CanScrollPages( out err ) ) {
 				Main.NewText( err, Color.Red );
-				return;
+				return false;
 			}
 			if( this.CurrentPageIdx <= 0 ) {
-				return;
+				return false;
 			}
 
 			this.DumpInventoryToPage( player, this.CurrentPageIdx-- );
 			this.DumpPageToInventory( player, this.CurrentPageIdx );
+
+			return true;
 		}
 
-		public void ScrollPageDown( Player player ) {
+		public bool ScrollPageDown( Player player ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			string err;
 
 			if( !this.CanScrollPages( out err ) ) {
 				Main.NewText( err, Color.Red );
-				return;
+				return false;
 			}
 			if( this.CurrentPageIdx >= (this.Pages.Count - 1) ) {
-				return;
+				return false;
 			}
 
 			this.DumpInventoryToPage( player, this.CurrentPageIdx++ );
 			this.DumpPageToInventory( player, this.CurrentPageIdx );
+
+			return true;
 		}
 
 

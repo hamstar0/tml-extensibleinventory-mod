@@ -8,6 +8,12 @@ namespace ExtensibleInventory {
 
 		private string CurrBookName = "Default";
 
+		////////////////
+
+		public InventoryBook CurrentBook {
+			get { return this.Books[this.CurrBookName]; }
+		}
+
 
 
 		////////////////

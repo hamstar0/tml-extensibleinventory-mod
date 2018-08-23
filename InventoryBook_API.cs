@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Terraria;
 
 
@@ -41,7 +40,7 @@ namespace ExtensibleInventory {
 				return false;
 			}
 
-			bool is_maxed = this.Pages.Count < mymod.Config.MaxPages;
+			bool is_maxed = this.Pages.Count >= mymod.Config.MaxPages;
 			
 			if( is_maxed ) {
 				err = "Max pages reached.";

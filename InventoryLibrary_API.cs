@@ -6,22 +6,14 @@ using Terraria;
 
 namespace ExtensibleInventory {
 	partial class InventoryLibrary {
-		public IDictionary<string, InventoryBook> EnabledBooks {
-			get {
-				return this.Books.Where( kv => kv.Value.IsEnabled )
-					.ToDictionary( kv => kv.Key, kv => kv.Value );
-			}
+		public IList<string> GetBookNames() {
+			return this.Books.Keys.ToList();
 		}
-
-		public InventoryBook CurrentBook {
-			get { return this.Books[this.CurrBookName]; }
-		}
-
 
 		////////////////
 
-		public void ChangeBook( string book_name ) {
-			if( this.Books.ContainsKey( book_name ) ) {
+		public void ChangeCurrentBook( string book_name ) {
+			if( !this.Books.ContainsKey( book_name ) ) {
 				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.ChangeBook - No such book by name " + book_name );
 			}
 
@@ -56,6 +48,16 @@ namespace ExtensibleInventory {
 
 
 		////////////////
+
+		public bool IsBookEnabled( string book_name ) {
+			if( !this.Books.ContainsKey( book_name ) ) {
+				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.IsBookEnabled - No such book by name " + book_name );
+			}
+
+			InventoryBook book = this.Books[book_name];
+
+			return book.IsEnabled;
+		}
 
 		public void EnableBook( string book_name ) {
 			if( !this.Books.ContainsKey( book_name ) ) {
