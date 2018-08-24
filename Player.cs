@@ -1,5 +1,4 @@
 using HamstarHelpers.Helpers.DebugHelpers;
-using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -28,6 +27,14 @@ namespace ExtensibleInventory {
 			var tags = new TagCompound();
 
 			return this.Library.Save( tags );
+		}
+
+
+		////////////////
+
+		public override bool PreItemCheck() {
+			var mymod = (ExtensibleInventoryMod)this.mod;
+			return !mymod.InvPageScroller.IsHoveringAnyControl();
 		}
 	}
 }

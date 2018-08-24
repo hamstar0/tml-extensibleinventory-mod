@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Services.Promises;
+﻿using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Services.Promises;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
@@ -15,7 +16,7 @@ namespace ExtensibleInventory {
 			sb.DrawString( Main.fontMouseText, "X", elem.GetOuterDimensions().Position() + new Vector2( 4, -2 ), Color.Red, 0f, default( Vector2 ), 1.25f, SpriteEffects.None, 1f );
 		}
 
-		
+
 
 		////////////////
 
@@ -56,7 +57,33 @@ namespace ExtensibleInventory {
 
 
 		////////////////
-		
+
+		public bool IsHoveringAnyControl() {
+			if( this.ButtonPageLeft.IsMouseHovering ) {
+				return true;
+			}
+			if( this.ButtonPageRight.IsMouseHovering ) {
+				return true;
+			}
+			if( this.ButtonPageAdd.IsMouseHovering ) {
+				return true;
+			}
+			if( this.ButtonPageSub.IsMouseHovering ) {
+				return true;
+			}
+			if( this.ButtonBooks != null ) {
+				foreach( var button in this.ButtonBooks.Values ) {
+					if( button.IsMouseHovering ) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+
+
+		////////////////
+
 		public override void Update( GameTime game_time ) {
 			if( this.ButtonBooks == null && Main.LocalPlayer != null && Main.LocalPlayer.active ) {
 				this.InitializeLibraryBooks();
@@ -103,9 +130,9 @@ namespace ExtensibleInventory {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
 			}
 
-			if( this.ButtonBooks != null && plr != null && plr.active ) {
+			if( plr != null && plr.active ) {
 				var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
-				
+
 				if( !myplayer.Library.CurrentBook.IsEnabled ) {
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
@@ -113,16 +140,18 @@ namespace ExtensibleInventory {
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
 				}
 
-				foreach( var kv in this.ButtonBooks ) {
-					string book_name = kv.Key;
-					UIImageButton book_button = kv.Value;
+				if( this.ButtonBooks != null ) {
+					foreach( var kv in this.ButtonBooks ) {
+						string book_name = kv.Key;
+						UIImageButton book_button = kv.Value;
 
-					if( book_button.IsMouseHovering ) {
-						sb.DrawString( Main.fontMouseText, book_name, pos, Color.White );
-					}
+						if( book_button.IsMouseHovering ) {
+							sb.DrawString( Main.fontMouseText, book_name, pos, Color.White );
+						}
 
-					if( !myplayer.Library.IsBookEnabled(book_name) ) {
-						InventoryPageScrollerUI.DrawX( sb, book_button );
+						if( !myplayer.Library.IsBookEnabled( book_name ) ) {
+							InventoryPageScrollerUI.DrawX( sb, book_button );
+						}
 					}
 				}
 			}

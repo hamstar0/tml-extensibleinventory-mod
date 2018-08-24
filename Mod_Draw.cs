@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using ReLogic.Graphics;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
@@ -9,7 +7,7 @@ using Terraria.UI;
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryMod : Mod {
 		private UserInterface InvUI;
-		private InventoryPageScrollerUI InvPageScroller;
+		internal InventoryPageScrollerUI InvPageScroller;
 
 		
 
