@@ -16,7 +16,7 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public InventoryBook CurrentBook {
-			get { return this.Books[this.CurrBookName]; }
+			get { return this.Books[ this.CurrBookName ]; }
 		}
 
 

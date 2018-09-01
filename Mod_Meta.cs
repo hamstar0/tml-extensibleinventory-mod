@@ -22,6 +22,9 @@ namespace ExtensibleInventory {
 					ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
 				}
 			}
+
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			myplayer.Library.CurrentBook.IsEnabled = ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled;
 		}
 
 		public static void ResetConfigFromDefaults() {
