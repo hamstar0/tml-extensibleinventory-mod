@@ -4,9 +4,14 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class InventoryLibrary {
+		public const string DefaultBookName = "Default";
+
+
+		////////////////
+		
 		private IDictionary<string, InventoryBook> Books = new Dictionary<string, InventoryBook>();
 
-		private string CurrBookName = "Default";
+		private string CurrBookName = InventoryLibrary.DefaultBookName;
 
 		////////////////
 
@@ -29,6 +34,11 @@ namespace ExtensibleInventory {
 
 		internal void Load( TagCompound tags ) {
 			if( !tags.ContainsKey("book_count") || !tags.ContainsKey("curr_book") ) {
+				var book = new InventoryBook( ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled, InventoryLibrary.DefaultBookName );
+
+				book.Load( InventoryLibrary.DefaultBookName.ToLower(), tags );
+				this.Books[ InventoryLibrary.DefaultBookName ] = book;
+
 				return;
 			}
 
@@ -39,9 +49,16 @@ namespace ExtensibleInventory {
 
 			for( int i=0; i< book_count; i++ ) {
 				string book_name = tags.GetString( "book_name_" + i );
-				var book = new InventoryBook( false, book_name );
+				string book_name_io = book_name.ToLower();
 
-				book.Load( book_name.ToLower(), tags );
+				bool is_enabled = false;
+				if( book_name == InventoryLibrary.DefaultBookName ) {
+					is_enabled = ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled;
+				}
+
+				var book = new InventoryBook( is_enabled, book_name );
+
+				book.Load( book_name_io, tags );
 
 				this.Books[ book_name ] = book;
 			}
@@ -56,10 +73,12 @@ namespace ExtensibleInventory {
 			int i = 0;
 			foreach( var kv in this.Books ) {
 				string book_name = kv.Key;
+				string book_name_io = book_name.ToLower();
+
 				InventoryBook book = kv.Value;
 
 				tags["book_name_" + i] = book_name;
-				book.Save( book_name.ToLower(), tags );
+				book.Save( book_name_io, tags );
 
 				i++;
 			}

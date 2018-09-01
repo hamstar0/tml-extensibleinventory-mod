@@ -56,7 +56,7 @@ namespace ExtensibleInventory {
 
 			InventoryBook book = this.Books[book_name];
 
-			return book.IsBookEnabled();
+			return book.IsEnabled;
 		}
 
 		public void EnableBook( string book_name ) {

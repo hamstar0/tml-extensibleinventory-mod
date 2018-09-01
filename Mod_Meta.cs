@@ -34,6 +34,9 @@ namespace ExtensibleInventory {
 
 			ExtensibleInventoryMod.Instance.ConfigJson.SetData( new_config );
 			ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
+
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			myplayer.Library.CurrentBook.IsEnabled = new_config.DefaultBookEnabled;
 		}
 	}
 }

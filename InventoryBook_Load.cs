@@ -5,17 +5,19 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class InventoryBook {
-		public void Load( string prefix, TagCompound tags ) {
-			if( prefix == "default" ) {
+		public void Load( string lowercase_book_name, TagCompound tags ) {
+			string prefix;
+
+			if( lowercase_book_name == "default" ) {
 				prefix = "";
 			} else {
-				prefix += "_";
+				prefix = lowercase_book_name + "_";
 			}
 
 			if( ExtensibleInventoryMod.Instance.Config.DebugModeReset ) {
 				return;
 			}
-			if( !tags.ContainsKey( prefix+"page_count" ) || !tags.ContainsKey( prefix+"curr_page" ) ) {
+			if( !tags.ContainsKey( prefix + "page_count" ) || !tags.ContainsKey( prefix + "curr_page" ) ) {
 				return;
 			}
 
@@ -31,7 +33,7 @@ namespace ExtensibleInventory {
 				if( i == curr_page ) { continue; }
 
 				for( int j = 0; j < InventoryBook.BasePageCapacity; j++ ) {
-					string idx = prefix+"page_" + i + "_" + j;
+					string idx = prefix + "page_" + i + "_" + j;
 
 					if( tags.ContainsKey( idx ) ) {
 						page[j] = ItemIO.Load( tags.GetCompound( idx ) );
@@ -44,11 +46,13 @@ namespace ExtensibleInventory {
 			this.CurrentPageIdx = curr_page;
 		}
 
-		public TagCompound Save( string prefix, TagCompound tags ) {
-			if( prefix == "default" ) {
+		public TagCompound Save( string lowercase_book_name, TagCompound tags ) {
+			string prefix;
+
+			if( lowercase_book_name == "default" ) {
 				prefix = "";
 			} else {
-				prefix += "_";
+				prefix = lowercase_book_name + "_";
 			}
 
 			tags[ prefix + "page_count" ] = this.Pages.Count;
