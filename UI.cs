@@ -133,7 +133,7 @@ namespace ExtensibleInventory {
 			if( plr != null && plr.active ) {
 				var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
 
-				if( !myplayer.Library.CurrentBook.IsEnabled ) {
+				if( !myplayer.Library.CurrentBook.IsBookEnabled() ) {
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );

@@ -45,6 +45,8 @@
     <Compile Include="Mod_Meta.cs" />
     <Compile Include="InventoryBook.cs" />
     <Compile Include="InventoryLibrary.cs" />
+    <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
+    <Compile Include="Player_Load.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="UI_Layout.cs" />

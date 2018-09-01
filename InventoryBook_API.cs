@@ -3,6 +3,16 @@ using Terraria;
 
 namespace ExtensibleInventory {
 	partial class InventoryBook {
+		public bool IsBookEnabled() {
+			if( this.Name == "Default" ) {
+				return ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled;
+			} else {
+				return this.IsEnabled;
+			}
+		}
+
+
+
 		public int CountPages() {
 			return this.Pages.Count;
 		}
@@ -11,7 +21,7 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public bool CanScrollPages( out string err ) {
-			if( !this.IsEnabled ) {
+			if( !this.IsBookEnabled() ) {
 				err = this.Name + " inventory extension disabled.";
 				return false;
 			}
@@ -28,7 +38,7 @@ namespace ExtensibleInventory {
 		}
 
 		public bool CanAddPage( Player player, int page_num, out string err ) {
-			if( !this.IsEnabled ) {
+			if( !this.IsBookEnabled() ) {
 				err = this.Name + " inventory extension disabled.";
 				return false;
 			}
@@ -52,7 +62,7 @@ namespace ExtensibleInventory {
 		}
 
 		public bool CanDeletePage( Player player, int page_num, out string err ) {
-			if( !this.IsEnabled ) {
+			if( !this.IsBookEnabled() ) {
 				err = this.Name+" inventory extension disabled.";
 				return false;
 			}

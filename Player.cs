@@ -1,4 +1,5 @@
 using HamstarHelpers.Helpers.DebugHelpers;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -27,6 +28,28 @@ namespace ExtensibleInventory {
 			var tags = new TagCompound();
 
 			return this.Library.Save( tags );
+		}
+
+
+		////////////////
+
+		public override void SyncPlayer( int to_who, int from_who, bool new_player ) {
+			if( Main.netMode == 2 ) {
+				if( to_who == -1 && from_who == this.player.whoAmI ) {
+					this.OnConnectServer();
+				}
+			}
+		}
+
+		public override void OnEnterWorld( Player player ) {
+			if( player.whoAmI != Main.myPlayer ) { return; }
+			if( this.player.whoAmI != Main.myPlayer ) { return; }
+
+			if( Main.netMode == 0 ) {
+				this.OnConnectSingle();
+			} else if( Main.netMode == 1 ) {
+				this.OnConnectClient();
+			}
 		}
 
 

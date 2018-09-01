@@ -19,7 +19,10 @@ namespace ExtensibleInventory {
 		////////////////
 
 		internal InventoryLibrary() {
-			this.Books[ this.CurrBookName ] = new InventoryBook( ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled, this.CurrBookName );
+			this.Books[ this.CurrBookName ] = new InventoryBook(
+				ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled,
+				this.CurrBookName
+			);
 		}
 
 		////////////////
