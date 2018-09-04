@@ -89,8 +89,12 @@ namespace ExtensibleInventory {
 			return this.Pages[page_num];
 		}
 
-		public bool IsPageEmpty( int page_num ) {
+		public bool IsPageEmpty( Player player, int page_num ) {
 			var page = this.Pages[page_num];
+			
+			if( page_num == this.CurrentPageIdx ) {
+				page = player.inventory;
+			}
 
 			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
 				if( !page[i].IsAir ) {
@@ -107,6 +111,23 @@ namespace ExtensibleInventory {
 				}
 			}
 			return true;
+		}
+
+		public float GaugePageFullness( Player player, int page_num ) {
+			var page = this.Pages[page_num];
+			int slots = 0;
+
+			if( page_num == this.CurrentPageIdx ) {
+				page = player.inventory;
+			}
+
+			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
+				if( !page[i].IsAir ) {
+					slots++;
+				}
+			}
+
+			return slots / (float)InventoryBook.BasePageCapacity;
 		}
 
 

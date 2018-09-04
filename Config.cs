@@ -24,7 +24,7 @@ namespace ExtensibleInventory {
 		public float BookPositionY = 260f;
 		public float PagePositionX = 192f;
 		public float PagePositionY = 260f;
-		public float PageTicksPositionX = 64f;
+		public float PageTicksPositionX = 32f;
 		public float PageTicksPositionY = 254f;
 
 		public float ChestOnOffsetX = 0f;

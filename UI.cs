@@ -114,25 +114,25 @@ namespace ExtensibleInventory {
 		private void DrawPageTicks( SpriteBatch sb ) {
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
 			var mymod = ExtensibleInventoryMod.Instance;
 
 			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
 			int pages = myplayer.Library.CurrentBook.CountPages();
-			int max_pages = pages > 30 ? 29 : pages;
+			int max_pages = pages > 29 ? 28 : pages;
 
-			for( int i=0; i< max_pages; i++ ) {
-				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 12, 3 );
-				var fill_color = i == myplayer.Library.CurrentBook.CurrentPageIdx ?
-					new Color(64, 64, 128, 48) :
-					new Color(80, 80, 160, 48);
-				var bord_color = new Color( 224, 224, 224, 48 );
+			for( int i=0; i<max_pages; i++ ) {
+				bool is_curr_page = i == myplayer.Library.CurrentBook.CurrentPageIdx;
+				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 13, 4 );
+				var fill_color = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( plr, i );
+				var bord_color = Color.White * 0.65f;
+				int thickness = is_curr_page ? 2 : 1;
 
-				HudHelpers.DrawBorderedRect( sb, fill_color, bord_color, rect, 1 );
+				HudHelpers.DrawBorderedRect( sb, fill_color, bord_color, rect, thickness );
 			}
 
 			if( pages != max_pages ) {
-				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X * ( 30 * 16 ), pos.Y ), Color.White );
+				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + ( 28 * 16 ), pos.Y - 12f ), Color.White );
 			}
 		}
 
