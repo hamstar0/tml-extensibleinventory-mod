@@ -9,7 +9,7 @@ namespace ExtensibleInventory {
 			bool is_player_valid = Main.LocalPlayer != null && Main.LocalPlayer.active;
 
 			if( is_player_valid ) {
-				is_chest = Main.LocalPlayer.chest != -1;
+				is_chest = Main.LocalPlayer.chest != -1 || Main.npcShop > 0;
 			}
 
 			if( this.IsChest != is_chest ) {

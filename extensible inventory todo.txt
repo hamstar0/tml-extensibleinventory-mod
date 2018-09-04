@@ -1,7 +1,10 @@
+v1.2
+-	Show ticks for each page
+-	Use scroll wheel with a selected item to change pages
+-	Fix UI overlay while using NPC
 v1.1
 -	@Test books, book picker, and library
 -	Implement API to add books to library
-
 -	Implement book enable/disable
 -	@Test books
 -	Implement book picker on UI

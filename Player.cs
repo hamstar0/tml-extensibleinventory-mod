@@ -1,5 +1,6 @@
 using HamstarHelpers.Helpers.DebugHelpers;
 using Terraria;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -58,6 +59,24 @@ namespace ExtensibleInventory {
 		public override bool PreItemCheck() {
 			var mymod = (ExtensibleInventoryMod)this.mod;
 			return !mymod.InvPageScroller.IsHoveringAnyControl();
+		}
+
+
+		////////////////
+
+		public override void SetControls() {
+			if( Main.mouseItem == null || Main.mouseItem.IsAir ) {
+				return;
+			}
+
+			int scrolled = PlayerInput.ScrollWheelDelta;
+			PlayerInput.ScrollWheelDelta = 0;
+
+			if( scrolled >= 120 ) {
+				this.Library.CurrentBook.ScrollPageUp( this.player );
+			} else if( scrolled <= -120 ) {
+				this.Library.CurrentBook.ScrollPageDown( this.player );
+			}
 		}
 	}
 }

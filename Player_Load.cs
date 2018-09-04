@@ -11,7 +11,7 @@ namespace ExtensibleInventory {
 
 			if( !mymod.ConfigJson.LoadFile() ) {
 				mymod.ConfigJson.SaveFile();
-				LogHelpers.Log( "Extensible Inventory config " + ExtensibleInventoryConfigData.ConfigVersion.ToString() + " created." );
+				LogHelpers.Log( "Extensible Inventory config " + mymod.Version.ToString() + " created." );
 			}
 		}
 

@@ -78,7 +78,13 @@ namespace ExtensibleInventory {
 				
 				var button = new UIImageButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+					string err;
 					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+
+					if( !myplayer2.Library.CanSwitchBooks(out err) ) {
+						Main.NewText( err, Color.Red );
+					}
+
 					myplayer2.Library.ChangeCurrentBook( curr_book_name );
 
 					this.ButtonBooks[ curr_book_name ].SetImage( this.ButtonBookTex );

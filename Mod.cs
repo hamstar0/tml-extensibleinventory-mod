@@ -50,7 +50,7 @@ namespace ExtensibleInventory {
 			}
 
 			if( this.Config.UpdateToLatestVersion() ) {
-				LogHelpers.Log( "Extensible Inventory updated to " + ExtensibleInventoryConfigData.ConfigVersion.ToString() );
+				LogHelpers.Log( "Extensible Inventory updated to " + this.Version.ToString() );
 				this.ConfigJson.SaveFile();
 			}
 		}

@@ -6,6 +6,22 @@ using Terraria;
 
 namespace ExtensibleInventory {
 	partial class InventoryLibrary {
+		public bool CanSwitchBooks( out string err ) {
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !mymod.Config.CanSwitchBooks ) {
+				err = "Book switching disabled.";
+				return false;
+			}
+
+			err = "";
+			return true;
+		}
+
+
+
+		////////////////
+
 		public IList<string> GetBookNames() {
 			return this.Books.Keys.ToList();
 		}

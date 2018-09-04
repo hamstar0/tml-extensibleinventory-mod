@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.HudHelpers;
 using HamstarHelpers.Services.Promises;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -95,11 +96,86 @@ namespace ExtensibleInventory {
 		}
 
 
+		////////////////
+
 		public override void Draw( SpriteBatch sb ) {
+			if( !ExtensibleInventoryMod.Instance.Config.HidePageTicksUI ) {
+				this.DrawPageTicks( sb );
+			}
+
 			base.Draw( sb );
 
+			this.DrawDisabledElementOverlays( sb );
+
+			this.DrawMouseHoverTexts( sb );
+		}
+
+
+		private void DrawPageTicks( SpriteBatch sb ) {
 			Player plr = Main.LocalPlayer;
+			if( plr == null || !plr.active ) { return; }    //?
+			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 			var mymod = ExtensibleInventoryMod.Instance;
+
+			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
+			int pages = myplayer.Library.CurrentBook.CountPages();
+			int max_pages = pages > 30 ? 29 : pages;
+
+			for( int i=0; i< max_pages; i++ ) {
+				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 12, 3 );
+				var fill_color = i == myplayer.Library.CurrentBook.CurrentPageIdx ?
+					new Color(64, 64, 128, 48) :
+					new Color(80, 80, 160, 48);
+				var bord_color = new Color( 224, 224, 224, 48 );
+
+				HudHelpers.DrawBorderedRect( sb, fill_color, bord_color, rect, 1 );
+			}
+
+			if( pages != max_pages ) {
+				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X * ( 30 * 16 ), pos.Y ), Color.White );
+			}
+		}
+
+
+		private void DrawDisabledElementOverlays( SpriteBatch sb ) {
+			Player plr = Main.LocalPlayer;
+			if( plr == null || !plr.active ) { return; }    //?
+			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !mymod.Config.CanScrollPages ) {
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
+			}
+			if( !mymod.Config.CanAddPages ) {
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
+			}
+			if( !mymod.Config.CanDeletePages ) {
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
+			}
+			
+			if( !myplayer.Library.CurrentBook.IsEnabled ) {
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
+				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
+			}
+
+			if( this.ButtonBooks != null ) {
+				foreach( var kv in this.ButtonBooks ) {
+					string _;
+					string book_name = kv.Key;
+					UIImageButton book_button = kv.Value;
+
+					if( !myplayer.Library.CanSwitchBooks(out _) || !myplayer.Library.IsBookEnabled( book_name ) ) {
+						InventoryPageScrollerUI.DrawX( sb, book_button );
+					}
+				}
+			}
+		}
+
+
+		private void DrawMouseHoverTexts( SpriteBatch sb ) {
 			var pos = new Vector2( Main.mouseX, Main.mouseY + 16 );
 
 			if( this.ButtonPageLeft.IsMouseHovering ) {
@@ -119,39 +195,13 @@ namespace ExtensibleInventory {
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 
-			if( !mymod.Config.CanScrollPages ) {
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
-			}
-			if( !mymod.Config.CanAddPages ) {
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
-			}
-			if( !mymod.Config.CanDeletePages ) {
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
-			}
+			if( this.ButtonBooks != null ) {
+				foreach( var kv in this.ButtonBooks ) {
+					string book_name = kv.Key;
+					UIImageButton book_button = kv.Value;
 
-			if( plr != null && plr.active ) {
-				var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
-
-				if( !myplayer.Library.CurrentBook.IsEnabled ) {
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
-				}
-
-				if( this.ButtonBooks != null ) {
-					foreach( var kv in this.ButtonBooks ) {
-						string book_name = kv.Key;
-						UIImageButton book_button = kv.Value;
-
-						if( book_button.IsMouseHovering ) {
-							sb.DrawString( Main.fontMouseText, book_name, pos, Color.White );
-						}
-
-						if( !myplayer.Library.IsBookEnabled( book_name ) ) {
-							InventoryPageScrollerUI.DrawX( sb, book_button );
-						}
+					if( book_button.IsMouseHovering ) {
+						sb.DrawString( Main.fontMouseText, book_name, pos, Color.White );
 					}
 				}
 			}
