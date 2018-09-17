@@ -19,12 +19,12 @@ namespace ExtensibleInventory.UI {
 		internal Texture2D ButtonPageAddTex;
 		internal Texture2D ButtonPageSubTex;
 		
-		private IDictionary<string, UIImageButton> ButtonBooks = null;
+		private IDictionary<string, UIInventoryControlButton> ButtonBooks = null;
 		private UIText PageDisplay;
-		private UIImageButton ButtonPageLeft;
-		private UIImageButton ButtonPageRight;
-		private UIImageButton ButtonPageAdd;
-		private UIImageButton ButtonPageSub;
+		private UIInventoryControlButton ButtonPageLeft;
+		private UIInventoryControlButton ButtonPageRight;
+		private UIInventoryControlButton ButtonPageAdd;
+		private UIInventoryControlButton ButtonPageSub;
 
 		private bool IsChest = true;
 

@@ -5,6 +5,7 @@ using Terraria.UI;
 namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		private void UpdateLayout() {
+			var mymod = ExtensibleInventoryMod.Instance;
 			bool is_chest = true;
 			bool is_player_valid = Main.LocalPlayer != null && Main.LocalPlayer.active;
 
@@ -22,6 +23,16 @@ namespace ExtensibleInventory.UI {
 				this.SetPageDisplayPosition( is_chest );
 			}
 
+			this.ButtonPageAdd.IsHidden = !mymod.Config.CanAddPages;
+			this.ButtonPageSub.IsHidden = !mymod.Config.CanDeletePages;
+			this.ButtonPageLeft.IsHidden = !mymod.Config.CanScrollPages;
+			this.ButtonPageRight.IsHidden = !mymod.Config.CanScrollPages;
+			if( this.ButtonBooks != null ) {
+				foreach( UIInventoryControlButton book in this.ButtonBooks.Values ) {
+					book.IsHidden = !mymod.Config.CanSwitchBooks;
+				}
+			}
+			 
 			this.Recalculate();
 		}
 

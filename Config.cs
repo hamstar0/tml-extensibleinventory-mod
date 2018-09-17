@@ -29,7 +29,7 @@ namespace ExtensibleInventory {
 
 		public float ChestOnOffsetX = 0f;
 		public float ChestOnOffsetY = 168f;
-
+		
 		public bool CanSwitchBooks = true;
 		public bool CanScrollPages = true;
 		public bool CanAddPages = true;

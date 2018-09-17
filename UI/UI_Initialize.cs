@@ -13,19 +13,19 @@ namespace ExtensibleInventory.UI {
 
 			this.PageDisplay = new UIText( "0 / 0" );
 
-			this.ButtonPageLeft = new UIImageButton( this.ButtonPageLeftTex );
+			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
 			this.ButtonPageLeft.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
 			};
 
-			this.ButtonPageRight = new UIImageButton( this.ButtonPageRightTex );
+			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
 			this.ButtonPageRight.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
 			};
 
-			this.ButtonPageAdd = new UIImageButton( this.ButtonPageAddTex );
+			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
@@ -34,7 +34,7 @@ namespace ExtensibleInventory.UI {
 				}
 			};
 
-			this.ButtonPageSub = new UIImageButton( this.ButtonPageSubTex );
+			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
@@ -62,7 +62,7 @@ namespace ExtensibleInventory.UI {
 				return;
 			}
 
-			this.ButtonBooks = new Dictionary<string, UIImageButton>();
+			this.ButtonBooks = new Dictionary<string, UIInventoryControlButton>();
 
 			int i = 0;
 
@@ -76,7 +76,7 @@ namespace ExtensibleInventory.UI {
 						this.ButtonBookDimTex :
 						this.ButtonBookTex;
 				
-				var button = new UIImageButton( tex );
+				var button = new UIInventoryControlButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
 					string err;
 					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();

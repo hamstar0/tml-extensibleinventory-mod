@@ -49,6 +49,7 @@
     <Compile Include="Player_Load.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Mod.cs" />
+    <Compile Include="UI\UIInventoryControlButton.cs" />
     <Compile Include="UI\UI_Draw.cs" />
     <Compile Include="UI\UI_Layout.cs" />
     <Compile Include="UI\UI_Initialize.cs" />

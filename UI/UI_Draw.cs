@@ -58,12 +58,12 @@ namespace ExtensibleInventory.UI {
 
 
 		private void DrawDisabledElementOverlays( SpriteBatch sb ) {
+			var mymod = ExtensibleInventoryMod.Instance;
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
 			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
-			var mymod = ExtensibleInventoryMod.Instance;
 
-			if( !mymod.Config.CanScrollPages ) {
+			/*if( !mymod.Config.CanScrollPages ) {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
 			}
@@ -72,16 +72,22 @@ namespace ExtensibleInventory.UI {
 			}
 			if( !mymod.Config.CanDeletePages ) {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
-			}
+			}*/
 			
 			if( !myplayer.Library.CurrentBook.IsEnabled ) {
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
-				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
+				if( mymod.Config.CanScrollPages ) {
+					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
+					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
+				}
+				if( mymod.Config.CanAddPages ) {
+					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
+				}
+				if( mymod.Config.CanDeletePages ) {
+					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
+				}
 			}
 
-			if( this.ButtonBooks != null ) {
+			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var kv in this.ButtonBooks ) {
 					string _;
 					string book_name = kv.Key;
@@ -96,26 +102,27 @@ namespace ExtensibleInventory.UI {
 
 
 		private void DrawMouseHoverTexts( SpriteBatch sb ) {
+			var mymod = ExtensibleInventoryMod.Instance;
 			var pos = new Vector2( Main.mouseX, Main.mouseY + 16 );
 
-			if( this.ButtonPageLeft.IsMouseHovering ) {
-				string text = "Scroll inventory up";
+			if( this.ButtonPageLeft.IsMouseHovering && mymod.Config.CanScrollPages ) {
+				string text = "Scroll inventory left";
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
-			if( this.ButtonPageRight.IsMouseHovering ) {
-				string text = "Scroll inventory down";
+			if( this.ButtonPageRight.IsMouseHovering && mymod.Config.CanScrollPages ) {
+				string text = "Scroll inventory right";
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
-			if( this.ButtonPageAdd.IsMouseHovering ) {
+			if( this.ButtonPageAdd.IsMouseHovering && mymod.Config.CanAddPages ) {
 				string text = "Add new inventory page";
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
-			if( this.ButtonPageSub.IsMouseHovering ) {
+			if( this.ButtonPageSub.IsMouseHovering && mymod.Config.CanDeletePages ) {
 				string text = "Remove current inventory page";
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 
-			if( this.ButtonBooks != null ) {
+			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var kv in this.ButtonBooks ) {
 					string book_name = kv.Key;
 					UIImageButton book_button = kv.Value;
