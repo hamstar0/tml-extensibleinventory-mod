@@ -9,7 +9,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		internal Texture2D ButtonBookTex;
 		internal Texture2D ButtonBookDimTex;
@@ -36,10 +36,10 @@ namespace ExtensibleInventory {
 			this.ButtonBookTex = ModLoader.GetTexture( "Terraria/Item_531" );   // Spell Tome
 			this.ButtonBookDimTex = ModLoader.GetTexture( "Terraria/Item_1313" );   // Book of Skulls
 			this.ButtonBookLitTex = ModLoader.GetTexture( "Terraria/Item_1336" );   // Golden Shower
-			this.ButtonPageRightTex = mymod.GetTexture( "ButtonRight" );
-			this.ButtonPageLeftTex = mymod.GetTexture( "ButtonLeft" );
-			this.ButtonPageAddTex = mymod.GetTexture( "ButtonAdd" );
-			this.ButtonPageSubTex = mymod.GetTexture( "ButtonSub" );
+			this.ButtonPageRightTex = mymod.GetTexture( "UI/ButtonRight" );
+			this.ButtonPageLeftTex = mymod.GetTexture( "UI/ButtonLeft" );
+			this.ButtonPageAddTex = mymod.GetTexture( "UI/ButtonAdd" );
+			this.ButtonPageSubTex = mymod.GetTexture( "UI/ButtonSub" );
 
 			Promises.AddWorldUnloadEachPromise( () => {
 				this.ButtonBooks = null;

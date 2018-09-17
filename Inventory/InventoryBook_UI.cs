@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
 		public bool ScrollPageUp( Player player ) {
 			var mymod = ExtensibleInventoryMod.Instance;

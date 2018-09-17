@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Terraria.ModLoader.IO;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.Inventory {
 	partial class InventoryLibrary {
 		public const string DefaultBookName = "Default";
 

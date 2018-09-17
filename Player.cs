@@ -1,3 +1,4 @@
+using ExtensibleInventory.Inventory;
 using HamstarHelpers.Helpers.DebugHelpers;
 using Terraria;
 using Terraria.GameInput;

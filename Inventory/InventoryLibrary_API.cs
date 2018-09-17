@@ -4,7 +4,7 @@ using System.Linq;
 using Terraria;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.Inventory {
 	partial class InventoryLibrary {
 		public bool CanSwitchBooks( out string err ) {
 			var mymod = ExtensibleInventoryMod.Instance;

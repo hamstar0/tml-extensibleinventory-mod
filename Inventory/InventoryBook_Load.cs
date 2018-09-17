@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ModLoader.IO;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
 		public void Load( string lowercase_book_name, TagCompound tags ) {
 			string prefix;

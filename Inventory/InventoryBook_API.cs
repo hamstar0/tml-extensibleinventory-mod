@@ -1,7 +1,7 @@
 using Terraria;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
 		public int CountPages() {
 			return this.Pages.Count;

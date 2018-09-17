@@ -2,7 +2,7 @@
 using Terraria.UI;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		private void UpdateLayout() {
 			bool is_chest = true;

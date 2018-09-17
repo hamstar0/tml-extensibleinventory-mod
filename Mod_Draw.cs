@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ExtensibleInventory.UI;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;

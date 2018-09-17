@@ -6,7 +6,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
 
-namespace ExtensibleInventory {
+namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		public override void OnInitialize() {
 			var mymod = ExtensibleInventoryMod.Instance;

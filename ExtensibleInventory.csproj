@@ -37,22 +37,22 @@
     <Compile Include="API.cs" />
     <Compile Include="API_Call.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="InventoryBook_UI.cs" />
-    <Compile Include="InventoryBook_API.cs" />
-    <Compile Include="InventoryBook_Load.cs" />
-    <Compile Include="InventoryLibrary_API.cs" />
+    <Compile Include="Inventory\InventoryBook_UI.cs" />
+    <Compile Include="Inventory\InventoryBook_API.cs" />
+    <Compile Include="Inventory\InventoryBook_Load.cs" />
+    <Compile Include="Inventory\InventoryLibrary_API.cs" />
     <Compile Include="Mod_Draw.cs" />
     <Compile Include="Mod_Meta.cs" />
-    <Compile Include="InventoryBook.cs" />
-    <Compile Include="InventoryLibrary.cs" />
+    <Compile Include="Inventory\InventoryBook.cs" />
+    <Compile Include="Inventory\InventoryLibrary.cs" />
     <Compile Include="NetProtocol\ModSettingsProtocol.cs" />
     <Compile Include="Player_Load.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="UI_Draw.cs" />
-    <Compile Include="UI_Layout.cs" />
-    <Compile Include="UI_Initialize.cs" />
-    <Compile Include="UI.cs" />
+    <Compile Include="UI\UI_Draw.cs" />
+    <Compile Include="UI\UI_Layout.cs" />
+    <Compile Include="UI\UI_Initialize.cs" />
+    <Compile Include="UI\UI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="HamstarHelpers">
@@ -87,10 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
-    <Content Include="ButtonAdd.png" />
-    <Content Include="ButtonLeft.png" />
-    <Content Include="ButtonRight.png" />
-    <Content Include="ButtonSub.png" />
+    <Content Include="UI\ButtonAdd.png" />
+    <Content Include="UI\ButtonLeft.png" />
+    <Content Include="UI\ButtonRight.png" />
+    <Content Include="UI\ButtonSub.png" />
     <Content Include="description.txt" />
   </ItemGroup>
   <ItemGroup>
