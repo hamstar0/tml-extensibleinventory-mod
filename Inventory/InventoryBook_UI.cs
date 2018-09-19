@@ -25,7 +25,7 @@ namespace ExtensibleInventory.Inventory {
 			
 			this.DumpInventoryToPage( player, curr_page_idx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 15, () => {
+			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 10, () => {
 				if( !InventoryBook.IsPlayerInventoryEmpty( player ) ) {
 					this.DumpInventoryToPage( player, curr_page_idx );
 					return true;
@@ -59,7 +59,7 @@ namespace ExtensibleInventory.Inventory {
 
 			this.DumpInventoryToPage( player, curr_page_idx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 15, () => {
+			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 10, () => {
 				if( !InventoryBook.IsPlayerInventoryEmpty( player ) ) {
 					this.DumpInventoryToPage( player, curr_page_idx );
 					return true;
