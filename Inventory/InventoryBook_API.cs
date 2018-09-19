@@ -3,6 +3,19 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
+		public static bool IsPlayerInventoryEmpty( Player player ) {
+			for( int i = 10; i < 50; i++ ) {
+				if( !player.inventory[i].IsAir ) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+
+
+		////////////////
+
 		public int CountPages() {
 			return this.Pages.Count;
 		}
@@ -71,7 +84,7 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 
-			bool is_empty = this.IsPlayerInventoryEmpty( player );
+			bool is_empty = InventoryBook.IsPlayerInventoryEmpty( player );
 
 			if( !is_empty ) {
 				err = "Cannot delete non-empty inventory pages.";
@@ -98,15 +111,6 @@ namespace ExtensibleInventory.Inventory {
 
 			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
 				if( !page[i].IsAir ) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		public bool IsPlayerInventoryEmpty( Player player ) {
-			for( int i = 10; i < 50; i++ ) {
-				if( !player.inventory[i].IsAir ) {
 					return false;
 				}
 			}
