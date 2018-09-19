@@ -7,8 +7,7 @@ using Terraria;
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
 		public bool ScrollPageUp( Player player ) {
-			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScrollFrom") > 0
-				|| Timers.GetTimerTickDuration("ExtensibleInventoryPageScrollTo") > 0 ) {
+			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScroll") > 0 ) {
 				return false;
 			}
 			
@@ -25,7 +24,7 @@ namespace ExtensibleInventory.Inventory {
 			
 			this.DumpInventoryToPage( player, curr_page_idx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 10, () => {
+			Timers.SetTimer( "ExtensibleInventoryPageScroll", 10, () => {
 				if( !InventoryBook.IsPlayerInventoryEmpty( player ) ) {
 					this.DumpInventoryToPage( player, curr_page_idx );
 					return true;
@@ -41,8 +40,7 @@ namespace ExtensibleInventory.Inventory {
 		}
 
 		public bool ScrollPageDown( Player player ) {
-			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScrollFrom") > 0
-				|| Timers.GetTimerTickDuration("ExtensibleInventoryPageScrollTo") > 0 ) {
+			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScroll") > 0 ) {
 				return false;
 			}
 			
@@ -59,7 +57,7 @@ namespace ExtensibleInventory.Inventory {
 
 			this.DumpInventoryToPage( player, curr_page_idx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScrollFrom", 10, () => {
+			Timers.SetTimer( "ExtensibleInventoryPageScroll", 10, () => {
 				if( !InventoryBook.IsPlayerInventoryEmpty( player ) ) {
 					this.DumpInventoryToPage( player, curr_page_idx );
 					return true;
