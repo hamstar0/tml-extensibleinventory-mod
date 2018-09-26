@@ -56,17 +56,15 @@ namespace ExtensibleInventory {
 
 
 		////////////////
-
-		public override bool PreItemCheck() {
-			if( Main.dedServ ) { return base.PreItemCheck(); }
-
-			var mymod = (ExtensibleInventoryMod)this.mod;
-			
-			if( mymod.InvPageScroller.IsHoveringAnyControl() ) {
-				this.player.mouseInterface = true;
+		
+		public override void ModifyDrawInfo( ref PlayerDrawInfo drawInfo ) {
+			if( !Main.dedServ ) {
+				var mymod = (ExtensibleInventoryMod)this.mod;
+				if( mymod.InvPageScroller.IsHoveringAnyControl() ) {
+					this.player.mouseInterface = true;
+				}
 			}
-
-			return base.PreItemCheck();
+			base.ModifyDrawInfo( ref drawInfo );
 		}
 
 
@@ -76,6 +74,8 @@ namespace ExtensibleInventory {
 			if( Main.mouseItem == null || Main.mouseItem.IsAir ) {
 				return;
 			}
+
+			var mymod = (ExtensibleInventoryMod)this.mod;
 
 			int scrolled = PlayerInput.ScrollWheelDelta;
 			PlayerInput.ScrollWheelDelta = 0;
