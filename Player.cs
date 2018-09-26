@@ -61,7 +61,12 @@ namespace ExtensibleInventory {
 			if( Main.dedServ ) { return base.PreItemCheck(); }
 
 			var mymod = (ExtensibleInventoryMod)this.mod;
-			return !mymod.InvPageScroller.IsHoveringAnyControl();
+			
+			if( mymod.InvPageScroller.IsHoveringAnyControl() ) {
+				this.player.mouseInterface = true;
+			}
+
+			return base.PreItemCheck();
 		}
 
 

@@ -19,7 +19,7 @@ namespace ExtensibleInventory {
 		//public bool HideBookUI = false;
 		//public bool HidePageUI = false;
 		public bool HidePageTicksUI = false;
-
+		
 		public float BookPositionX = 64f;
 		public float BookPositionY = 260f;
 		public float PagePositionX = 192f;
