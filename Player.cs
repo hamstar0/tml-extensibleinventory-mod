@@ -58,6 +58,8 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public override bool PreItemCheck() {
+			if( Main.dedServ ) { return base.PreItemCheck(); }
+
 			var mymod = (ExtensibleInventoryMod)this.mod;
 			return !mymod.InvPageScroller.IsHoveringAnyControl();
 		}
