@@ -4,21 +4,21 @@ using Terraria;
 
 
 namespace ExtensibleInventory.NetProtocol {
-	class ModSettingsProtocol : PacketProtocol {
+	class ModSettingsProtocol : PacketProtocolRequestToServer {
 		public ExtensibleInventoryConfigData Settings;
 
 
 		////////////////
 
-		private ModSettingsProtocol( PacketProtocolDataConstructorLock ctor_lock ) { }
+		protected ModSettingsProtocol( PacketProtocolDataConstructorLock ctor_lock ) : base( ctor_lock ) { }
 
-		protected override void SetServerDefaults( int to_who ) {
+		protected override void InitializeServerSendData( int to_who ) {
 			this.Settings = ExtensibleInventoryMod.Instance.Config;
 		}
 
 		////////////////
 
-		protected override void ReceiveWithClient() {
+		protected override void ReceiveReply() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
