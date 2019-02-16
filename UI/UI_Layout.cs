@@ -6,21 +6,21 @@ namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		private void UpdateLayout() {
 			var mymod = ExtensibleInventoryMod.Instance;
-			bool is_chest = true;
-			bool is_player_valid = Main.LocalPlayer != null && Main.LocalPlayer.active;
+			bool isChest = true;
+			bool isPlayerValid = Main.LocalPlayer != null && Main.LocalPlayer.active;
 
-			if( is_player_valid ) {
-				is_chest = Main.LocalPlayer.chest != -1 || Main.npcShop > 0;
+			if( isPlayerValid ) {
+				isChest = Main.LocalPlayer.chest != -1 || Main.npcShop > 0;
 			}
 
-			if( this.IsChest != is_chest ) {
-				this.IsChest = is_chest;
+			if( this.IsChest != isChest ) {
+				this.IsChest = isChest;
 
-				this.SetLayoutPositions( is_chest );
+				this.SetLayoutPositions( isChest );
 			}
 
-			if( is_player_valid ) {
-				this.SetPageDisplayPosition( is_chest );
+			if( isPlayerValid ) {
+				this.SetPageDisplayPosition( isChest );
 			}
 
 			this.ButtonPageAdd.IsHidden = !mymod.Config.CanAddPages;
@@ -37,7 +37,7 @@ namespace ExtensibleInventory.UI {
 		}
 
 
-		private void SetPageDisplayPosition( bool is_chest ) {
+		private void SetPageDisplayPosition( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			ExtensibleInventoryPlayer myplayer = null;
 
@@ -45,32 +45,32 @@ namespace ExtensibleInventory.UI {
 				myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 			}
 
-			float off_x = is_chest ? mymod.Config.ChestOnOffsetX : 0;
-			float off_y = is_chest ? mymod.Config.ChestOnOffsetY : 0;
-			float x = mymod.Config.PagePositionX + off_x;
-			float y = mymod.Config.PagePositionY + off_y;
-			string page_text = this.PageDisplay.Text;
+			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
+			float offY = isChest ? mymod.Config.ChestOnOffsetY : 0;
+			float x = mymod.Config.PagePositionX + offX;
+			float y = mymod.Config.PagePositionY + offY;
+			string pageText = this.PageDisplay.Text;
 
 			if( myplayer != null ) {
-				page_text = myplayer.Library.CurrentBook.RenderPagePosition();
+				pageText = myplayer.Library.CurrentBook.RenderPagePosition();
 
-				this.PageDisplay.SetText( page_text );
+				this.PageDisplay.SetText( pageText );
 			}
 
-			float text_wid = Main.fontMouseText.MeasureString( page_text ).X;
+			float textWid = Main.fontMouseText.MeasureString( pageText ).X;
 
 			this.PageDisplay.Top.Set( y, 0f );
-			this.PageDisplay.Left.Set( x + 20f + ( 48f - text_wid / 2f ), 0f );
+			this.PageDisplay.Left.Set( x + 20f + ( 48f - textWid / 2f ), 0f );
 		}
 
 
-		private void SetLayoutPositions( bool is_chest ) {
+		private void SetLayoutPositions( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 
-			float off_x = is_chest ? mymod.Config.ChestOnOffsetX : 0;
-			float off_y = is_chest ? mymod.Config.ChestOnOffsetY : 0;
-			float x = mymod.Config.PagePositionX + off_x;
-			float y = mymod.Config.PagePositionY + off_y;
+			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
+			float offY = isChest ? mymod.Config.ChestOnOffsetY : 0;
+			float x = mymod.Config.PagePositionX + offX;
+			float y = mymod.Config.PagePositionY + offY;
 
 			this.ButtonPageLeft.Top.Set( y, 0f );
 			this.ButtonPageLeft.Left.Set( x, 0f );
@@ -82,13 +82,13 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageSub.Left.Set( x + 172f, 0f );
 
 			if( this.ButtonBooks != null ) {
-				float book_x = mymod.Config.BookPositionX + off_x;
-				float book_y = mymod.Config.BookPositionY + off_y;
+				float bookX = mymod.Config.BookPositionX + offX;
+				float bookY = mymod.Config.BookPositionY + offY;
 
 				int i = 0;
 				foreach( var button in this.ButtonBooks.Values ) {
-					button.Top.Set( book_y, 0f );
-					button.Left.Set( book_x + ( i * 24 ), 0f );
+					button.Top.Set( bookY, 0f );
+					button.Left.Set( bookX + ( i * 24 ), 0f );
 					i++;
 				}
 			}

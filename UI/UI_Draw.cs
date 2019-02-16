@@ -34,24 +34,25 @@ namespace ExtensibleInventory.UI {
 		private void DrawPageTicks( SpriteBatch sb ) {
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
+
 			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
 			var mymod = ExtensibleInventoryMod.Instance;
 
 			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
 			int pages = myplayer.Library.CurrentBook.CountPages();
-			int max_pages = pages > 29 ? 28 : pages;
+			int maxPages = pages > 29 ? 28 : pages;
 
-			for( int i=0; i<max_pages; i++ ) {
-				bool is_curr_page = i == myplayer.Library.CurrentBook.CurrentPageIdx;
+			for( int i=0; i<maxPages; i++ ) {
+				bool isCurrPage = i == myplayer.Library.CurrentBook.CurrentPageIdx;
 				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 13, 4 );
-				var fill_color = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( plr, i );
-				var bord_color = Color.White * 0.65f;
-				int thickness = is_curr_page ? 2 : 1;
+				var fillColor = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( plr, i );
+				var bordColor = Color.White * 0.65f;
+				int thickness = isCurrPage ? 2 : 1;
 
-				HudHelpers.DrawBorderedRect( sb, fill_color, bord_color, rect, thickness );
+				HudHelpers.DrawBorderedRect( sb, fillColor, bordColor, rect, thickness );
 			}
 
-			if( pages != max_pages ) {
+			if( pages != maxPages ) {
 				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + ( 28 * 16 ), pos.Y - 12f ), Color.White );
 			}
 		}
@@ -90,11 +91,11 @@ namespace ExtensibleInventory.UI {
 			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var kv in this.ButtonBooks ) {
 					string _;
-					string book_name = kv.Key;
-					UIImageButton book_button = kv.Value;
+					string bookName = kv.Key;
+					UIImageButton bookButton = kv.Value;
 
-					if( !myplayer.Library.CanSwitchBooks(out _) || !myplayer.Library.IsBookEnabled( book_name ) ) {
-						InventoryPageScrollerUI.DrawX( sb, book_button );
+					if( !myplayer.Library.CanSwitchBooks(out _) || !myplayer.Library.IsBookEnabled( bookName ) ) {
+						InventoryPageScrollerUI.DrawX( sb, bookButton );
 					}
 				}
 			}
@@ -124,11 +125,11 @@ namespace ExtensibleInventory.UI {
 
 			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var kv in this.ButtonBooks ) {
-					string book_name = kv.Key;
-					UIImageButton book_button = kv.Value;
+					string bookName = kv.Key;
+					UIImageButton bookButton = kv.Value;
 
-					if( book_button.IsMouseHovering ) {
-						sb.DrawString( Main.fontMouseText, book_name, pos, Color.White );
+					if( bookButton.IsMouseHovering ) {
+						sb.DrawString( Main.fontMouseText, bookName, pos, Color.White );
 					}
 				}
 			}

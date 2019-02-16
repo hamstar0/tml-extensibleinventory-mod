@@ -40,7 +40,7 @@ namespace ExtensibleInventory.Inventory {
 			return true;
 		}
 
-		public bool CanAddPage( Player player, int page_num, out string err ) {
+		public bool CanAddPage( Player player, int pageNum, out string err ) {
 			if( !this.IsEnabled ) {
 				err = this.Name + " inventory extension disabled.";
 				return false;
@@ -64,7 +64,7 @@ namespace ExtensibleInventory.Inventory {
 			return true;
 		}
 
-		public bool CanDeletePage( Player player, int page_num, out string err ) {
+		public bool CanDeletePage( Player player, int pageNum, out string err ) {
 			if( !this.IsEnabled ) {
 				err = this.Name+" inventory extension disabled.";
 				return false;
@@ -98,14 +98,14 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public Item[] GetPageItems( int page_num ) {
-			return this.Pages[page_num];
+		public Item[] GetPageItems( int pageNum ) {
+			return this.Pages[pageNum];
 		}
 
-		public bool IsPageEmpty( Player player, int page_num ) {
-			var page = this.Pages[page_num];
+		public bool IsPageEmpty( Player player, int pageNum ) {
+			var page = this.Pages[pageNum];
 			
-			if( page_num == this.CurrentPageIdx ) {
+			if( pageNum == this.CurrentPageIdx ) {
 				page = player.inventory;
 			}
 
@@ -117,11 +117,11 @@ namespace ExtensibleInventory.Inventory {
 			return true;
 		}
 
-		public float GaugePageFullness( Player player, int page_num ) {
-			var page = this.Pages[page_num];
+		public float GaugePageFullness( Player player, int pageNum ) {
+			var page = this.Pages[pageNum];
 			int slots = 0;
 
-			if( page_num == this.CurrentPageIdx ) {
+			if( pageNum == this.CurrentPageIdx ) {
 				page = player.inventory;
 			}
 
@@ -137,34 +137,34 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool InsertNewPage( Player player, int page_num, out string err ) {
-			if( !this.CanAddPage( player, page_num, out err ) ) {
+		public bool InsertNewPage( Player player, int pageNum, out string err ) {
+			if( !this.CanAddPage( player, pageNum, out err ) ) {
 				return false;
 			}
 
 			var mymod = ExtensibleInventoryMod.Instance;
 			
-			this.DumpInventoryToPage( player, page_num );
-			this.Pages.Insert( page_num, this.CreateBlankPage() );
+			this.DumpInventoryToPage( player, pageNum );
+			this.Pages.Insert( pageNum, this.CreateBlankPage() );
 			
 			return true;
 		}
 
-		public bool DeleteEmptyPage( Player player, int page_num, out string err ) {
+		public bool DeleteEmptyPage( Player player, int pageNum, out string err ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			
 			if( !this.CanDeletePage( player, this.CurrentPageIdx, out err ) ) {
 				return false;
 			}
 
-			this.Pages.RemoveAt( page_num );
+			this.Pages.RemoveAt( pageNum );
 
 			if( this.CurrentPageIdx >= this.Pages.Count ) {
 				this.CurrentPageIdx = this.Pages.Count - 1;
 
 				this.DumpPageToInventory( player, this.CurrentPageIdx );
 			} else {
-				this.DumpPageToInventory( player, page_num );
+				this.DumpPageToInventory( player, pageNum );
 			}
 			
 			return true;

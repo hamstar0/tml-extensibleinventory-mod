@@ -16,7 +16,7 @@ namespace ExtensibleInventory {
 
 		private void InitializeUI() {
 			this.InvUI = new UserInterface();
-			this.InvPageScroller = new InventoryPageScrollerUI( this );
+			this.InvPageScroller = new InventoryPageScrollerUI();
 			this.InvUI.SetState( this.InvPageScroller );
 		}
 
@@ -24,10 +24,10 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
-			int layer_idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Inventory" ) );
-			if( layer_idx == -1 ) { return; }
+			int layerIdx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Inventory" ) );
+			if( layerIdx == -1 ) { return; }
 
-			GameInterfaceDrawMethod control_ui = delegate {
+			GameInterfaceDrawMethod controlUi = delegate {
 				if( !Main.playerInventory || Main.myPlayer < 0 || Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
 					return true;
 				}
@@ -40,9 +40,9 @@ namespace ExtensibleInventory {
 				return true;
 			};
 
-			var inv_over_layer = new LegacyGameInterfaceLayer( "Unlimited Inventory: Page Controls", control_ui, InterfaceScaleType.UI );
+			var invOverLayer = new LegacyGameInterfaceLayer( "Extensible Inventory: Page Controls", controlUi, InterfaceScaleType.UI );
 
-			layers.Insert( layer_idx + 1, inv_over_layer );
+			layers.Insert( layerIdx + 1, invOverLayer );
 		}
 	}
 }

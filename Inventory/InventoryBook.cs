@@ -5,7 +5,7 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		public static int BasePageCapacity { get { return 40; } }
+		public static int BasePageCapacity => 40;
 
 
 
@@ -22,13 +22,13 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 		
-		internal InventoryBook( bool is_enabled, string book_name ) {
-			this.IsEnabled = is_enabled;
+		internal InventoryBook( bool isEnabled, string bookName ) {
+			this.IsEnabled = isEnabled;
 
 			this.Pages.Add( this.CreateBlankPage() );
 			this.Pages.Add( this.CreateBlankPage() );
 
-			this.Name = book_name;
+			this.Name = bookName;
 
 			this.ResetPages();
 		}
@@ -54,17 +54,17 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		private void DumpInventoryToPage( Player player, int page_num ) {
+		private void DumpInventoryToPage( Player player, int pageNum ) {
 			for( int i=10; i<50; i++ ) {
-				this.Pages[ page_num ][ i - 10 ] = player.inventory[ i ];
+				this.Pages[ pageNum ][ i - 10 ] = player.inventory[ i ];
 				player.inventory[ i ] = new Item();
 			}
 		}
 
-		private void DumpPageToInventory( Player player, int page_num ) {
+		private void DumpPageToInventory( Player player, int pageNum ) {
 			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
-				player.inventory[i + 10] = this.Pages[page_num][i];
-				this.Pages[page_num][i] = new Item();
+				player.inventory[i + 10] = this.Pages[pageNum][i];
+				this.Pages[pageNum][i] = new Item();
 			}
 		}
 	}

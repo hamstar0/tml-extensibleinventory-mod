@@ -10,11 +10,13 @@ namespace ExtensibleInventory {
 	partial class ExtensibleInventoryPlayer : ModPlayer {
 		internal InventoryLibrary Library;
 		
+		////////////////
 
+		public override bool CloneNewInstances => false;
 
 		////////////////
 
-		public override bool CloneNewInstances { get { return false; } }
+
 
 		public override void Initialize() {
 			this.Library = new InventoryLibrary();
@@ -35,9 +37,9 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public override void SyncPlayer( int to_who, int from_who, bool new_player ) {
+		public override void SyncPlayer( int toWho, int fromWho, bool newPlayer ) {
 			if( Main.netMode == 2 ) {
-				if( to_who == -1 && from_who == this.player.whoAmI ) {
+				if( toWho == -1 && fromWho == this.player.whoAmI ) {
 					this.OnConnectServer();
 				}
 			}

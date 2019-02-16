@@ -16,10 +16,9 @@ namespace ExtensibleInventory {
 		}
 
 		private void OnConnectClient() {
-			PacketProtocol.QuickRequestToServer<ModSettingsProtocol>();
+			PacketProtocolRequestToServer.QuickRequest<ModSettingsProtocol>( -1 );
 		}
 
-		private void OnConnectServer() {
-		}
+		private void OnConnectServer() { }
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using HamstarHelpers.Components.Network;
-using HamstarHelpers.Components.Network.Data;
 using Terraria;
 
 
@@ -10,7 +9,7 @@ namespace ExtensibleInventory.NetProtocol {
 
 		////////////////
 
-		protected ModSettingsProtocol( PacketProtocolDataConstructorLock ctor_lock ) : base( ctor_lock ) { }
+		private ModSettingsProtocol() { }
 
 		protected override void InitializeServerSendData( int to_who ) {
 			this.Settings = ExtensibleInventoryMod.Instance.Config;

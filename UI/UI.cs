@@ -32,7 +32,9 @@ namespace ExtensibleInventory.UI {
 
 		////////////////
 
-		public InventoryPageScrollerUI( ExtensibleInventoryMod mymod ) : base() {
+		public InventoryPageScrollerUI() : base() {
+			var mymod = ExtensibleInventoryMod.Instance;
+
 			this.ButtonBookTex = ModLoader.GetTexture( "Terraria/Item_531" );   // Spell Tome
 			this.ButtonBookDimTex = ModLoader.GetTexture( "Terraria/Item_1313" );   // Book of Skulls
 			this.ButtonBookLitTex = ModLoader.GetTexture( "Terraria/Item_1336" );   // Golden Shower
@@ -75,14 +77,14 @@ namespace ExtensibleInventory.UI {
 
 		////////////////
 
-		public override void Update( GameTime game_time ) {
+		public override void Update( GameTime gameTime ) {
 			if( this.ButtonBooks == null && Main.LocalPlayer != null && Main.LocalPlayer.active ) {
 				this.InitializeLibraryBooks();
 			}
 
 			this.UpdateLayout();
 
-			base.Update( game_time );
+			base.Update( gameTime );
 		}
 	}
 }

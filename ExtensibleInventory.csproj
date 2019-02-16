@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ExtensibleInventory</RootNamespace>
     <AssemblyName>ExtensibleInventory</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -35,7 +35,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="API.cs" />
-    <Compile Include="API_Call.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Inventory\InventoryBook_UI.cs" />
     <Compile Include="Inventory\InventoryBook_API.cs" />

@@ -28,14 +28,14 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public void ChangeCurrentBook( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.ChangeBook - No such book by name " + book_name );
+		public void ChangeCurrentBook( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
 			this.CurrentBook.DumpInventoryToCurrentPage( Main.LocalPlayer );
 
-			this.CurrBookName = book_name;
+			this.CurrBookName = bookName;
 
 			this.CurrentBook.DumpCurrentPageToInventory( Main.LocalPlayer );
 		}
@@ -43,54 +43,54 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public void AddBook( string book_name, bool is_enabled ) {
-			if( this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.AddBook - Book by name " + book_name + " already added." );
+		public void AddBook( string bookName, bool isEnabled ) {
+			if( this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "Book by name " + bookName + " already added." );
 			}
 
-			this.Books[ book_name ] = new InventoryBook( is_enabled, book_name );
+			this.Books[ bookName ] = new InventoryBook( isEnabled, bookName );
 		}
 
-		public bool RemoveBook( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.RemoveBook - No such book by name " + book_name );
+		public bool RemoveBook( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
-			if( book_name == "Default" ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.RemoveBook - Cannot delete Default book; try disabling instead." );
+			if( bookName == "Default" ) {
+				throw new HamstarException( "Cannot delete Default book; try disabling instead." );
 			}
 
-			return this.Books.Remove( book_name );
+			return this.Books.Remove( bookName );
 		}
 
 
 		////////////////
 
-		public bool IsBookEnabled( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.IsBookEnabled - No such book by name " + book_name );
+		public bool IsBookEnabled( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[book_name];
+			InventoryBook book = this.Books[bookName];
 
 			return book.IsEnabled;
 		}
 
-		public void EnableBook( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.EnableBook - No such book by name " + book_name );
+		public void EnableBook( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[book_name];
+			InventoryBook book = this.Books[bookName];
 
 			book.IsEnabled = true;
 		}
 
-		public void DisableBook( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.DisableBook - No such book by name " + book_name );
+		public void DisableBook( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[book_name];
+			InventoryBook book = this.Books[bookName];
 
 			book.IsEnabled = false;
 		}
@@ -98,43 +98,43 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public int CountBookPages( string book_name ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.CountBookPages - No such book by name " + book_name );
+		public int CountBookPages( string bookName ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
 			return this.Books.Count;
 		}
 
 		
-		public bool AddBookPage( Player player, string book_name, out string err ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.AddBookPage - No such book by name " + book_name );
+		public bool AddBookPage( Player player, string bookName, out string err ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[book_name];
+			InventoryBook book = this.Books[bookName];
 
 			return book.InsertNewPage( player, book.CountPages() - 1, out err );
 		}
 
-		public bool RemoveLatestBookPage( Player player, string book_name, out string err ) {
-			if( !this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.RemoveLatestBookPage - No such book by name " + book_name );
+		public bool RemoveLatestBookPage( Player player, string bookName, out string err ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[ book_name ];
+			InventoryBook book = this.Books[ bookName ];
 
 			return book.DeleteEmptyPage( player, book.CountPages() - 1, out err );
 		}
 
 		////////////////
 		
-		public Item[] GetLatestBookPageItems( string book_name ) {
-			if( this.Books.ContainsKey( book_name ) ) {
-				throw new HamstarException( "ExtensibleInventory.InventoryLibrary.GetLatestBookPageItems - No such book by name " + book_name );
+		public Item[] GetLatestBookPageItems( string bookName ) {
+			if( this.Books.ContainsKey( bookName ) ) {
+				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[book_name];
+			InventoryBook book = this.Books[bookName];
 			int count = book.CountPages();
 			if( count == 0 ) {
 				return null;

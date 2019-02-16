@@ -1,5 +1,8 @@
 using HamstarHelpers.Components.Config;
+using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.DotNetHelpers;
+using HamstarHelpers.Helpers.TmlHelpers;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -14,19 +17,13 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public JsonConfig<ExtensibleInventoryConfigData> ConfigJson { get; private set; }
-		public ExtensibleInventoryConfigData Config { get { return this.ConfigJson.Data; } }
+		public ExtensibleInventoryConfigData Config => this.ConfigJson.Data;
 
 
 
 		////////////////
 
 		public ExtensibleInventoryMod() {
-			this.Properties = new ModProperties() {
-				Autoload = true,
-				AutoloadGores = true,
-				AutoloadSounds = true
-			};
-			
 			this.ConfigJson = new JsonConfig<ExtensibleInventoryConfigData>(
 				ExtensibleInventoryConfigData.ConfigFileName,
 				ConfigurationDataBase.RelativePath,
@@ -35,6 +32,9 @@ namespace ExtensibleInventory {
 		}
 
 		public override void Load() {
+			string depErr = TmlHelpers.ReportBadDependencyMods( this );
+			if( depErr != null ) { throw new HamstarException( depErr ); }
+
 			ExtensibleInventoryMod.Instance = this;
 
 			this.LoadConfig();
@@ -49,7 +49,9 @@ namespace ExtensibleInventory {
 				this.ConfigJson.SaveFile();
 			}
 
-			if( this.Config.UpdateToLatestVersion() ) {
+			if( this.Config.CanUpdateVersion() ) {
+				this.Config.UpdateToLatestVersion();
+
 				LogHelpers.Log( "Extensible Inventory updated to " + this.Version.ToString() );
 				this.ConfigJson.SaveFile();
 			}
@@ -64,15 +66,22 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public override object Call( params object[] args ) {
-			if( args.Length == 0 ) { throw new Exception( "Undefined call type." ); }
+			if( args == null || args.Length == 0 ) { throw new HamstarException( "Undefined call type." ); }
 
-			string call_type = args[0] as string;
-			if( args == null ) { throw new Exception( "Invalid call type." ); }
+			string callType = args[0] as string;
+			if( callType == null ) { throw new HamstarException( "Invalid call type." ); }
 
-			var new_args = new object[args.Length - 1];
-			Array.Copy( args, 1, new_args, 0, args.Length - 1 );
+			var methodInfo = typeof( ExtensibleInventoryAPI ).GetMethod( callType );
+			if( methodInfo == null ) { throw new HamstarException( "Invalid call type " + callType ); }
 
-			return ExtensibleInventoryAPI.Call( call_type, new_args );
+			var newArgs = new object[args.Length - 1];
+			Array.Copy( args, 1, newArgs, 0, args.Length - 1 );
+
+			try {
+				return ReflectionHelpers.SafeCall( methodInfo, null, newArgs );
+			} catch( Exception e ) {
+				throw new HamstarException( "Bad API call.", e );
+			}
 		}
 	}
 }

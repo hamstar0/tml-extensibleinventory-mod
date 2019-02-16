@@ -4,7 +4,7 @@ using System;
 
 namespace ExtensibleInventory {
 	public class ExtensibleInventoryConfigData : ConfigurationDataBase {
-		public readonly static string ConfigFileName = "Extensible Inventory Config.json";
+		public static string ConfigFileName => "Extensible Inventory Config.json";
 
 
 		////////////////
@@ -47,28 +47,37 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public bool UpdateToLatestVersion() {
-			var new_config = new ExtensibleInventoryConfigData();
-			var vers_since = this.VersionSinceUpdate != "" ?
+		private void SetDefaults() { }
+
+		////
+
+		public bool CanUpdateVersion() {
+			if( this.VersionSinceUpdate == "" ) { return true; }
+			var versSince = new Version( this.VersionSinceUpdate );
+			return versSince < ExtensibleInventoryMod.Instance.Version;
+		}
+
+		public void UpdateToLatestVersion() {
+			var mymod = ExtensibleInventoryMod.Instance;
+			var newConfig = new ExtensibleInventoryConfigData();
+			var versSince = this.VersionSinceUpdate != "" ?
 				new Version( this.VersionSinceUpdate ) :
 				new Version();
 
-			if( vers_since >= ExtensibleInventoryMod.Instance.Version ) {
-				return false;
+			if( this.VersionSinceUpdate == "" ) {
+				this.SetDefaults();
 			}
 
-			if( vers_since < new Version( 1, 2, 0 ) ) {
+			if( versSince < new Version( 1, 2, 0 ) ) {
 				if( this.BookPositionY == ExtensibleInventoryConfigData._1_1_BookPositionY ) {
-					this.BookPositionY = new_config.BookPositionY;
+					this.BookPositionY = newConfig.BookPositionY;
 				}
 				if( this.PagePositionY == ExtensibleInventoryConfigData._1_1_PagePositionY ) {
-					this.PagePositionY = new_config.PagePositionY;
+					this.PagePositionY = newConfig.PagePositionY;
 				}
 			}
 
-			this.VersionSinceUpdate = ExtensibleInventoryMod.Instance.Version.ToString();
-
-			return true;
+			this.VersionSinceUpdate = mymod.Version.ToString();
 		}
 	}
 }

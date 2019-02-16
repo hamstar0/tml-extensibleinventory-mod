@@ -56,9 +56,9 @@ namespace ExtensibleInventory.UI {
 
 		private void InitializeLibraryBooks() {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-			IList<string> all_book_names = myplayer.Library.GetBookNames();
+			IList<string> allBookNames = myplayer.Library.GetBookNames();
 
-			if( all_book_names.Count == 1 ) {
+			if( allBookNames.Count == 1 ) {
 				return;
 			}
 
@@ -66,13 +66,13 @@ namespace ExtensibleInventory.UI {
 
 			int i = 0;
 
-			foreach( string book_name in all_book_names ) {
-				string curr_book_name = book_name;
-				bool is_current_book = book_name == myplayer.Library.CurrentBook.Name;
+			foreach( string bookName in allBookNames ) {
+				string currBookName = bookName;
+				bool isCurrentBook = bookName == myplayer.Library.CurrentBook.Name;
 
-				Texture2D tex = is_current_book ?
+				Texture2D tex = isCurrentBook ?
 					this.ButtonBookLitTex :
-					myplayer.Library.IsBookEnabled( book_name ) ?
+					myplayer.Library.IsBookEnabled( bookName ) ?
 						this.ButtonBookDimTex :
 						this.ButtonBookTex;
 				
@@ -85,13 +85,13 @@ namespace ExtensibleInventory.UI {
 						Main.NewText( err, Color.Red );
 					}
 
-					myplayer2.Library.ChangeCurrentBook( curr_book_name );
+					myplayer2.Library.ChangeCurrentBook( currBookName );
 
-					this.ButtonBooks[ curr_book_name ].SetImage( this.ButtonBookTex );
+					this.ButtonBooks[ currBookName ].SetImage( this.ButtonBookTex );
 					button.SetImage( this.ButtonBookLitTex );
 				};
 
-				this.ButtonBooks[ book_name ] = button;
+				this.ButtonBooks[ bookName ] = button;
 				base.Append( button );
 
 				i++;

@@ -8,8 +8,12 @@ namespace ExtensibleInventory.UI {
 		public bool IsHidden = false;
 
 
+
+		////////////////
+
 		public UIInventoryControlButton( Texture2D tex ) : base( tex ) { }
 
+		////
 
 		public override void MouseOver( UIMouseEvent evt ) {
 			if( this.IsHidden ) { return; }

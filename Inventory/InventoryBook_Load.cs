@@ -1,3 +1,4 @@
+using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
 using Terraria;
 using Terraria.ModLoader.IO;
@@ -5,13 +6,13 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		public void Load( string lowercase_book_name, TagCompound tags ) {
+		public void Load( string lowercaseBookName, TagCompound tags ) {
 			string prefix;
 
-			if( lowercase_book_name == "default" ) {
+			if( lowercaseBookName == "default" ) {
 				prefix = "";
 			} else {
-				prefix = lowercase_book_name + "_";
+				prefix = lowercaseBookName + "_";
 			}
 
 			if( ExtensibleInventoryMod.Instance.Config.DebugModeReset ) {
@@ -24,35 +25,39 @@ namespace ExtensibleInventory.Inventory {
 			this.Pages.Clear();
 
 			int pages = tags.GetInt( prefix + "page_count" );
-			int curr_page = tags.GetInt( prefix + "curr_page" );
+			int currPage = tags.GetInt( prefix + "curr_page" );
 
 			for( int i = 0; i < pages; i++ ) {
 				Item[] page = this.CreateBlankPage();
 				this.Pages.Add( page );
 
-				if( i == curr_page ) { continue; }
+				if( i == currPage ) { continue; }
 
 				for( int j = 0; j < InventoryBook.BasePageCapacity; j++ ) {
 					string idx = prefix + "page_" + i + "_" + j;
 
 					if( tags.ContainsKey( idx ) ) {
-						page[j] = ItemIO.Load( tags.GetCompound( idx ) );
+						try {
+							page[j] = ItemIO.Load( tags.GetCompound( idx ) );
+						} catch {
+							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j );
+						}
 					} else {
 						page[j] = new Item();
 					}
 				}
 			}
 
-			this.CurrentPageIdx = curr_page;
+			this.CurrentPageIdx = currPage;
 		}
 
-		public TagCompound Save( string lowercase_book_name, TagCompound tags ) {
+		public TagCompound Save( string lowercaseBookName, TagCompound tags ) {
 			string prefix;
 
-			if( lowercase_book_name == "default" ) {
+			if( lowercaseBookName == "default" ) {
 				prefix = "";
 			} else {
-				prefix = lowercase_book_name + "_";
+				prefix = lowercaseBookName + "_";
 			}
 
 			tags[ prefix + "page_count" ] = this.Pages.Count;
@@ -62,9 +67,14 @@ namespace ExtensibleInventory.Inventory {
 				if( i == this.CurrentPageIdx ) { continue; }
 
 				for( int j = 0; j < InventoryBook.BasePageCapacity; j++ ) {
-					string idx = prefix+"page_" + i + "_" + j;
+					string idx = prefix + "page_" + i + "_" + j;
 
-					tags[idx] = ItemIO.Save( this.Pages[i][j] );
+					try {
+						tags[idx] = ItemIO.Save( this.Pages[i][j] );
+					} catch {
+						LogHelpers.Warn( "Could not save item for book "+lowercaseBookName+" on page "+i+" at position "+j );
+						continue;
+					}
 				}
 			}
 
