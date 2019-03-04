@@ -1,4 +1,5 @@
 ﻿using ExtensibleInventory.UI;
+using HamstarHelpers.Helpers.DebugHelpers;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
@@ -29,6 +30,9 @@ namespace ExtensibleInventory {
 
 			GameInterfaceDrawMethod controlUi = delegate {
 				if( !Main.playerInventory || Main.myPlayer < 0 || Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
+					if( Main.playerInventory ) {
+						LogHelpers.LogOnce( ""+(Main.myPlayer<0)+","+(Main.LocalPlayer == null)+","+(!Main.LocalPlayer.active) );
+					}
 					return true;
 				}
 

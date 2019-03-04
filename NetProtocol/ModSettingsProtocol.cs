@@ -11,7 +11,7 @@ namespace ExtensibleInventory.NetProtocol {
 
 		private ModSettingsProtocol() { }
 
-		protected override void InitializeServerSendData( int to_who ) {
+		protected override void InitializeServerSendData( int toWho ) {
 			this.Settings = ExtensibleInventoryMod.Instance.Config;
 		}
 

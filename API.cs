@@ -20,62 +20,62 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public static void AddBook( string book_name, bool user_can_add_pages ) {
+		public static void AddBook( string bookName, bool userCanAddPages ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			myplayer.Library.AddBook( book_name, user_can_add_pages );
+			myplayer.Library.AddBook( bookName, userCanAddPages );
 		}
 		
-		public static bool RemoveBook( string book_name ) {
+		public static bool RemoveBook( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			return myplayer.Library.RemoveBook( book_name );
+			return myplayer.Library.RemoveBook( bookName );
 		}
 
 
 		////////////////
 
-		public static void EnableBook( string book_name ) {
+		public static void EnableBook( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			myplayer.Library.EnableBook( book_name );
+			myplayer.Library.EnableBook( bookName );
 		}
 		
-		public static void DisableBook( string book_name ) {
+		public static void DisableBook( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			myplayer.Library.DisableBook( book_name );
+			myplayer.Library.DisableBook( bookName );
 		}
 		
 
 		////////////////
 
-		public static int CountBookPages( string book_name ) {
+		public static int CountBookPages( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			return myplayer.Library.CountBookPages( book_name );
+			return myplayer.Library.CountBookPages( bookName );
 		}
 
-		public static void AddBookPage( string book_name ) {
+		public static void AddBookPage( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 			string err;
 
-			if( !myplayer.Library.AddBookPage( Main.LocalPlayer, book_name, out err ) ) {
+			if( !myplayer.Library.AddBookPage( Main.LocalPlayer, bookName, out err ) ) {
 				Main.NewText( err, Color.Red );
 			}
 		}
 
-		public static Item[] GetLatestBookPageItems( string book_name ) {
+		public static Item[] GetLatestBookPageItems( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
-			return myplayer.Library.GetLatestBookPageItems( book_name );
+			return myplayer.Library.GetLatestBookPageItems( bookName );
 		}
 		
-		public static void RemoveLatestBookPage( string book_name ) {
+		public static void RemoveLatestBookPage( string bookName ) {
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 			string err;
 
-			if( !myplayer.Library.RemoveLatestBookPage( Main.LocalPlayer, book_name, out err ) ) {
+			if( !myplayer.Library.RemoveLatestBookPage( Main.LocalPlayer, bookName, out err ) ) {
 				Main.NewText( err, Color.Red );
 			}
 		}

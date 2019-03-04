@@ -34,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="API_Compat.cs" />
     <Compile Include="API.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Inventory\InventoryBook_UI.cs" />

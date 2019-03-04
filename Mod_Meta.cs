@@ -32,14 +32,14 @@ namespace ExtensibleInventory {
 				throw new Exception( "Cannot reset to default configs outside of single player." );
 			}
 
-			var new_config = new ExtensibleInventoryConfigData();
+			var newConfig = new ExtensibleInventoryConfigData();
 			//new_config.SetDefaults();
 
-			ExtensibleInventoryMod.Instance.ConfigJson.SetData( new_config );
+			ExtensibleInventoryMod.Instance.ConfigJson.SetData( newConfig );
 			ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
 
 			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-			myplayer.Library.CurrentBook.IsEnabled = new_config.DefaultBookEnabled;
+			myplayer.Library.CurrentBook.IsEnabled = newConfig.DefaultBookEnabled;
 		}
 	}
 }

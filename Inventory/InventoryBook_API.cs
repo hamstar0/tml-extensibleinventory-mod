@@ -53,9 +53,9 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 
-			bool is_maxed = this.Pages.Count >= mymod.Config.MaxPages;
+			bool isMaxed = this.Pages.Count >= mymod.Config.MaxPages;
 			
-			if( is_maxed ) {
+			if( isMaxed ) {
 				err = "Max pages reached.";
 				return false;
 			}
@@ -77,16 +77,16 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 
-			bool min_pages = this.Pages.Count > 1;
+			bool minPages = this.Pages.Count > 1;
 
-			if( !min_pages ) {
+			if( !minPages ) {
 				err = "Too few pages to delete any more.";
 				return false;
 			}
 
-			bool is_empty = InventoryBook.IsPlayerInventoryEmpty( player );
+			bool isEmpty = InventoryBook.IsPlayerInventoryEmpty( player );
 
-			if( !is_empty ) {
+			if( !isEmpty ) {
 				err = "Cannot delete non-empty inventory pages.";
 				return false;
 			}

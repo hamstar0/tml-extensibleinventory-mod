@@ -14,19 +14,19 @@ namespace ExtensibleInventory.UI {
 			this.PageDisplay = new UIText( "0 / 0" );
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
-			this.ButtonPageLeft.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonPageLeft.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
 			};
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
-			this.ButtonPageRight.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonPageRight.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 				myplayer2.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
 			};
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
-			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 
 				if( myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer ) ) {
@@ -77,7 +77,7 @@ namespace ExtensibleInventory.UI {
 						this.ButtonBookTex;
 				
 				var button = new UIInventoryControlButton( tex );
-				button.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+				button.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 					string err;
 					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
 

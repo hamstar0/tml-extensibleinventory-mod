@@ -53,7 +53,7 @@ namespace ExtensibleInventory.UI {
 			}
 
 			if( pages != maxPages ) {
-				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + ( 28 * 16 ), pos.Y - 12f ), Color.White );
+				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + (28 * 16), pos.Y - 12f ), Color.White );
 			}
 		}
 
