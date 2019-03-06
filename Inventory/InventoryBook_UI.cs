@@ -7,14 +7,20 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
+		public const string PageScrollTimerName = "ExtensibleInventoryPageScroll";
+
+
+
 		public bool ScrollPageUp( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
+				LogHelpers.Warn( "World not in play" );
+				Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
 				return false;
 			}
-			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScroll") > 0 ) {
+			if( Timers.GetTimerTickDuration( InventoryBook.PageScrollTimerName ) > 0 ) {
 				return false;
 			}
-			
+
 			string err;
 
 			if( !this.CanScrollPages( out err ) ) {
@@ -28,7 +34,7 @@ namespace ExtensibleInventory.Inventory {
 			this.DumpInventoryToPage( player, this.CurrentPageIdx );
 			this.DumpPageToInventory( player, --this.CurrentPageIdx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScroll", 10, () => {
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
 			} );
 
@@ -37,12 +43,14 @@ namespace ExtensibleInventory.Inventory {
 
 		public bool ScrollPageDown( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
+				LogHelpers.Warn( "World not in play" );
+				Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
 				return false;
 			}
-			if( Timers.GetTimerTickDuration("ExtensibleInventoryPageScroll") > 0 ) {
+			if( Timers.GetTimerTickDuration( InventoryBook.PageScrollTimerName ) > 0 ) {
 				return false;
 			}
-			
+
 			string err;
 
 			if( !this.CanScrollPages( out err ) ) {
@@ -56,7 +64,7 @@ namespace ExtensibleInventory.Inventory {
 			this.DumpInventoryToPage( player, this.CurrentPageIdx );
 			this.DumpPageToInventory( player, ++this.CurrentPageIdx );
 
-			Timers.SetTimer( "ExtensibleInventoryPageScroll", 10, () => {
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
 			} );
 
