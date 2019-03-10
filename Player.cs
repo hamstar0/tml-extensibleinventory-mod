@@ -62,7 +62,7 @@ namespace ExtensibleInventory {
 		public override void ModifyDrawInfo( ref PlayerDrawInfo drawInfo ) {
 			if( !Main.dedServ ) {
 				var mymod = (ExtensibleInventoryMod)this.mod;
-				if( mymod.InvPageScroller.IsHoveringAnyControl() ) {
+				if( mymod.InvPageScroller?.IsHoveringAnyControl() ?? false ) {
 					this.player.mouseInterface = true;
 				}
 			}
@@ -83,9 +83,9 @@ namespace ExtensibleInventory {
 			PlayerInput.ScrollWheelDelta = 0;
 
 			if( scrolled >= 120 ) {
-				this.Library.CurrentBook.ScrollPageUp( this.player );
+				this.Library.CurrentBook?.ScrollPageUp( this.player );
 			} else if( scrolled <= -120 ) {
-				this.Library.CurrentBook.ScrollPageDown( this.player );
+				this.Library.CurrentBook?.ScrollPageDown( this.player );
 			}
 		}
 	}
