@@ -56,14 +56,22 @@ namespace ExtensibleInventory.Inventory {
 
 		private void DumpInventoryToPage( Player player, int pageNum ) {
 			for( int i=10; i<50; i++ ) {
-				this.Pages[ pageNum ][ i - 10 ] = player.inventory[ i ]?.Clone() ?? new Item();
+				Item invItem = ( !player.inventory[i]?.IsAir ?? false ) ?
+					player.inventory[i].DeepClone() :	// Clone() causes errors?
+					new Item();
+
+				this.Pages[ pageNum ][ i - 10 ] = invItem;
 				player.inventory[ i ] = new Item();
 			}
 		}
 
 		private void DumpPageToInventory( Player player, int pageNum ) {
 			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
-				player.inventory[ i + 10 ] = this.Pages[ pageNum ][ i ]?.Clone() ?? new Item();
+				Item pageItem = ( !this.Pages[pageNum][i]?.IsAir ?? false ) ?
+					this.Pages[pageNum][i].DeepClone() :    // Clone() causes errors?
+					new Item();
+
+				player.inventory[ i + 10 ] = pageItem;
 				this.Pages[ pageNum ][ i ] = new Item();
 			}
 		}

@@ -39,22 +39,12 @@ namespace ExtensibleInventory {
 				}
 
 				var mymod = ExtensibleInventoryMod.Instance;
-				bool sbBegunCheck;
-				bool sbBegunCheckSuccess = XnaHelpers.IsMainSpriteBatchBegun( out sbBegunCheck );
 
 				try {
 					mymod.InvUI?.Update( Main._drawInterfaceGameTime );
 					mymod.InvPageScroller?.Draw( Main.spriteBatch );
 				} catch( Exception e ) {
 					LogHelpers.WarnOnce( e.ToString() );
-
-					if( sbBegunCheckSuccess ) {
-						if( sbBegunCheck ) {
-							Main.spriteBatch.End();
-						} else {
-							Main.spriteBatch.Begin();
-						}
-					}
 				}
 
 				return true;

@@ -52,19 +52,25 @@ namespace ExtensibleInventory.UI {
 		////////////////
 
 		public bool IsHoveringAnyControl() {
-			if( this.ButtonPageLeft.IsMouseHovering ) {
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( !Main.playerInventory ) {
+				return false;
+			}
+
+			if( this.ButtonPageLeft.IsMouseHovering && mymod.Config.CanScrollPages ) {
 				return true;
 			}
-			if( this.ButtonPageRight.IsMouseHovering ) {
+			if( this.ButtonPageRight.IsMouseHovering && mymod.Config.CanScrollPages ) {
 				return true;
 			}
-			if( this.ButtonPageAdd.IsMouseHovering ) {
+			if( this.ButtonPageAdd.IsMouseHovering && mymod.Config.CanAddPages ) {
 				return true;
 			}
-			if( this.ButtonPageSub.IsMouseHovering ) {
+			if( this.ButtonPageSub.IsMouseHovering && mymod.Config.CanDeletePages ) {
 				return true;
 			}
-			if( this.ButtonBooks != null ) {
+			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var button in this.ButtonBooks.Values ) {
 					if( button.IsMouseHovering ) {
 						return true;

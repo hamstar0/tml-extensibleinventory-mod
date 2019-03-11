@@ -1,5 +1,6 @@
 using ExtensibleInventory.Inventory;
 using HamstarHelpers.Helpers.DebugHelpers;
+using System;
 using Terraria;
 using Terraria.GameInput;
 using Terraria.ModLoader;
@@ -61,9 +62,13 @@ namespace ExtensibleInventory {
 		
 		public override void ModifyDrawInfo( ref PlayerDrawInfo drawInfo ) {
 			if( !Main.dedServ ) {
-				var mymod = (ExtensibleInventoryMod)this.mod;
-				if( mymod.InvPageScroller?.IsHoveringAnyControl() ?? false ) {
-					this.player.mouseInterface = true;
+				try {
+					var mymod = (ExtensibleInventoryMod)this.mod;
+					if( mymod.InvPageScroller?.IsHoveringAnyControl() ?? false ) {
+						this.player.mouseInterface = true;
+					}
+				} catch( Exception e ) {
+					LogHelpers.Warn( "What's this doing here? - " + e.ToString() );
 				}
 			}
 			base.ModifyDrawInfo( ref drawInfo );
