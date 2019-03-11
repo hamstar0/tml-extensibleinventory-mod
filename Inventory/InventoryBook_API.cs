@@ -99,7 +99,7 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		public Item[] GetPageItems( int pageNum ) {
-			return this.Pages[pageNum];
+			return this.Pages[ pageNum ];
 		}
 
 		public bool IsPageEmpty( Player player, int pageNum ) {
