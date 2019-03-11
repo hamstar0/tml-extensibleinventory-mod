@@ -14,7 +14,7 @@ namespace ExtensibleInventory.Inventory {
 		public bool ScrollPageUp( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
 				LogHelpers.Warn( "World not in play" );
-				Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
+				//Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
 				return false;
 			}
 			if( Timers.GetTimerTickDuration( InventoryBook.PageScrollTimerName ) > 0 ) {
@@ -44,7 +44,7 @@ namespace ExtensibleInventory.Inventory {
 		public bool ScrollPageDown( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
 				LogHelpers.Warn( "World not in play" );
-				Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
+				//Main.NewText( "Could not scroll pages. Please report this as an issue.", Color.Red );
 				return false;
 			}
 			if( Timers.GetTimerTickDuration( InventoryBook.PageScrollTimerName ) > 0 ) {

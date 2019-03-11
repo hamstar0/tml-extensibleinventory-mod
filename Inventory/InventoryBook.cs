@@ -57,7 +57,7 @@ namespace ExtensibleInventory.Inventory {
 		private void DumpInventoryToPage( Player player, int pageNum ) {
 			for( int i=10; i<50; i++ ) {
 				Item invItem = ( !player.inventory[i]?.IsAir ?? false ) ?
-					player.inventory[i].DeepClone() :	// Clone() causes errors?
+					player.inventory[i].DeepClone() :
 					new Item();
 
 				this.Pages[ pageNum ][ i - 10 ] = invItem;
@@ -68,7 +68,7 @@ namespace ExtensibleInventory.Inventory {
 		private void DumpPageToInventory( Player player, int pageNum ) {
 			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
 				Item pageItem = ( !this.Pages[pageNum][i]?.IsAir ?? false ) ?
-					this.Pages[pageNum][i].DeepClone() :    // Clone() causes errors?
+					this.Pages[pageNum][i].DeepClone() :
 					new Item();
 
 				player.inventory[ i + 10 ] = pageItem;

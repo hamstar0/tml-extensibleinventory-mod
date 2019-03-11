@@ -1,6 +1,6 @@
 ﻿using ExtensibleInventory.UI;
+using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.XnaHelpers;
 using System;
 using System.Collections.Generic;
 using Terraria;
@@ -44,7 +44,7 @@ namespace ExtensibleInventory {
 					mymod.InvUI?.Update( Main._drawInterfaceGameTime );
 					mymod.InvPageScroller?.Draw( Main.spriteBatch );
 				} catch( Exception e ) {
-					LogHelpers.WarnOnce( e.ToString() );
+					throw new HamstarException( "", e );
 				}
 
 				return true;
