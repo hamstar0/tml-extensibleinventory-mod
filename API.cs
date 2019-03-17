@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Microsoft.Xna.Framework;
 using Terraria;
 
@@ -21,13 +22,15 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public static void AddBook( string bookName, bool userCanAddPages ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			myplayer.Library.AddBook( bookName, userCanAddPages );
 		}
 		
 		public static bool RemoveBook( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			return myplayer.Library.RemoveBook( bookName );
 		}
@@ -36,13 +39,15 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public static void EnableBook( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			myplayer.Library.EnableBook( bookName );
 		}
 		
 		public static void DisableBook( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			myplayer.Library.DisableBook( bookName );
 		}
@@ -51,13 +56,15 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public static int CountBookPages( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			return myplayer.Library.CountBookPages( bookName );
 		}
 
 		public static void AddBookPage( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 			string err;
 
 			if( !myplayer.Library.AddBookPage( Main.LocalPlayer, bookName, out err ) ) {
@@ -66,13 +73,15 @@ namespace ExtensibleInventory {
 		}
 
 		public static Item[] GetLatestBookPageItems( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 
 			return myplayer.Library.GetLatestBookPageItems( bookName );
 		}
 		
 		public static void RemoveLatestBookPage( string bookName ) {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, ExtensibleInventoryMod.Instance,
+				"ExtensibleInventoryPlayer" );
 			string err;
 
 			if( !myplayer.Library.RemoveLatestBookPage( Main.LocalPlayer, bookName, out err ) ) {

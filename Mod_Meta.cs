@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Config;
+using HamstarHelpers.Helpers.TmlHelpers;
 using System;
 using System.IO;
 using Terraria;
@@ -17,14 +18,17 @@ namespace ExtensibleInventory {
 			if( Main.netMode != 0 ) {
 				throw new Exception( "Cannot reload configs outside of single player." );
 			}
-			if( ExtensibleInventoryMod.Instance != null ) {
-				if( !ExtensibleInventoryMod.Instance.ConfigJson.LoadFile() ) {
-					ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
+
+			var mymod = ExtensibleInventoryMod.Instance;
+
+			if( mymod != null ) {
+				if( !mymod.ConfigJson.LoadFile() ) {
+					mymod.ConfigJson.SaveFile();
 				}
 			}
 
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
-			myplayer.Library.CurrentBook.IsEnabled = ExtensibleInventoryMod.Instance.Config.DefaultBookEnabled;
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+			myplayer.Library.CurrentBook.IsEnabled = mymod.Config.DefaultBookEnabled;
 		}
 
 		public static void ResetConfigFromDefaults() {
@@ -32,13 +36,14 @@ namespace ExtensibleInventory {
 				throw new Exception( "Cannot reset to default configs outside of single player." );
 			}
 
+			var mymod = ExtensibleInventoryMod.Instance;
 			var newConfig = new ExtensibleInventoryConfigData();
 			//new_config.SetDefaults();
 
-			ExtensibleInventoryMod.Instance.ConfigJson.SetData( newConfig );
-			ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
+			mymod.ConfigJson.SetData( newConfig );
+			mymod.ConfigJson.SaveFile();
 
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 			myplayer.Library.CurrentBook.IsEnabled = newConfig.DefaultBookEnabled;
 		}
 	}

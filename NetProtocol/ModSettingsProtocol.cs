@@ -1,4 +1,5 @@
 ﻿using HamstarHelpers.Components.Network;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Terraria;
 
 
@@ -19,7 +20,7 @@ namespace ExtensibleInventory.NetProtocol {
 
 		protected override void ReceiveReply() {
 			var mymod = ExtensibleInventoryMod.Instance;
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
 			mymod.ConfigJson.SetData( this.Settings );
 

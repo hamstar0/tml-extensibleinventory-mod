@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HamstarHelpers.Helpers.TmlHelpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using Terraria;
@@ -15,19 +16,22 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
 			this.ButtonPageLeft.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
-				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 				myplayer2.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
 			};
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
 			this.ButtonPageRight.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
-				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 				myplayer2.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
 			};
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
-				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
 				if( myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer ) ) {
 					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " added.", Color.LimeGreen );
@@ -36,7 +40,8 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
-				var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
 				if( myplayer2.Library.CurrentBook.DeleteCurrentPage( Main.LocalPlayer ) ) {
 					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " removed.", Color.LimeGreen );
@@ -55,7 +60,8 @@ namespace ExtensibleInventory.UI {
 
 
 		private void InitializeLibraryBooks() {
-			var myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 			IList<string> allBookNames = myplayer.Library.GetBookNames();
 
 			if( allBookNames.Count == 1 ) {
@@ -79,7 +85,8 @@ namespace ExtensibleInventory.UI {
 				var button = new UIInventoryControlButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 					string err;
-					var myplayer2 = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+					var mymod2 = ExtensibleInventoryMod.Instance;
+					var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
 					if( !myplayer2.Library.CanSwitchBooks(out err) ) {
 						Main.NewText( err, Color.Red );

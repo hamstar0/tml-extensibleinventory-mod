@@ -1,5 +1,6 @@
 ﻿using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.HudHelpers;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
@@ -35,8 +36,8 @@ namespace ExtensibleInventory.UI {
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
 
-			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
 			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( plr, mymod, "ExtensibleInventoryPlayer" );
 
 			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
 			int pages = myplayer.Library.CurrentBook.CountPages();
@@ -62,7 +63,7 @@ namespace ExtensibleInventory.UI {
 			var mymod = ExtensibleInventoryMod.Instance;
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
-			var myplayer = plr.GetModPlayer<ExtensibleInventoryPlayer>();
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( plr, mymod, "ExtensibleInventoryPlayer" );
 
 			/*if( !mymod.Config.CanScrollPages ) {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
@@ -74,7 +75,7 @@ namespace ExtensibleInventory.UI {
 			if( !mymod.Config.CanDeletePages ) {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
 			}*/
-			
+
 			if( !myplayer.Library.CurrentBook.IsEnabled ) {
 				if( mymod.Config.CanScrollPages ) {
 					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );

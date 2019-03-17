@@ -1,4 +1,5 @@
-﻿using Terraria;
+﻿using HamstarHelpers.Helpers.TmlHelpers;
+using Terraria;
 using Terraria.UI;
 
 
@@ -42,7 +43,7 @@ namespace ExtensibleInventory.UI {
 			ExtensibleInventoryPlayer myplayer = null;
 
 			if( Main.LocalPlayer != null && Main.LocalPlayer.active ) {
-				myplayer = Main.LocalPlayer.GetModPlayer<ExtensibleInventoryPlayer>();
+				myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 			}
 
 			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
