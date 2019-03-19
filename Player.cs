@@ -1,5 +1,6 @@
 using ExtensibleInventory.Inventory;
 using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Services.Messages;
 using System;
 using Terraria;
 using Terraria.GameInput;
@@ -10,8 +11,13 @@ using Terraria.ModLoader.IO;
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryPlayer : ModPlayer {
 		internal InventoryLibrary Library;
-		
+
+		private int ScrollModeDuration = 0;
+
+
 		////////////////
+
+		public bool ScrollModeOn => this.ScrollModeDuration > 0;
 
 		public override bool CloneNewInstances => false;
 
@@ -55,11 +61,35 @@ namespace ExtensibleInventory {
 			} else if( Main.netMode == 1 ) {
 				this.OnConnectClient();
 			}
+
+			string msg = "You can now quickly scroll inventory pages by selecting an item and using the mouse wheel while viewing your inventory.";
+			InboxMessages.SetMessage( "ExtensibleInventoryScroll", msg, false );
 		}
 
 
 		////////////////
-		
+
+		public override void PreUpdate() {
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( mymod.Config.ScrollModeEnabled ) {
+				if( this.ScrollModeDuration > 0 ) {
+					this.ScrollModeDuration--;
+				}
+
+				if( Main.playerInventory ) {
+					if( Main.mouseItem != null && !Main.mouseItem.IsAir ) {
+						this.ScrollModeDuration = ( this.ScrollModeDuration < 2 ) ? 2 : this.ScrollModeDuration;
+					}
+				} else {
+					this.ScrollModeDuration = 0;
+				}
+			}
+		}
+
+
+		////////////////
+
 		public override void ModifyDrawInfo( ref PlayerDrawInfo drawInfo ) {
 			if( !Main.dedServ ) {
 				try {
@@ -78,19 +108,21 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public override void SetControls() {
-			if( Main.mouseItem == null || Main.mouseItem.IsAir ) {
-				return;
-			}
+			if( !this.ScrollModeOn ) { return; }
 
 			var mymod = (ExtensibleInventoryMod)this.mod;
 
 			int scrolled = PlayerInput.ScrollWheelDelta;
 			PlayerInput.ScrollWheelDelta = 0;
 
-			if( scrolled >= 120 ) {
-				this.Library.CurrentBook?.ScrollPageUp( this.player );
-			} else if( scrolled <= -120 ) {
-				this.Library.CurrentBook?.ScrollPageDown( this.player );
+			if( Main.playerInventory ) {
+				if( scrolled >= 120 ) {
+					this.ScrollModeDuration = 5 * 60;
+					this.Library.CurrentBook?.ScrollPageUp( this.player );
+				} else if( scrolled <= -120 ) {
+					this.ScrollModeDuration = 5 * 60;
+					this.Library.CurrentBook?.ScrollPageDown( this.player );
+				}
 			}
 		}
 	}

@@ -33,7 +33,7 @@ namespace ExtensibleInventory.UI {
 					book.IsHidden = !mymod.Config.CanSwitchBooks;
 				}
 			}
-			 
+			
 			this.Recalculate();
 		}
 
