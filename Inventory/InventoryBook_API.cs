@@ -3,19 +3,6 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		public static bool IsPlayerInventoryEmpty( Player player ) {
-			for( int i = 10; i < 50; i++ ) {
-				if( !player.inventory[i].IsAir ) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-
-
-		////////////////
-
 		public int CountPages() {
 			return this.Pages.Count;
 		}
@@ -170,21 +157,9 @@ namespace ExtensibleInventory.Inventory {
 			return true;
 		}
 
-		
-		////////////////
-
-		public void DumpInventoryToCurrentPage( Player player ) {
-			this.DumpInventoryToPage( player, this.CurrentPageIdx );
-		}
-		public void DumpCurrentPageToInventory( Player player ) {
-			this.DumpPageToInventory( player, this.CurrentPageIdx );
-		}
-
 
 		////////////////
 
-		public string RenderPagePosition() {
-			return ( this.CurrentPageIdx + 1 ) + " / " + this.Pages.Count;
-		}
+		SetOffloadCurrentPage
 	}
 }

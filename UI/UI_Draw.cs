@@ -12,7 +12,17 @@ using Terraria.UI;
 namespace ExtensibleInventory.UI {
 	partial class InventoryPageScrollerUI : UIState {
 		public static void DrawX( SpriteBatch sb, UIElement elem ) {
-			sb.DrawString( Main.fontMouseText, "X", elem.GetOuterDimensions().Position() + new Vector2( 4, -2 ), Color.Red, 0f, default( Vector2 ), 1.25f, SpriteEffects.None, 1f );
+			sb.DrawString(
+				Main.fontMouseText,
+				"X",
+				elem.GetOuterDimensions().Position() + new Vector2( 4, -2 ),
+				Color.Red,
+				0f,
+				default( Vector2 ),
+				1.25f,
+				SpriteEffects.None,
+				1f
+			);
 		}
 
 

@@ -16,21 +16,21 @@ namespace ExtensibleInventory.UI {
 			this.PageDisplay = new UIText( "0 / 0" );
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
-			this.ButtonPageLeft.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
+			this.ButtonPageLeft.OnClick += ( evt, elem ) => {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 				myplayer2.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
 			};
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
-			this.ButtonPageRight.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
+			this.ButtonPageRight.OnClick += ( evt, elem ) => {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 				myplayer2.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
 			};
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
-			this.ButtonPageAdd.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
+			this.ButtonPageAdd.OnClick += ( evt, elem ) => {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
@@ -40,7 +40,7 @@ namespace ExtensibleInventory.UI {
 			};
 
 			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
-			this.ButtonPageSub.OnClick += delegate ( UIMouseEvent evt, UIElement listening_elem ) {
+			this.ButtonPageSub.OnClick += ( evt, elem ) => {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
@@ -49,14 +49,33 @@ namespace ExtensibleInventory.UI {
 				}
 			};
 
-			this.SetLayoutPositions( false );
-			this.SetPageDisplayPosition( false );
+			this.TogglePageOffload = new UIInventoryControlToggle( this.TogglePageOffloadOnTex, this.TogglePageOffloadOffTex );
+			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
+
+				if( myplayer2.Library.CurrentBook.SetOffloadCurrentPage( Main.LocalPlayer, false ) ) {
+					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " rejects offloading.", Color.LimeGreen );
+				}
+			};
+			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
+				var mymod2 = ExtensibleInventoryMod.Instance;
+				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
+
+				if( myplayer2.Library.CurrentBook.SetOffloadCurrentPage( Main.LocalPlayer, true ) ) {
+					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " accepts offloading.", Color.LimeGreen );
+				}
+			};
+
+			this.SetElementPositions( false );
+			this.SetPageTabsPosition( false );
 
 			base.Append( this.PageDisplay );
 			base.Append( this.ButtonPageLeft );
 			base.Append( this.ButtonPageRight );
 			base.Append( this.ButtonPageAdd );
 			base.Append( this.ButtonPageSub );
+			base.Append( this.TogglePageOffload );
 		}
 
 

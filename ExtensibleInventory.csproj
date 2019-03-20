@@ -95,6 +95,8 @@
     <Content Include="UI\ButtonSub.png" />
     <Content Include="description.txt" />
     <Content Include="UI\IconScroll.png" />
+    <Content Include="UI\ToggleOffOffload.png" />
+    <Content Include="UI\ToggleOnOffload.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

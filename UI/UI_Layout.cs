@@ -18,17 +18,18 @@ namespace ExtensibleInventory.UI {
 			if( this.IsChest != isChest ) {
 				this.IsChest = isChest;
 
-				this.SetLayoutPositions( isChest );
+				this.SetElementPositions( isChest );
 			}
 
 			if( isPlayerValid ) {
-				this.SetPageDisplayPosition( isChest );
+				this.SetPageTabsPosition( isChest );
 			}
 
 			this.ButtonPageAdd.IsHidden = !mymod.Config.CanAddPages;
 			this.ButtonPageSub.IsHidden = !mymod.Config.CanDeletePages;
 			this.ButtonPageLeft.IsHidden = !mymod.Config.CanScrollPages;
 			this.ButtonPageRight.IsHidden = !mymod.Config.CanScrollPages;
+			this.TogglePageOffload.IsHidden = !mymod.Config.CanTogglePageOffloads;
 			if( this.ButtonBooks != null ) {
 				foreach( UIInventoryControlButton book in this.ButtonBooks.Values ) {
 					book.IsHidden = !mymod.Config.CanSwitchBooks;
@@ -39,7 +40,7 @@ namespace ExtensibleInventory.UI {
 		}
 
 
-		private void SetPageDisplayPosition( bool isChest ) {
+		private void SetPageTabsPosition( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			ExtensibleInventoryPlayer myplayer = null;
 
@@ -54,7 +55,7 @@ namespace ExtensibleInventory.UI {
 			string pageText = this.PageDisplay.Text;
 
 			if( myplayer != null ) {
-				pageText = myplayer.Library.CurrentBook.RenderPagePosition();
+				pageText = myplayer.Library.CurrentBook.PagePositionToString();
 
 				this.PageDisplay.SetText( pageText );
 			}
@@ -66,7 +67,7 @@ namespace ExtensibleInventory.UI {
 		}
 
 
-		private void SetLayoutPositions( bool isChest ) {
+		private void SetElementPositions( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 
 			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
@@ -82,6 +83,8 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageAdd.Left.Set( x + 144f, 0f );
 			this.ButtonPageSub.Top.Set( y, 0f );
 			this.ButtonPageSub.Left.Set( x + 172f, 0f );
+			this.TogglePageOffload.Top.Set( y, 0f );
+			this.TogglePageOffload.Left.Set( x + 200f, 0f );
 
 			if( this.ButtonBooks != null ) {
 				float bookX = mymod.Config.BookPositionX + offX;

@@ -21,10 +21,10 @@ namespace ExtensibleInventory {
 
 		public override bool CloneNewInstances => false;
 
+
+
 		////////////////
-
-
-
+		
 		public override void Initialize() {
 			this.Library = new InventoryLibrary();
 		}
