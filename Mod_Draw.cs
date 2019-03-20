@@ -13,8 +13,8 @@ using Terraria.UI;
 
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryMod : Mod {
-		private UserInterface InvUI;
-		internal InventoryPageScrollerUI InvPageScroller;
+		private UserInterface InvUIMngr;
+		internal InventoryUI InvUI;
 
 		private Texture2D ScrollIcon;
 
@@ -23,9 +23,9 @@ namespace ExtensibleInventory {
 		////////////////
 
 		private void InitializeUI() {
-			this.InvUI = new UserInterface();
-			this.InvPageScroller = new InventoryPageScrollerUI();
-			this.InvUI.SetState( this.InvPageScroller );
+			this.InvUIMngr = new UserInterface();
+			this.InvUI = new InventoryUI();
+			this.InvUIMngr.SetState( this.InvUI );
 			this.ScrollIcon = this.GetTexture( "UI/IconScroll" );
 		}
 
@@ -47,8 +47,8 @@ namespace ExtensibleInventory {
 				var mymod = ExtensibleInventoryMod.Instance;
 
 				try {
-					mymod.InvUI?.Update( Main._drawInterfaceGameTime );
-					mymod.InvPageScroller?.Draw( Main.spriteBatch );
+					mymod.InvUIMngr?.Update( Main._drawInterfaceGameTime );
+					mymod.InvUI?.Draw( Main.spriteBatch );
 
 					var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, this, "ExtensibleInventoryPlayer" );
 					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {

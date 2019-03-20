@@ -55,6 +55,7 @@
     <Compile Include="Mod.cs" />
     <Compile Include="UI\Elements\UIInventoryControlButton.cs" />
     <Compile Include="UI\Elements\UIInventoryControlToggle.cs" />
+    <Compile Include="UI\UI_Funcs.cs" />
     <Compile Include="UI\UI_Draw.cs" />
     <Compile Include="UI\UI_Layout.cs" />
     <Compile Include="UI\UI_Initialize.cs" />

@@ -10,6 +10,19 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryPlayer : ModPlayer {
+		public static bool IsPlayerInventoryEmpty( Player player ) {
+			for( int i = 10; i < 50; i++ ) {
+				if( !player.inventory[i].IsAir ) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+
+
+		////////////////
+
 		internal InventoryLibrary Library;
 
 		private int ScrollModeDuration = 0;
@@ -94,7 +107,7 @@ namespace ExtensibleInventory {
 			if( !Main.dedServ ) {
 				try {
 					var mymod = (ExtensibleInventoryMod)this.mod;
-					if( mymod.InvPageScroller?.IsHoveringAnyControl() ?? false ) {
+					if( mymod.InvUI?.IsHoveringAnyControl() ?? false ) {
 						this.player.mouseInterface = true;
 					}
 				} catch( Exception e ) {

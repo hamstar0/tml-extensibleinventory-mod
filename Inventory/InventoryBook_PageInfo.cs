@@ -71,7 +71,7 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 
-			bool isEmpty = InventoryBook.IsPlayerInventoryEmpty( player );
+			bool isEmpty = ExtensibleInventoryPlayer.IsPlayerInventoryEmpty( player );
 
 			if( !isEmpty ) {
 				err = "Cannot delete non-empty inventory pages.";

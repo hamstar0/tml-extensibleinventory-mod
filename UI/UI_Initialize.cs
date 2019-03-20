@@ -9,7 +9,7 @@ using Terraria.UI;
 
 
 namespace ExtensibleInventory.UI {
-	partial class InventoryPageScrollerUI : UIState {
+	partial class InventoryUI : UIState {
 		public override void OnInitialize() {
 			var mymod = ExtensibleInventoryMod.Instance;
 
@@ -17,54 +17,30 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
 			this.ButtonPageLeft.OnClick += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-				myplayer2.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
+				this.ScrollPageUp();
 			};
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
 			this.ButtonPageRight.OnClick += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-				myplayer2.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
+				this.ScrollPageDown();
 			};
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-
-				if( myplayer2.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer ) ) {
-					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " added.", Color.LimeGreen );
-				}
+				this.AddPage();
 			};
 
 			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-
-				if( myplayer2.Library.CurrentBook.DeleteCurrentPage( Main.LocalPlayer ) ) {
-					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " removed.", Color.LimeGreen );
-				}
+				this.DelPage();
 			};
 
 			this.TogglePageOffload = new UIInventoryControlToggle( this.TogglePageOffloadOnTex, this.TogglePageOffloadOffTex );
-			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-
-				if( myplayer2.Library.CurrentBook.SetCurrentPageOffloadable( false ) ) {
-					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " rejects offloading.", Color.LimeGreen );
-				}
+			this.TogglePageOffload.OnToggleOn += ( evt, elem ) => {
+				this.ToggleOffloadablePageOn();
 			};
 			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
-				var mymod2 = ExtensibleInventoryMod.Instance;
-				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
-
-				if( myplayer2.Library.CurrentBook.SetCurrentPageOffloadable( true ) ) {
-					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " accepts offloading.", Color.LimeGreen );
-				}
+				this.ToggleOffloadablePageOff();
 			};
 
 			this.SetElementPositions( false );

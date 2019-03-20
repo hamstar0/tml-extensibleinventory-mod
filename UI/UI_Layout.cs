@@ -5,7 +5,7 @@ using Terraria.UI;
 
 
 namespace ExtensibleInventory.UI {
-	partial class InventoryPageScrollerUI : UIState {
+	partial class InventoryUI : UIState {
 		private void UpdateLayout() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			bool isChest = true;

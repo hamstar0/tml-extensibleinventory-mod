@@ -1,6 +1,3 @@
-using HamstarHelpers.Helpers.DotNetHelpers;
-using System.Collections.Generic;
-using Terraria;
 using Terraria.ModLoader.IO;
 
 

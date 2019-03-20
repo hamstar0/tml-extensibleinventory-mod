@@ -11,7 +11,7 @@ using Terraria.UI;
 
 
 namespace ExtensibleInventory.UI {
-	partial class InventoryPageScrollerUI : UIState {
+	partial class InventoryUI : UIState {
 		internal Texture2D ButtonBookTex;
 		internal Texture2D ButtonBookDimTex;
 		internal Texture2D ButtonBookLitTex;
@@ -36,7 +36,7 @@ namespace ExtensibleInventory.UI {
 
 		////////////////
 
-		public InventoryPageScrollerUI() : base() {
+		public InventoryUI() : base() {
 			var mymod = ExtensibleInventoryMod.Instance;
 
 			this.ButtonBookTex = ModLoader.GetTexture( "Terraria/Item_531" );   // Spell Tome

@@ -5,19 +5,6 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		public static bool IsPlayerInventoryEmpty( Player player ) {
-			for( int i = 10; i < 50; i++ ) {
-				if( !player.inventory[i].IsAir ) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-
-
-		////////////////
-
 		private readonly IList<InventoryPage> Pages = new List<InventoryPage>();
 
 		////////////////

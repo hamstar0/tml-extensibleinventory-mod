@@ -10,7 +10,7 @@ using Terraria.UI;
 
 
 namespace ExtensibleInventory.UI {
-	partial class InventoryPageScrollerUI : UIState {
+	partial class InventoryUI : UIState {
 		public static void DrawX( SpriteBatch sb, UIElement elem ) {
 			sb.DrawString(
 				Main.fontMouseText,
@@ -88,14 +88,14 @@ namespace ExtensibleInventory.UI {
 
 			if( !myplayer.Library.CurrentBook.IsEnabled ) {
 				if( mymod.Config.CanScrollPages ) {
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageRight );
+					InventoryUI.DrawX( sb, this.ButtonPageLeft );
+					InventoryUI.DrawX( sb, this.ButtonPageRight );
 				}
 				if( mymod.Config.CanAddPages ) {
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageAdd );
+					InventoryUI.DrawX( sb, this.ButtonPageAdd );
 				}
 				if( mymod.Config.CanDeletePages ) {
-					InventoryPageScrollerUI.DrawX( sb, this.ButtonPageSub );
+					InventoryUI.DrawX( sb, this.ButtonPageSub );
 				}
 			}
 
@@ -106,7 +106,7 @@ namespace ExtensibleInventory.UI {
 					UIImageButton bookButton = kv.Value;
 
 					if( !myplayer.Library.CanSwitchBooks(out _) || !myplayer.Library.IsBookEnabled( bookName ) ) {
-						InventoryPageScrollerUI.DrawX( sb, bookButton );
+						InventoryUI.DrawX( sb, bookButton );
 					}
 				}
 			}
