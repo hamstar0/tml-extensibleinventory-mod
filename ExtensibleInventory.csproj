@@ -93,6 +93,7 @@
     <Content Include="UI\ButtonRight.png" />
     <Content Include="UI\ButtonSub.png" />
     <Content Include="description.txt" />
+    <Content Include="UI\IconScroll.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

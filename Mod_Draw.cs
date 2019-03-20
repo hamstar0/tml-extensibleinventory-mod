@@ -26,7 +26,7 @@ namespace ExtensibleInventory {
 			this.InvUI = new UserInterface();
 			this.InvPageScroller = new InventoryPageScrollerUI();
 			this.InvUI.SetState( this.InvPageScroller );
-			this.ScrollIcon = ModLoader.GetTexture( "Terraria/UI/VK_Shift" );
+			this.ScrollIcon = this.GetTexture( "UI/IconScroll" );
 		}
 
 
@@ -54,7 +54,7 @@ namespace ExtensibleInventory {
 					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
 						var pos = new Vector2( Main.mouseX - 24, Main.mouseY - 4 );
 
-						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White );
+						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * 0.5f );
 					}
 				} catch( Exception e ) {
 					throw new HamstarException( "", e );
