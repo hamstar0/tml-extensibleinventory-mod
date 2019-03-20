@@ -12,8 +12,8 @@ namespace ExtensibleInventory.UI {
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
 			if( myplayer.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer ) ) {
-				bool isOffloadable = myplayer.Library.CurrentBook.IsCurrentPageOffloadable();
-				this.TogglePageOffload.SetOn( !isOffloadable, false );
+				bool isSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
+				this.TogglePageSharing.SetOn( !isSharing, false );
 			}
 		}
 
@@ -22,8 +22,8 @@ namespace ExtensibleInventory.UI {
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
 			if( myplayer.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer ) ) {
-				bool isOffloadable = myplayer.Library.CurrentBook.IsCurrentPageOffloadable();
-				this.TogglePageOffload.SetOn( !isOffloadable, false );
+				bool isSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
+				this.TogglePageSharing.SetOn( !isSharing, false );
 			}
 		}
 
@@ -49,21 +49,21 @@ namespace ExtensibleInventory.UI {
 
 		////
 
-		public void ToggleOffloadablePageOn() {
+		public void TogglePageSharingOn() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
-			if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( true ) ) {
-				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " accepts auto-offloading.", Color.LimeGreen );
+			if( myplayer.Library.CurrentBook.SetCurrentPageShared( true ) ) {
+				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " auto-shares items.", Color.LimeGreen );
 			}
 		}
 
-		public void ToggleOffloadablePageOff() {
+		public void TogglePageSharingOff() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
-			if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( false ) ) {
-				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " rejects auto-offloading.", Color.LimeGreen );
+			if( myplayer.Library.CurrentBook.SetCurrentPageShared( false ) ) {
+				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " auto-shares items.", Color.LimeGreen );
 			}
 		}
 	}

@@ -49,8 +49,8 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool SetCurrentPageOffloadable( bool on ) {
-			this.Pages[ this.CurrentPageIdx ].IsOffloadable = on;
+		public bool SetCurrentPageShared( bool on ) {
+			this.Pages[ this.CurrentPageIdx ].IsSharing = on;
 			return true;
 		}
 	}

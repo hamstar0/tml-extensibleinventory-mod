@@ -1,3 +1,7 @@
+v1.3
+-	Define UI for "sharing" inventory
+
+...
 v1.2
 -	Show ticks for each page
 -	Use scroll wheel with a selected item to change pages

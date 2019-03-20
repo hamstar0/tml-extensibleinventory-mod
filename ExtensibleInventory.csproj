@@ -94,14 +94,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.txt" />
+    <Content Include="icon.png" />
     <Content Include="UI\ButtonAdd.png" />
     <Content Include="UI\ButtonLeft.png" />
     <Content Include="UI\ButtonRight.png" />
     <Content Include="UI\ButtonSub.png" />
     <Content Include="description.txt" />
     <Content Include="UI\IconScroll.png" />
-    <Content Include="UI\ToggleOffOffload.png" />
-    <Content Include="UI\ToggleOnOffload.png" />
+    <Content Include="UI\ToggleOffSharing.png" />
+    <Content Include="UI\ToggleOnSharing.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

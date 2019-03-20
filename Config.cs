@@ -35,7 +35,7 @@ namespace ExtensibleInventory {
 		public bool CanScrollPages = true;
 		public bool CanAddPages = true;
 		public bool CanDeletePages = true;
-		public bool CanTogglePageOffloads = true;
+		public bool CanTogglePageSharing = true;
 
 		public int MaxPages = 99;
 

@@ -29,7 +29,7 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageSub.IsHidden = !mymod.Config.CanDeletePages;
 			this.ButtonPageLeft.IsHidden = !mymod.Config.CanScrollPages;
 			this.ButtonPageRight.IsHidden = !mymod.Config.CanScrollPages;
-			this.TogglePageOffload.IsHidden = !mymod.Config.CanTogglePageOffloads;
+			this.TogglePageSharing.IsHidden = !mymod.Config.CanTogglePageSharing;
 			if( this.ButtonBooks != null ) {
 				foreach( UIInventoryControlButton book in this.ButtonBooks.Values ) {
 					book.IsHidden = !mymod.Config.CanSwitchBooks;
@@ -83,8 +83,8 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageAdd.Left.Set( x + 144f, 0f );
 			this.ButtonPageSub.Top.Set( y, 0f );
 			this.ButtonPageSub.Left.Set( x + 172f, 0f );
-			this.TogglePageOffload.Top.Set( y, 0f );
-			this.TogglePageOffload.Left.Set( x + 200f, 0f );
+			this.TogglePageSharing.Top.Set( y, 0f );
+			this.TogglePageSharing.Left.Set( x + 200f, 0f );
 
 			if( this.ButtonBooks != null ) {
 				float bookX = mymod.Config.BookPositionX + offX;

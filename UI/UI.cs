@@ -19,8 +19,8 @@ namespace ExtensibleInventory.UI {
 		internal Texture2D ButtonPageLeftTex;
 		internal Texture2D ButtonPageAddTex;
 		internal Texture2D ButtonPageSubTex;
-		internal Texture2D TogglePageOffloadOnTex;
-		internal Texture2D TogglePageOffloadOffTex;
+		internal Texture2D TogglePageSharingOnTex;
+		internal Texture2D TogglePageSharingOffTex;
 
 		private IDictionary<string, UIInventoryControlButton> ButtonBooks = null;
 		private UIText PageDisplay;
@@ -28,7 +28,7 @@ namespace ExtensibleInventory.UI {
 		private UIInventoryControlButton ButtonPageRight;
 		private UIInventoryControlButton ButtonPageAdd;
 		private UIInventoryControlButton ButtonPageSub;
-		private UIInventoryControlToggle TogglePageOffload;
+		private UIInventoryControlToggle TogglePageSharing;
 
 		private bool IsChest = true;
 
@@ -46,8 +46,8 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageLeftTex = mymod.GetTexture( "UI/ButtonLeft" );
 			this.ButtonPageAddTex = mymod.GetTexture( "UI/ButtonAdd" );
 			this.ButtonPageSubTex = mymod.GetTexture( "UI/ButtonSub" );
-			this.TogglePageOffloadOnTex = mymod.GetTexture( "UI/ToggleOnOffload" );
-			this.TogglePageOffloadOffTex = mymod.GetTexture( "UI/ToggleOffOffload" );
+			this.TogglePageSharingOnTex = mymod.GetTexture( "UI/ToggleOnSharing" );
+			this.TogglePageSharingOffTex = mymod.GetTexture( "UI/ToggleOffSharing" );
 
 			Promises.AddWorldUnloadEachPromise( () => {
 				this.ButtonBooks = null;
@@ -76,7 +76,7 @@ namespace ExtensibleInventory.UI {
 			if( this.ButtonPageSub.IsMouseHovering && mymod.Config.CanDeletePages ) {
 				return true;
 			}
-			if( this.TogglePageOffload.IsMouseHovering && mymod.Config.CanTogglePageOffloads ) {
+			if( this.TogglePageSharing.IsMouseHovering && mymod.Config.CanTogglePageSharing ) {
 				return true;
 			}
 			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {

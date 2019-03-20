@@ -109,22 +109,22 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool IsCurrentPageOffloadable() {
-			return this.Pages[ this.CurrentPageIdx ].IsOffloadable;
+		public bool IsCurrentPageSharing() {
+			return this.Pages[ this.CurrentPageIdx ].IsSharing;
 		}
 
-		public bool IsPageOffloadable( int pageNum ) {
-			return this.Pages[ pageNum ].IsOffloadable;
+		public bool IsPageSharing( int pageNum ) {
+			return this.Pages[ pageNum ].IsSharing;
 		}
 
-		public IList<InventoryPage> GetOffloadablePages( out bool includesCurrent ) {
+		public IList<InventoryPage> GetSharingPages( out bool includesCurrent ) {
 			var pages = new List<InventoryPage>( this.Pages.Count );
 			includesCurrent = false;
 
 			for( int i=0; i<this.Pages.Count; i++ ) {
 				InventoryPage page = this.Pages[i];
 
-				if( page.IsOffloadable ) {
+				if( page.IsSharing ) {
 					if( i == this.CurrentPageIdx ) {
 						includesCurrent = true;
 					}

@@ -36,7 +36,7 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		public Item[] Items;
-		public bool IsOffloadable = false;
+		public bool IsSharing = false;
 
 
 

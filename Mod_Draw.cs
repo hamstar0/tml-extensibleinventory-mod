@@ -54,7 +54,7 @@ namespace ExtensibleInventory {
 					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
 						var pos = new Vector2( Main.mouseX - 24, Main.mouseY - 4 );
 
-						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * 0.5f );
+						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * 0.35f );
 					}
 				} catch( Exception e ) {
 					throw new HamstarException( "", e );
