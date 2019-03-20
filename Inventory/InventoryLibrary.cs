@@ -1,4 +1,6 @@
+using HamstarHelpers.Helpers.DotNetHelpers;
 using System.Collections.Generic;
+using Terraria;
 using Terraria.ModLoader.IO;
 
 
@@ -11,11 +13,11 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 		
 		private IDictionary<string, InventoryBook> Books = new Dictionary<string, InventoryBook>();
-
 		private string CurrBookName = InventoryLibrary.DefaultBookName;
 		
-		////////////////
 
+		////////////////
+		
 		public InventoryBook CurrentBook => this.Books[ this.CurrBookName ];
 
 
@@ -28,6 +30,7 @@ namespace ExtensibleInventory.Inventory {
 				this.CurrBookName
 			);
 		}
+
 
 		////////////////
 

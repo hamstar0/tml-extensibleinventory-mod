@@ -1,4 +1,5 @@
 using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.DotNetHelpers;
 using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
@@ -10,6 +11,8 @@ namespace ExtensibleInventory.Inventory {
 		public const string PageScrollTimerName = "ExtensibleInventoryPageScroll";
 
 
+
+		////////////////
 
 		public bool ScrollPageUp( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
@@ -31,8 +34,8 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 			
-			this.DumpInventoryToPage( player, this.CurrentPageIdx );
-			this.DumpPageToInventory( player, --this.CurrentPageIdx );
+			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
+			this.PushPageToInventory( player, --this.CurrentPageIdx );
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
@@ -61,8 +64,8 @@ namespace ExtensibleInventory.Inventory {
 				return false;
 			}
 
-			this.DumpInventoryToPage( player, this.CurrentPageIdx );
-			this.DumpPageToInventory( player, ++this.CurrentPageIdx );
+			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
+			this.PushPageToInventory( player, ++this.CurrentPageIdx );
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
@@ -74,7 +77,7 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool InsertAtCurrentPagePosition( Player player ) {
+		public bool InsertAtCurrentPagePosition( [Nullable]Player player ) {
 			string err;
 			bool success = this.InsertNewPage( player, this.CurrentPageIdx, out err );
 
@@ -85,7 +88,7 @@ namespace ExtensibleInventory.Inventory {
 			return success;
 		}
 
-		public bool DeleteCurrentPage( Player player ) {
+		public bool DeleteCurrentPage( [Nullable]Player player ) {
 			string err;
 			bool success = this.DeleteEmptyPage( player, this.CurrentPageIdx, out err );
 

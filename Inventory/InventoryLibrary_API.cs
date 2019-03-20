@@ -1,4 +1,5 @@
 using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Helpers.DotNetHelpers;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -28,16 +29,16 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public void ChangeCurrentBook( string bookName ) {
+		public void ChangeCurrentBook( [Nullable]Player player, string bookName ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
 				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			this.CurrentBook.DumpInventoryToCurrentPage( Main.LocalPlayer );
+			this.CurrentBook.PullFromInventoryToCurrentPage( player );
 
 			this.CurrBookName = bookName;
 
-			this.CurrentBook.DumpCurrentPageToInventory( Main.LocalPlayer );
+			this.CurrentBook.PushCurrentPageToInventory( player );
 		}
 
 
@@ -70,7 +71,7 @@ namespace ExtensibleInventory.Inventory {
 				throw new HamstarException( "No such book by name " + bookName );
 			}
 
-			InventoryBook book = this.Books[bookName];
+			InventoryBook book = this.Books[ bookName ];
 
 			return book.IsEnabled;
 		}

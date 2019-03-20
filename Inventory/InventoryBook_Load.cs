@@ -28,22 +28,22 @@ namespace ExtensibleInventory.Inventory {
 			int currPage = tags.GetInt( prefix + "curr_page" );
 
 			for( int i = 0; i < pages; i++ ) {
-				Item[] page = this.CreateBlankPage();
+				InventoryPage page = new InventoryPage();
 				this.Pages.Add( page );
 
 				if( i == currPage ) { continue; }
 
-				for( int j = 0; j < InventoryBook.BasePageCapacity; j++ ) {
+				for( int j = 0; j < InventoryPage.BasePageCapacity; j++ ) {
 					string idx = prefix + "page_" + i + "_" + j;
 
 					if( tags.ContainsKey( idx ) ) {
 						try {
-							page[j] = ItemIO.Load( tags.GetCompound( idx ) );
+							page.Items[j] = ItemIO.Load( tags.GetCompound( idx ) );
 						} catch {
 							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						}
 					} else {
-						page[j] = new Item();
+						page.Items[j] = new Item();
 					}
 				}
 			}
@@ -66,11 +66,11 @@ namespace ExtensibleInventory.Inventory {
 			for( int i = 0; i < this.Pages.Count; i++ ) {
 				if( i == this.CurrentPageIdx ) { continue; }
 
-				for( int j = 0; j < InventoryBook.BasePageCapacity; j++ ) {
+				for( int j = 0; j < InventoryPage.BasePageCapacity; j++ ) {
 					string idx = prefix + "page_" + i + "_" + j;
 
 					try {
-						tags[idx] = ItemIO.Save( this.Pages[i][j] );
+						tags[idx] = ItemIO.Save( this.Pages[i].Items[j] );
 					} catch {
 						LogHelpers.Warn( "Could not save item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						continue;

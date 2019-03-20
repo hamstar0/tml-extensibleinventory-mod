@@ -54,7 +54,7 @@ namespace ExtensibleInventory.UI {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
-				if( myplayer2.Library.CurrentBook.SetOffloadCurrentPage( Main.LocalPlayer, false ) ) {
+				if( myplayer2.Library.CurrentBook.SetCurrentPageOffloadable( false ) ) {
 					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " rejects offloading.", Color.LimeGreen );
 				}
 			};
@@ -62,7 +62,7 @@ namespace ExtensibleInventory.UI {
 				var mymod2 = ExtensibleInventoryMod.Instance;
 				var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
 
-				if( myplayer2.Library.CurrentBook.SetOffloadCurrentPage( Main.LocalPlayer, true ) ) {
+				if( myplayer2.Library.CurrentBook.SetCurrentPageOffloadable( true ) ) {
 					Main.NewText( "Inventory page " + myplayer2.Library.CurrentBook.CurrentPageIdx + " accepts offloading.", Color.LimeGreen );
 				}
 			};
@@ -112,7 +112,7 @@ namespace ExtensibleInventory.UI {
 						Main.NewText( err, Color.Red );
 					}
 
-					myplayer2.Library.ChangeCurrentBook( currBookName );
+					myplayer2.Library.ChangeCurrentBook( Main.LocalPlayer, currBookName );
 
 					this.ButtonBooks[ currBookName ].SetImage( this.ButtonBookTex );
 					button.SetImage( this.ButtonBookLitTex );

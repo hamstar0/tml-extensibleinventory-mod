@@ -7,6 +7,7 @@ namespace ExtensibleInventory {
 		public static string ConfigFileName => "Extensible Inventory Config.json";
 
 
+
 		////////////////
 
 		public string VersionSinceUpdate = "";
@@ -46,6 +47,7 @@ namespace ExtensibleInventory {
 
 		private static float _1_1_BookPositionY = 256f;
 		private static float _1_1_PagePositionY = 256f;
+
 
 
 		////////////////

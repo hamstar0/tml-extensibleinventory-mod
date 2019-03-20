@@ -56,7 +56,7 @@ namespace ExtensibleInventory.UI {
 			for( int i=0; i<maxPages; i++ ) {
 				bool isCurrPage = i == myplayer.Library.CurrentBook.CurrentPageIdx;
 				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 13, 4 );
-				var fillColor = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( plr, i );
+				var fillColor = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( i );
 				var bordColor = Color.White * 0.65f;
 				int thickness = isCurrPage ? 2 : 1;
 

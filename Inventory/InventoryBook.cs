@@ -18,16 +18,12 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public static int BasePageCapacity => 40;
-
-
+		private readonly IList<InventoryPage> Pages = new List<InventoryPage>();
 
 		////////////////
 
 		public bool IsEnabled { get; internal set; }
 		public string Name { get; private set; }
-
-		private readonly IList<Item[]> Pages = new List<Item[]>();
 
 		public int CurrentPageIdx { get; private set; }
 
@@ -38,8 +34,8 @@ namespace ExtensibleInventory.Inventory {
 		internal InventoryBook( bool isEnabled, string bookName ) {
 			this.IsEnabled = isEnabled;
 
-			this.Pages.Add( this.CreateBlankPage() );
-			this.Pages.Add( this.CreateBlankPage() );
+			this.Pages.Add( new InventoryPage() );
+			this.Pages.Add( new InventoryPage() );
 
 			this.Name = bookName;
 
@@ -49,36 +45,22 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public void DumpInventoryToCurrentPage( Player player ) {
-			this.DumpInventoryToPage( player, this.CurrentPageIdx );
+		public void PullFromInventoryToCurrentPage( Player player ) {
+			this.Pages[ this.CurrentPageIdx ].PullFromInventory( player );
 		}
-		public void DumpCurrentPageToInventory( Player player ) {
-			this.DumpPageToInventory( player, this.CurrentPageIdx );
+		public void PushCurrentPageToInventory( Player player ) {
+			this.Pages[ this.CurrentPageIdx ].PushToInventory( player );
 		}
 
 
 		////////////////
 
-		private void DumpInventoryToPage( Player player, int pageNum ) {
-			for( int i = 10; i < 50; i++ ) {
-				Item invItem = ( !player.inventory[i]?.IsAir ?? false ) ?
-					player.inventory[i].DeepClone() :
-					new Item();
-
-				this.Pages[pageNum][i - 10] = invItem;
-				player.inventory[i] = new Item();
-			}
+		private void PullFromInventoryToPage( Player player, int pageNum ) {
+			this.Pages[ pageNum ].PullFromInventory( player );
 		}
 
-		private void DumpPageToInventory( Player player, int pageNum ) {
-			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
-				Item pageItem = ( !this.Pages[pageNum][i]?.IsAir ?? false ) ?
-					this.Pages[pageNum][i].DeepClone() :
-					new Item();
-
-				player.inventory[i + 10] = pageItem;
-				this.Pages[pageNum][i] = new Item();
-			}
+		private void PushPageToInventory( Player player, int pageNum ) {
+			this.Pages[ pageNum ].PushToInventory( player );
 		}
 	}
 }

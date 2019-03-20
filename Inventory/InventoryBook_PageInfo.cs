@@ -27,7 +27,7 @@ namespace ExtensibleInventory.Inventory {
 			return true;
 		}
 
-		public bool CanAddPage( Player player, int pageNum, out string err ) {
+		public bool CanAddPage( int pageNum, out string err ) {
 			if( !this.IsEnabled ) {
 				err = this.Name + " inventory extension disabled.";
 				return false;
@@ -86,39 +86,23 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		public Item[] GetPageItems( int pageNum ) {
-			return this.Pages[ pageNum ];
+			return this.Pages[ pageNum ].Items;
 		}
 
-		public bool IsPageEmpty( Player player, int pageNum ) {
-			var page = this.Pages[pageNum];
-			
+		public bool IsPageEmpty( int pageNum ) {
 			if( pageNum == this.CurrentPageIdx ) {
-				page = player.inventory;
+				return InventoryPage.IsItemSetEmpty( Main.LocalPlayer.inventory );
+			} else {
+				return this.Pages[pageNum].IsEmpty();
 			}
-
-			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
-				if( !page[i].IsAir ) {
-					return false;
-				}
-			}
-			return true;
 		}
 
-		public float GaugePageFullness( Player player, int pageNum ) {
-			var page = this.Pages[pageNum];
-			int slots = 0;
-
+		public float GaugePageFullness( int pageNum ) {
 			if( pageNum == this.CurrentPageIdx ) {
-				page = player.inventory;
+				return InventoryPage.GaugeItemSetFullness( Main.LocalPlayer.inventory );
+			} else {
+				return this.Pages[ pageNum ].GaugeFullness();
 			}
-
-			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
-				if( !page[i].IsAir ) {
-					slots++;
-				}
-			}
-
-			return slots / (float)InventoryBook.BasePageCapacity;
 		}
 
 

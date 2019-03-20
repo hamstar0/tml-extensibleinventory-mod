@@ -1,44 +1,35 @@
+using HamstarHelpers.Helpers.DotNetHelpers;
 using Terraria;
 
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		private Item[] CreateBlankPage() {
-			var page = new Item[InventoryBook.BasePageCapacity];
-
-			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
-				page[i] = new Item();
-			}
-
-			return page;
-		}
-
 		private void ResetPages() {
 			this.Pages.Clear();
-			this.Pages.Add( this.CreateBlankPage() );
-			this.Pages.Add( this.CreateBlankPage() );
+			this.Pages.Add( new InventoryPage() );
+			this.Pages.Add( new InventoryPage() );
 		}
 
 
 		////////////////
 
-		public bool InsertNewPage( Player player, int pageNum, out string err ) {
-			if( !this.CanAddPage( player, pageNum, out err ) ) {
+		public bool InsertNewPage( [Nullable]Player player, int pageNum, out string err ) {
+			if( !this.CanAddPage( pageNum, out err ) ) {
 				return false;
 			}
 
 			var mymod = ExtensibleInventoryMod.Instance;
 			
-			this.DumpInventoryToPage( player, pageNum );
-			this.Pages.Insert( pageNum, this.CreateBlankPage() );
+			this.PullFromInventoryToPage( player, pageNum );
+			this.Pages.Insert( pageNum, new InventoryPage() );
 			
 			return true;
 		}
 
-		public bool DeleteEmptyPage( Player player, int pageNum, out string err ) {
+		public bool DeleteEmptyPage( [Nullable]Player player, int pageNum, out string err ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			
-			if( !this.CanDeletePage( player, this.CurrentPageIdx, out err ) ) {
+			if( !this.CanDeletePage( player, pageNum, out err ) ) {
 				return false;
 			}
 
@@ -47,9 +38,9 @@ namespace ExtensibleInventory.Inventory {
 			if( this.CurrentPageIdx >= this.Pages.Count ) {
 				this.CurrentPageIdx = this.Pages.Count - 1;
 
-				this.DumpPageToInventory( player, this.CurrentPageIdx );
+				this.PushPageToInventory( player, this.CurrentPageIdx );
 			} else {
-				this.DumpPageToInventory( player, pageNum );
+				this.PushPageToInventory( player, pageNum );
 			}
 			
 			return true;
@@ -58,6 +49,9 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		SetOffloadCurrentPage
+		public bool SetCurrentPageOffloadable( bool on ) {
+			this.Pages[ this.CurrentPageIdx ].IsOffloadable = on;
+			return true;
+		}
 	}
 }
