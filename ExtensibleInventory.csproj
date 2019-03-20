@@ -38,7 +38,7 @@
     <Compile Include="API.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="Inventory\InventoryBook_UI.cs" />
-    <Compile Include="Inventory\InventoryBook_API.cs" />
+    <Compile Include="Inventory\InventoryBook_Pages.cs" />
     <Compile Include="Inventory\InventoryBook_Load.cs" />
     <Compile Include="Inventory\InventoryLibrary_API.cs" />
     <Compile Include="Mod_Draw.cs" />
