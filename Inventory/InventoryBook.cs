@@ -46,24 +46,6 @@ namespace ExtensibleInventory.Inventory {
 			this.ResetPages();
 		}
 
-		////////////////
-
-		private Item[] CreateBlankPage() {
-			var page = new Item[InventoryBook.BasePageCapacity];
-
-			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
-				page[i] = new Item();
-			}
-
-			return page;
-		}
-
-		private void ResetPages() {
-			this.Pages.Clear();
-			this.Pages.Add( this.CreateBlankPage() );
-			this.Pages.Add( this.CreateBlankPage() );
-		}
-
 
 		////////////////
 
@@ -78,32 +60,25 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		private void DumpInventoryToPage( Player player, int pageNum ) {
-			for( int i=10; i<50; i++ ) {
+			for( int i = 10; i < 50; i++ ) {
 				Item invItem = ( !player.inventory[i]?.IsAir ?? false ) ?
 					player.inventory[i].DeepClone() :
 					new Item();
 
-				this.Pages[ pageNum ][ i - 10 ] = invItem;
-				player.inventory[ i ] = new Item();
+				this.Pages[pageNum][i - 10] = invItem;
+				player.inventory[i] = new Item();
 			}
 		}
 
 		private void DumpPageToInventory( Player player, int pageNum ) {
-			for( int i=0; i< InventoryBook.BasePageCapacity; i++ ) {
+			for( int i = 0; i < InventoryBook.BasePageCapacity; i++ ) {
 				Item pageItem = ( !this.Pages[pageNum][i]?.IsAir ?? false ) ?
 					this.Pages[pageNum][i].DeepClone() :
 					new Item();
 
-				player.inventory[ i + 10 ] = pageItem;
-				this.Pages[ pageNum ][ i ] = new Item();
+				player.inventory[i + 10] = pageItem;
+				this.Pages[pageNum][i] = new Item();
 			}
-		}
-
-
-		////////////////
-
-		public string PagePositionToString() {
-			return ( this.CurrentPageIdx + 1 ) + " / " + this.Pages.Count;
 		}
 	}
 }

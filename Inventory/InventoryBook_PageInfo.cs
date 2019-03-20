@@ -124,42 +124,8 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool InsertNewPage( Player player, int pageNum, out string err ) {
-			if( !this.CanAddPage( player, pageNum, out err ) ) {
-				return false;
-			}
-
-			var mymod = ExtensibleInventoryMod.Instance;
-			
-			this.DumpInventoryToPage( player, pageNum );
-			this.Pages.Insert( pageNum, this.CreateBlankPage() );
-			
-			return true;
+		public string PagePositionToString() {
+			return ( this.CurrentPageIdx + 1 ) + " / " + this.Pages.Count;
 		}
-
-		public bool DeleteEmptyPage( Player player, int pageNum, out string err ) {
-			var mymod = ExtensibleInventoryMod.Instance;
-			
-			if( !this.CanDeletePage( player, this.CurrentPageIdx, out err ) ) {
-				return false;
-			}
-
-			this.Pages.RemoveAt( pageNum );
-
-			if( this.CurrentPageIdx >= this.Pages.Count ) {
-				this.CurrentPageIdx = this.Pages.Count - 1;
-
-				this.DumpPageToInventory( player, this.CurrentPageIdx );
-			} else {
-				this.DumpPageToInventory( player, pageNum );
-			}
-			
-			return true;
-		}
-
-
-		////////////////
-
-		SetOffloadCurrentPage
 	}
 }
