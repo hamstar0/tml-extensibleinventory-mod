@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.TmlHelpers;
+﻿using ExtensibleInventory.UI.Elements;
+using HamstarHelpers.Helpers.TmlHelpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;

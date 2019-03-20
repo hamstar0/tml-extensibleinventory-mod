@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
+﻿using ExtensibleInventory.UI.Elements;
+using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Services.Promises;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -25,6 +26,7 @@ namespace ExtensibleInventory.UI {
 		private UIInventoryControlButton ButtonPageRight;
 		private UIInventoryControlButton ButtonPageAdd;
 		private UIInventoryControlButton ButtonPageSub;
+		private UIInventoryControlToggle ButtonPageOffload;
 
 		private bool IsChest = true;
 
