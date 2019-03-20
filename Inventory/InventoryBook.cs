@@ -5,19 +5,19 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryBook {
-		private readonly IList<InventoryPage> Pages = new List<InventoryPage>();
-
-		////////////////
-
 		public bool IsEnabled { get; internal set; }
 		public string Name { get; private set; }
 
 		public int CurrentPageIdx { get; private set; }
 
+		////////////////
+
+		private readonly IList<InventoryPage> Pages = new List<InventoryPage>();
+
 
 
 		////////////////
-		
+
 		internal InventoryBook( bool isEnabled, string bookName ) {
 			this.IsEnabled = isEnabled;
 

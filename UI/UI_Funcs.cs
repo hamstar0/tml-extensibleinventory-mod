@@ -7,20 +7,29 @@ using Terraria.UI;
 
 namespace ExtensibleInventory.UI {
 	partial class InventoryUI : UIState {
-		private void ScrollPageUp() {
+		public void ScrollPageUp() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
-			myplayer.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer );
+
+			if( myplayer.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer ) ) {
+				bool isOffloadable = myplayer.Library.CurrentBook.IsCurrentPageOffloadable();
+				this.TogglePageOffload.SetOn( !isOffloadable, false );
+			}
 		}
 
-		private void ScrollPageDown() {
+		public void ScrollPageDown() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
-			myplayer.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
+
+			if( myplayer.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer ) ) {
+				bool isOffloadable = myplayer.Library.CurrentBook.IsCurrentPageOffloadable();
+				this.TogglePageOffload.SetOn( !isOffloadable, false );
+			}
 		}
 
+		////
 
-		private void AddPage() {
+		public void AddPage() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
@@ -29,7 +38,7 @@ namespace ExtensibleInventory.UI {
 			}
 		}
 
-		private void DelPage() {
+		public void DelPage() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
@@ -38,27 +47,24 @@ namespace ExtensibleInventory.UI {
 			}
 		}
 
+		////
 
-		private void ToggleOffloadablePageOff() {
-			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
-				var mymod = ExtensibleInventoryMod.Instance;
-				var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+		public void ToggleOffloadablePageOn() {
+			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
-				if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( false ) ) {
-					Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " rejects offloading.", Color.LimeGreen );
-				}
-			};
+			if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( true ) ) {
+				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " accepts auto-offloading.", Color.LimeGreen );
+			}
 		}
 
-		private void ToggleOffloadablePageOn() {
-			this.TogglePageOffload.OnToggleOff += ( evt, elem ) => {
-				var mymod = ExtensibleInventoryMod.Instance;
-				var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+		public void ToggleOffloadablePageOff() {
+			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
 
-				if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( true ) ) {
-					Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " accepts offloading.", Color.LimeGreen );
-				}
-			};
+			if( myplayer.Library.CurrentBook.SetCurrentPageOffloadable( false ) ) {
+				Main.NewText( "Inventory page " + myplayer.Library.CurrentBook.CurrentPageIdx + " rejects auto-offloading.", Color.LimeGreen );
+			}
 		}
 	}
 }

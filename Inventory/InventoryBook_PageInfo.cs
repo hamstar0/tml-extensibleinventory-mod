@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Terraria;
 
 
@@ -106,6 +107,35 @@ namespace ExtensibleInventory.Inventory {
 		}
 
 
+		////////////////
+
+		public bool IsCurrentPageOffloadable() {
+			return this.Pages[ this.CurrentPageIdx ].IsOffloadable;
+		}
+
+		public bool IsPageOffloadable( int pageNum ) {
+			return this.Pages[ pageNum ].IsOffloadable;
+		}
+
+		public IList<InventoryPage> GetOffloadablePages( out bool includesCurrent ) {
+			var pages = new List<InventoryPage>( this.Pages.Count );
+			includesCurrent = false;
+
+			for( int i=0; i<this.Pages.Count; i++ ) {
+				InventoryPage page = this.Pages[i];
+
+				if( page.IsOffloadable ) {
+					if( i == this.CurrentPageIdx ) {
+						includesCurrent = true;
+					}
+					pages.Add( page );
+				}
+			}
+
+			return pages;
+		}
+		
+		
 		////////////////
 
 		public string PagePositionToString() {

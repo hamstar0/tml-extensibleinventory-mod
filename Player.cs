@@ -131,10 +131,10 @@ namespace ExtensibleInventory {
 			if( Main.playerInventory ) {
 				if( scrolled >= 120 ) {
 					this.ScrollModeDuration = 2 * 60;
-					this.Library.CurrentBook?.ScrollPageUp( this.player );
+					mymod.InvUI?.ScrollPageUp();
 				} else if( scrolled <= -120 ) {
 					this.ScrollModeDuration = 2 * 60;
-					this.Library.CurrentBook?.ScrollPageDown( this.player );
+					mymod.InvUI?.ScrollPageDown();
 				}
 			}
 		}

@@ -10,8 +10,7 @@ namespace ExtensibleInventory.UI.Elements {
 		private Texture2D OffTex;
 		
 		public bool IsHidden = false;
-
-
+		
 		////////////////
 
 		public event MouseEvent OnToggleOn;
@@ -23,20 +22,19 @@ namespace ExtensibleInventory.UI.Elements {
 
 		////////////////
 
-		public UIInventoryControlToggle( Texture2D onTex, Texture2D offTex ) : base( offTex ) { }
+		public UIInventoryControlToggle( Texture2D onTex, Texture2D offTex ) : base( offTex ) {
+			this.OnTex = onTex;
+			this.OffTex = offTex;
+		}
+
 		
 		public override void OnInitialize() {
 			base.OnInitialize();
 
 			this.OnClick += ( evt, listeningElement ) => {
 				if( this.IsHidden ) { return; }
-
-				if( this.On ) {
-					this.OnToggleOff?.Invoke( evt, listeningElement );
-				} else {
-					this.OnToggleOn?.Invoke( evt, listeningElement );
-				}
-				this.On = !this.On;
+				
+				this.SetOn( !this.On, true );
 			};
 		}
 
@@ -62,6 +60,29 @@ namespace ExtensibleInventory.UI.Elements {
 			if( this.IsHidden ) { return; }
 
 			base.Draw( spriteBatch );
+		}
+
+
+		////////////////
+
+		public void SetOn( bool on, bool triggerMouseEvents ) {
+			if( triggerMouseEvents ) {
+				if( on == false ) {
+					this.OnToggleOff?.Invoke( (UIMouseEvent)null, (UIElement)null );
+				} else {
+					this.OnToggleOn?.Invoke( (UIMouseEvent)null, (UIElement)null );
+				}
+			}
+
+			if( this.On != on ) {
+				this.On = on;
+
+				if( on == false ) {
+					this.SetImage( this.OffTex );
+				} else {
+					this.SetImage( this.OnTex );
+				}
+			}
 		}
 	}
 }
