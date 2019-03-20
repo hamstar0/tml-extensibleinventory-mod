@@ -7,28 +7,6 @@ using Terraria;
 
 namespace ExtensibleInventory.Inventory {
 	partial class InventoryLibrary {
-		public bool CanSwitchBooks( out string err ) {
-			var mymod = ExtensibleInventoryMod.Instance;
-
-			if( !mymod.Config.CanSwitchBooks ) {
-				err = "Book switching disabled.";
-				return false;
-			}
-
-			err = "";
-			return true;
-		}
-
-
-
-		////////////////
-
-		public IList<string> GetBookNames() {
-			return this.Books.Keys.ToList();
-		}
-
-		////////////////
-
 		public void ChangeCurrentBook( [Nullable]Player player, string bookName ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
 				throw new HamstarException( "No such book by name " + bookName );
@@ -66,16 +44,6 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public bool IsBookEnabled( string bookName ) {
-			if( !this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
-			}
-
-			InventoryBook book = this.Books[ bookName ];
-
-			return book.IsEnabled;
-		}
-
 		public void EnableBook( string bookName ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
 				throw new HamstarException( "No such book by name " + bookName );
@@ -98,15 +66,6 @@ namespace ExtensibleInventory.Inventory {
 
 
 		////////////////
-
-		public int CountBookPages( string bookName ) {
-			if( !this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
-			}
-
-			return this.Books.Count;
-		}
-
 		
 		public bool AddBookPage( Player player, string bookName, out string err ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
@@ -126,22 +85,6 @@ namespace ExtensibleInventory.Inventory {
 			InventoryBook book = this.Books[ bookName ];
 
 			return book.DeleteEmptyPage( player, book.CountPages() - 1, out err );
-		}
-
-		////////////////
-		
-		public Item[] GetLatestBookPageItems( string bookName ) {
-			if( this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
-			}
-
-			InventoryBook book = this.Books[bookName];
-			int count = book.CountPages();
-			if( count == 0 ) {
-				return null;
-			}
-
-			return book.GetPageItems( count - 1 );
 		}
 	}
 }
