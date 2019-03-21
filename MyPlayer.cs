@@ -10,6 +10,12 @@ using Terraria.ModLoader.IO;
 
 namespace ExtensibleInventory {
 	partial class ExtensibleInventoryPlayer : ModPlayer {
+		public const int ScrollModeMaxDuration = 2 * 60;
+
+
+
+		////////////////
+
 		public static bool IsPlayerInventoryEmpty( Player player ) {
 			for( int i = 10; i < 50; i++ ) {
 				if( !player.inventory[i].IsAir ) {
@@ -25,10 +31,10 @@ namespace ExtensibleInventory {
 
 		internal InventoryLibrary Library;
 
-		private int ScrollModeDuration = 0;
-
 
 		////////////////
+
+		public int ScrollModeDuration { get; private set; } = 0;
 
 		public bool ScrollModeOn => this.ScrollModeDuration > 0;
 
@@ -92,9 +98,18 @@ namespace ExtensibleInventory {
 
 				if( Main.playerInventory ) {
 					if( Main.mouseItem != null && !Main.mouseItem.IsAir ) {
-						this.ScrollModeDuration = ( this.ScrollModeDuration < 2 ) ? 2 : this.ScrollModeDuration;
+						this.ScrollModeDuration = ( this.ScrollModeDuration < 60 ) ? 60 : this.ScrollModeDuration;
 					}
 				} else {
+					this.ScrollModeDuration = 0;
+				}
+
+				float minX = 20;
+				float minY = 20;
+				float maxX = minX + (14f * 56f) * Main.inventoryScale;
+				float maxY = minY + (8.5f * 56f) * Main.inventoryScale;
+
+				if( Main.mouseX < minX || Main.mouseX >= maxX || Main.mouseY < minY || Main.mouseY >= maxY ) {
 					this.ScrollModeDuration = 0;
 				}
 			}
@@ -130,10 +145,10 @@ namespace ExtensibleInventory {
 
 			if( Main.playerInventory ) {
 				if( scrolled >= 120 ) {
-					this.ScrollModeDuration = 2 * 60;
+					this.ScrollModeDuration = ExtensibleInventoryPlayer.ScrollModeMaxDuration;
 					mymod.InvUI?.ScrollPageUp();
 				} else if( scrolled <= -120 ) {
-					this.ScrollModeDuration = 2 * 60;
+					this.ScrollModeDuration = ExtensibleInventoryPlayer.ScrollModeMaxDuration;
 					mymod.InvUI?.ScrollPageDown();
 				}
 			}

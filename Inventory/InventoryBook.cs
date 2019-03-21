@@ -55,6 +55,9 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		public int Share( Player player, Item item ) {
+			// Do not share singular items
+			if( item.maxStack == 1 ) { return 0; }
+
 			int totalShared = 0;
 
 			for( int i=0; i<this.Pages.Count; i++ ) {
