@@ -2,12 +2,21 @@
 using System;
 using Terraria;
 using Terraria.GameContent.Achievements;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 
 namespace ExtensibleInventory {
 	class MyItem : GlobalItem {
 		public override bool OnPickup( Item item, Player player ) {
+			switch( item.type ) {
+			case ItemID.CopperCoin:
+			case ItemID.SilverCoin:
+			case ItemID.GoldCoin:
+			case ItemID.PlatinumCoin:
+				return true;
+			}
+
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( player );
 
 			int oldStack = item.stack;

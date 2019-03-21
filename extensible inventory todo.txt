@@ -1,6 +1,8 @@
 v1.3
+-	Implement item pickup sharing
+-	Rename current "offloading" to "sharing"
+-	Find new icon for "sharing"
 -	Define UI for "sharing" inventory
-
 ...
 v1.2
 -	Show ticks for each page
