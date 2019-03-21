@@ -20,7 +20,7 @@ namespace ExtensibleInventory.NetProtocol {
 
 		protected override void ReceiveReply() {
 			var mymod = ExtensibleInventoryMod.Instance;
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
 			mymod.ConfigJson.SetData( this.Settings );
 

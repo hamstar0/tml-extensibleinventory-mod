@@ -1,4 +1,5 @@
 using HamstarHelpers.Helpers.DebugHelpers;
+using System;
 using System.Collections.Generic;
 using Terraria;
 
@@ -48,6 +49,39 @@ namespace ExtensibleInventory.Inventory {
 
 		private void PushPageToInventory( Player player, int pageNum ) {
 			this.Pages[ pageNum ].PushToInventory( player );
+		}
+
+
+		////////////////
+
+		public int Share( Player player, Item item ) {
+			int totalShared = 0;
+
+			for( int i=0; i<this.Pages.Count; i++ ) {
+				InventoryPage page = this.Pages[i];
+				if( !page.IsSharing ) { continue; }
+
+				Item[] items = this.GetPageItems( player, i );
+				for( int j=0; j<items.Length; j++ ) {
+					Item dest = items[j];
+					if( dest.type != item.type ) { continue; }
+
+					int space = dest.maxStack - dest.stack;
+					if( space <= 0 ) { continue; }
+
+					int consume = Math.Min( space, item.stack );
+					item.stack -= consume;
+					dest.stack += consume;
+					totalShared += consume;
+
+					if( item.stack == 0 ) {
+						item.active = false;
+						break;
+					}
+				}
+			}
+
+			return totalShared;
 		}
 	}
 }

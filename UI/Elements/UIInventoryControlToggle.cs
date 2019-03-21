@@ -16,7 +16,7 @@ namespace ExtensibleInventory.UI.Elements {
 		public event MouseEvent OnToggleOn;
 		public event MouseEvent OnToggleOff;
 
-		public bool On { get; private set; } = false;
+		public bool IsOn { get; private set; } = false;
 
 
 
@@ -34,7 +34,7 @@ namespace ExtensibleInventory.UI.Elements {
 			this.OnClick += ( evt, listeningElement ) => {
 				if( this.IsHidden ) { return; }
 				
-				this.SetOn( !this.On, true );
+				this.SetOn( !this.IsOn, true );
 			};
 		}
 
@@ -74,8 +74,8 @@ namespace ExtensibleInventory.UI.Elements {
 				}
 			}
 
-			if( this.On != on ) {
-				this.On = on;
+			if( this.IsOn != on ) {
+				this.IsOn = on;
 
 				if( on == false ) {
 					this.SetImage( this.OffTex );

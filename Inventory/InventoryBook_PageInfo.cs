@@ -86,8 +86,12 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
-		public Item[] GetPageItems( int pageNum ) {
-			return this.Pages[ pageNum ].Items;
+		public Item[] GetPageItems( Player player, int pageNum ) {
+			if( pageNum == this.CurrentPageIdx ) {
+				return player.inventory;
+			} else {
+				return this.Pages[ pageNum ].Items;
+			}
 		}
 
 		public bool IsPageEmpty( int pageNum ) {

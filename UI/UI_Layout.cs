@@ -45,7 +45,7 @@ namespace ExtensibleInventory.UI {
 			ExtensibleInventoryPlayer myplayer = null;
 
 			if( Main.LocalPlayer != null && Main.LocalPlayer.active ) {
-				myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+				myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			}
 
 			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
@@ -80,11 +80,11 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageRight.Top.Set( y, 0f );
 			this.ButtonPageRight.Left.Set( x + 112f, 0f );
 			this.ButtonPageAdd.Top.Set( y, 0f );
-			this.ButtonPageAdd.Left.Set( x + 144f, 0f );
+			this.ButtonPageAdd.Left.Set( x + 136f, 0f );
 			this.ButtonPageSub.Top.Set( y, 0f );
-			this.ButtonPageSub.Left.Set( x + 172f, 0f );
+			this.ButtonPageSub.Left.Set( x + 160f, 0f );
 			this.TogglePageSharing.Top.Set( y, 0f );
-			this.TogglePageSharing.Left.Set( x + 200f, 0f );
+			this.TogglePageSharing.Left.Set( x + 184f, 0f );
 
 			if( this.ButtonBooks != null ) {
 				float bookX = mymod.Config.BookPositionX + offX;

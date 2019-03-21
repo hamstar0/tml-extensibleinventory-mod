@@ -47,7 +47,7 @@ namespace ExtensibleInventory.UI {
 			if( plr == null || !plr.active ) { return; }    //?
 
 			var mymod = ExtensibleInventoryMod.Instance;
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( plr, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
 
 			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
 			int pages = myplayer.Library.CurrentBook.CountPages();
@@ -73,7 +73,7 @@ namespace ExtensibleInventory.UI {
 			var mymod = ExtensibleInventoryMod.Instance;
 			Player plr = Main.LocalPlayer;
 			if( plr == null || !plr.active ) { return; }    //?
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( plr, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
 
 			/*if( !mymod.Config.CanScrollPages ) {
 				InventoryPageScrollerUI.DrawX( sb, this.ButtonPageLeft );
@@ -131,6 +131,10 @@ namespace ExtensibleInventory.UI {
 			}
 			if( this.ButtonPageSub.IsMouseHovering && mymod.Config.CanDeletePages ) {
 				string text = "Remove current inventory page";
+				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
+			}
+			if( this.TogglePageSharing.IsMouseHovering && mymod.Config.CanTogglePageSharing ) {
+				string text = "Item sharing for this page: "+(this.TogglePageSharing.IsOn?"On":"Off");
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 

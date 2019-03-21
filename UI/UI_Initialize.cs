@@ -57,7 +57,7 @@ namespace ExtensibleInventory.UI {
 
 		private void InitializeLibraryBooks() {
 			var mymod = ExtensibleInventoryMod.Instance;
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			IList<string> allBookNames = myplayer.Library.GetBookNames();
 
 			if( allBookNames.Count == 1 ) {
@@ -81,8 +81,7 @@ namespace ExtensibleInventory.UI {
 				var button = new UIInventoryControlButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
 					string err;
-					var mymod2 = ExtensibleInventoryMod.Instance;
-					var myplayer2 = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod2, "ExtensibleInventoryPlayer" );
+					var myplayer2 = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
 					if( !myplayer2.Library.CanSwitchBooks(out err) ) {
 						Main.NewText( err, Color.Red );

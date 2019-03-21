@@ -51,7 +51,7 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 		
-		public Item[] GetLatestBookPageItems( string bookName ) {
+		public Item[] GetLatestBookPageItems( Player player, string bookName ) {
 			if( this.Books.ContainsKey( bookName ) ) {
 				throw new HamstarException( "No such book by name " + bookName );
 			}
@@ -62,7 +62,7 @@ namespace ExtensibleInventory.Inventory {
 				return null;
 			}
 
-			return book.GetPageItems( count - 1 );
+			return book.GetPageItems( player, count - 1 );
 		}
 	}
 }

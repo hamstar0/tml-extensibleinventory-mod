@@ -1,5 +1,6 @@
 ﻿using ExtensibleInventory.UI.Elements;
 using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Services.Promises;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -95,6 +96,14 @@ namespace ExtensibleInventory.UI {
 		public override void Update( GameTime gameTime ) {
 			if( this.ButtonBooks == null && Main.LocalPlayer != null && Main.LocalPlayer.active ) {
 				this.InitializeLibraryBooks();
+			}
+
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
+			bool isCurrPageSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
+
+			// Update sharing
+			if( this.TogglePageSharing.IsOn != isCurrPageSharing ) {
+				this.TogglePageSharing.SetOn( isCurrPageSharing, false );
 			}
 
 			this.UpdateLayout();

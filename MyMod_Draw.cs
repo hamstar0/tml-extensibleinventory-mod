@@ -50,7 +50,7 @@ namespace ExtensibleInventory {
 					mymod.InvUIMngr?.Update( Main._drawInterfaceGameTime );
 					mymod.InvUI?.Draw( Main.spriteBatch );
 
-					var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, this, "ExtensibleInventoryPlayer" );
+					var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
 						var pos = new Vector2( Main.mouseX - 24, Main.mouseY - 4 );
 

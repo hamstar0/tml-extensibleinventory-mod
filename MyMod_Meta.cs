@@ -27,7 +27,7 @@ namespace ExtensibleInventory {
 				}
 			}
 
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			myplayer.Library.CurrentBook.IsEnabled = mymod.Config.DefaultBookEnabled;
 		}
 
@@ -43,7 +43,7 @@ namespace ExtensibleInventory {
 			mymod.ConfigJson.SetData( newConfig );
 			mymod.ConfigJson.SaveFile();
 
-			var myplayer = (ExtensibleInventoryPlayer)TmlHelpers.SafelyGetModPlayer( Main.LocalPlayer, mymod, "ExtensibleInventoryPlayer" );
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			myplayer.Library.CurrentBook.IsEnabled = newConfig.DefaultBookEnabled;
 		}
 	}
