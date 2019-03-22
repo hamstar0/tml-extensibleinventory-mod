@@ -45,6 +45,10 @@ namespace ExtensibleInventory.Inventory {
 					} else {
 						page.Items[j] = new Item();
 					}
+
+					if( tags.ContainsKey( idx+"_s" ) ) {
+						page.IsSharing = (bool)tags[ idx+"_s" ];
+					}
 				}
 			}
 
@@ -75,6 +79,8 @@ namespace ExtensibleInventory.Inventory {
 						LogHelpers.Warn( "Could not save item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						continue;
 					}
+
+					tags[idx+"_s"] = this.Pages[i].IsSharing;
 				}
 			}
 
