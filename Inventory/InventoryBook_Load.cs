@@ -47,7 +47,7 @@ namespace ExtensibleInventory.Inventory {
 					}
 
 					if( tags.ContainsKey( idx+"_s" ) ) {
-						page.IsSharing = (bool)tags[ idx+"_s" ];
+						page.IsSharing = tags.GetBool( idx + "_s" );
 					}
 				}
 			}
@@ -80,7 +80,7 @@ namespace ExtensibleInventory.Inventory {
 						continue;
 					}
 
-					tags[idx+"_s"] = this.Pages[i].IsSharing;
+					tags[idx+"_s"] = (bool)this.Pages[i].IsSharing;
 				}
 			}
 
