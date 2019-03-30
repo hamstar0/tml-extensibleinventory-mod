@@ -9,9 +9,8 @@ namespace ExtensibleInventory.UI {
 		private void UpdateLayout() {
 			var mymod = ExtensibleInventoryMod.Instance;
 			bool isChest = true;
-			bool isPlayerValid = Main.LocalPlayer != null && Main.LocalPlayer.active;
 
-			if( isPlayerValid ) {
+			if( Main.LocalPlayer != null /*&& Main.LocalPlayer.active*/ ) {
 				isChest = Main.LocalPlayer.chest != -1 || Main.npcShop > 0;
 			}
 
@@ -21,7 +20,7 @@ namespace ExtensibleInventory.UI {
 				this.SetElementPositions( isChest );
 			}
 
-			if( isPlayerValid ) {
+			if( Main.LocalPlayer != null /*&& Main.LocalPlayer.active*/ ) {
 				this.SetPageTabsPosition( isChest );
 			}
 
@@ -42,11 +41,7 @@ namespace ExtensibleInventory.UI {
 
 		private void SetPageTabsPosition( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
-			ExtensibleInventoryPlayer myplayer = null;
-
-			if( Main.LocalPlayer != null && Main.LocalPlayer.active ) {
-				myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
-			}
+			ExtensibleInventoryPlayer myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
 			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
 			float offY = isChest ? mymod.Config.ChestOnOffsetY : 0;

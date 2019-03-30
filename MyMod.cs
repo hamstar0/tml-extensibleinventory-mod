@@ -1,9 +1,9 @@
 using HamstarHelpers.Components.Config;
 using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers;
 using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
+using HamstarHelpers.Services.RecipeHack;
 using System;
 using Terraria;
 using Terraria.ModLoader;
@@ -45,6 +45,17 @@ namespace ExtensibleInventory {
 			}
 		}
 
+		public override void PostAddRecipes() {
+			RecipeHack.RegisterIngredientSource( "ExtensibleInventoryShared", ( plr ) => {
+				if( plr.whoAmI != Main.myPlayer ) { return new Item[0]; }
+
+				var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
+				return myplayer.Library.CurrentBook.GetSharedItems( plr, false );
+			} );
+		}
+		
+		////
+
 		private void LoadConfig() {
 			if( !this.ConfigJson.LoadFile() ) {
 				this.ConfigJson.SaveFile();
@@ -58,6 +69,7 @@ namespace ExtensibleInventory {
 			}
 		}
 
+		////
 
 		public override void Unload() {
 			ExtensibleInventoryMod.Instance = null;

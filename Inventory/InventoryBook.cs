@@ -1,6 +1,7 @@
 using HamstarHelpers.Helpers.DebugHelpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 
 
@@ -60,12 +61,12 @@ namespace ExtensibleInventory.Inventory {
 
 			int totalShared = 0;
 
-			for( int i=0; i<this.Pages.Count; i++ ) {
+			for( int i = 0; i < this.Pages.Count; i++ ) {
 				InventoryPage page = this.Pages[i];
 				if( !page.IsSharing ) { continue; }
 
 				Item[] items = this.GetPageItems( player, i );
-				for( int j=0; j<items.Length; j++ ) {
+				for( int j = 0; j < items.Length; j++ ) {
 					Item dest = items[j];
 					if( dest.type != item.type ) { continue; }
 
@@ -85,6 +86,29 @@ namespace ExtensibleInventory.Inventory {
 			}
 
 			return totalShared;
+		}
+
+
+		////////////////
+
+		public IEnumerable<Item> GetSharedItems( Player player, bool excludeCurrentPage ) {
+			var pages = new List<Item[]>();
+
+			for( int i=0; i<this.Pages.Count; i++ ) {
+				if( excludeCurrentPage && i == this.CurrentPageIdx ) {
+					continue;
+				}
+
+				if( this.Pages[i].IsSharing || i == this.CurrentPageIdx ) {
+					pages.Add( this.GetPageItems(player, i) );
+				}
+			}
+
+			IEnumerable<Item> items = pages
+				.SelectMany( p => p )
+				.Where( item => item != null && !item.IsAir );
+
+			return items;
 		}
 	}
 }

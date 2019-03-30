@@ -53,7 +53,7 @@ namespace ExtensibleInventory {
 					var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
 						var pos = new Vector2( Main.mouseX - 24, Main.mouseY );
-						float colorScale = 0.5f * ((float)myplayer.ScrollModeDuration / (float)ExtensibleInventoryPlayer.ScrollModeMaxDuration);
+						float colorScale = 0.35f * ((float)myplayer.ScrollModeDuration / (float)ExtensibleInventoryPlayer.ScrollModeMaxDuration);
 
 						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * colorScale );
 					}

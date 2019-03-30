@@ -51,7 +51,7 @@ namespace ExtensibleInventory.Inventory {
 					}
 				}
 			}
-
+			
 			this.CurrentPageIdx = currPage;
 		}
 
