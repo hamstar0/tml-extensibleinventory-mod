@@ -1,5 +1,5 @@
 author = hamstar
-version = 1.4.0
+version = 1.4.0.1
 displayName = Extensible Inventory
 modReferences = HamstarHelpers@4.2.6
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*

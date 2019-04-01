@@ -24,6 +24,7 @@ namespace ExtensibleInventory.Inventory {
 
 			this.Pages.Clear();
 
+			bool foundSharing = false;
 			int pages = tags.GetInt( prefix + "page_count" );
 			int currPage = tags.GetInt( prefix + "curr_page" );
 
@@ -31,14 +32,21 @@ namespace ExtensibleInventory.Inventory {
 				InventoryPage page = new InventoryPage();
 				this.Pages.Add( page );
 
+				string pageNumKey = prefix + "page_" + i;
+				foundSharing = tags.ContainsKey( pageNumKey + "_s" );
+
+				if( foundSharing ) {
+					page.IsSharing = tags.GetBool( pageNumKey + "_s" );
+				}
+
 				if( i == currPage ) { continue; }
 
 				for( int j = 0; j < InventoryPage.BasePageCapacity; j++ ) {
-					string idx = prefix + "page_" + i + "_" + j;
+					string pageNumItemNumKey = pageNumKey + "_" + j;
 
-					if( tags.ContainsKey( idx ) ) {
+					if( tags.ContainsKey( pageNumItemNumKey ) ) {
 						try {
-							page.Items[j] = ItemIO.Load( tags.GetCompound( idx ) );
+							page.Items[j] = ItemIO.Load( tags.GetCompound( pageNumItemNumKey ) );
 						} catch {
 							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						}
@@ -46,8 +54,9 @@ namespace ExtensibleInventory.Inventory {
 						page.Items[j] = new Item();
 					}
 
-					if( tags.ContainsKey( idx+"_s" ) ) {
-						page.IsSharing = tags.GetBool( idx + "_s" );
+					if( !foundSharing && tags.ContainsKey( pageNumItemNumKey+"_s" ) ) { // Oops!
+						foundSharing = true;
+						page.IsSharing = tags.GetBool( pageNumItemNumKey + "_s" );
 					}
 				}
 			}
@@ -68,19 +77,20 @@ namespace ExtensibleInventory.Inventory {
 			tags[ prefix + "curr_page" ] = this.CurrentPageIdx;
 
 			for( int i = 0; i < this.Pages.Count; i++ ) {
+				string pageNumKey = prefix + "page_" + i;
+				tags[ pageNumKey+"_s" ] = (bool)this.Pages[i].IsSharing;
+
 				if( i == this.CurrentPageIdx ) { continue; }
 
 				for( int j = 0; j < InventoryPage.BasePageCapacity; j++ ) {
-					string idx = prefix + "page_" + i + "_" + j;
+					string pageNumItemNumKey = pageNumKey + "_" + j;
 
 					try {
-						tags[idx] = ItemIO.Save( this.Pages[i].Items[j] );
+						tags[pageNumItemNumKey] = ItemIO.Save( this.Pages[i].Items[j] );
 					} catch {
 						LogHelpers.Warn( "Could not save item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						continue;
 					}
-
-					tags[idx+"_s"] = (bool)this.Pages[i].IsSharing;
 				}
 			}
 
