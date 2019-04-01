@@ -31,7 +31,8 @@ namespace ExtensibleInventory.UI {
 
 		public override void Draw( SpriteBatch sb ) {
 			if( !ExtensibleInventoryMod.Instance.Config.HidePageTicksUI ) {
-				this.DrawPageTicks( sb );
+				Rectangle[] rects = this.DrawPageTicks( sb );
+				this.HandlePageTickClicks( rects );
 			}
 
 			base.Draw( sb );
@@ -42,9 +43,11 @@ namespace ExtensibleInventory.UI {
 		}
 
 
-		private void DrawPageTicks( SpriteBatch sb ) {
+		private Rectangle[] DrawPageTicks( SpriteBatch sb ) {
 			Player plr = Main.LocalPlayer;
-			if( plr == null || !plr.active ) { return; }    //?
+			if( plr == null || !plr.active ) {
+				return new Rectangle[0];    //?
+			}
 
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
@@ -52,20 +55,32 @@ namespace ExtensibleInventory.UI {
 			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
 			int pages = myplayer.Library.CurrentBook.CountPages();
 			int maxPages = pages > 29 ? 28 : pages;
+			var rects = new Rectangle[pages];
 
-			for( int i=0; i<maxPages; i++ ) {
+			var unsharedColor = new Color( 192, 192, 192 );
+			var sharedColor = new Color( 128, 255, 32 );
+
+			for( int i = 0; i < maxPages; i++ ) {
 				bool isCurrPage = i == myplayer.Library.CurrentBook.CurrentPageIdx;
-				var rect = new Rectangle( (int)(pos.X + (i * 16)), (int)(pos.Y), 13, 4 );
-				var fillColor = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( i );
-				var bordColor = Color.White * 0.65f;
+				bool isShared = myplayer.Library.CurrentBook.IsPageSharing( i );
+
+				var rect = new Rectangle( (int)( pos.X + ( i * 16 ) ), (int)pos.Y, 13, 4 );
+				bool isHovering = rect.Contains( Main.mouseX, Main.mouseY );
+
+				Color fillColor = new Color( 128, 128, 256 ) * myplayer.Library.CurrentBook.GaugePageFullness( i );
+				Color bordColor = (isShared ? sharedColor : unsharedColor) * (isHovering ? 1f : 0.65f);
 				int thickness = isCurrPage ? 2 : 1;
 
 				HudHelpers.DrawBorderedRect( sb, fillColor, bordColor, rect, thickness );
+
+				rects[i] = rect;
 			}
 
 			if( pages != maxPages ) {
-				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + (28 * 16), pos.Y - 12f ), Color.White );
+				sb.DrawString( Main.fontMouseText, "...", new Vector2( pos.X + ( 28 * 16 ), pos.Y - 12f ), Color.White );
 			}
+
+			return rects;
 		}
 
 
@@ -105,7 +120,7 @@ namespace ExtensibleInventory.UI {
 					string bookName = kv.Key;
 					UIImageButton bookButton = kv.Value;
 
-					if( !myplayer.Library.CanSwitchBooks(out _) || !myplayer.Library.IsBookEnabled( bookName ) ) {
+					if( !myplayer.Library.CanSwitchBooks( out _ ) || !myplayer.Library.IsBookEnabled( bookName ) ) {
 						InventoryUI.DrawX( sb, bookButton );
 					}
 				}
@@ -134,7 +149,7 @@ namespace ExtensibleInventory.UI {
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 			if( this.TogglePageSharing.IsMouseHovering && mymod.Config.CanTogglePageSharing ) {
-				string text = "Item sharing for this page: "+(this.TogglePageSharing.IsOn?"On":"Off");
+				string text = "Item sharing for this page: " + ( this.TogglePageSharing.IsOn ? "On" : "Off" );
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
 
@@ -145,6 +160,28 @@ namespace ExtensibleInventory.UI {
 
 					if( bookButton.IsMouseHovering ) {
 						sb.DrawString( Main.fontMouseText, bookName, pos, Color.White );
+					}
+				}
+			}
+		}
+
+
+		////////////////
+
+		private void HandlePageTickClicks( Rectangle[] rects ) {
+			Player plr = Main.LocalPlayer;
+			if( plr == null || !plr.active ) { return; }    //?
+
+			var mymod = ExtensibleInventoryMod.Instance;
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
+			
+			if( Main.mouseLeft && Main.mouseLeftRelease ) {
+				for( int i = 0; i < rects.Length; i++ ) {
+					Rectangle rect = rects[i];
+
+					if( rect.Contains( Main.mouseX, Main.mouseY ) ) {
+						myplayer.Library.CurrentBook.JumpToPage( Main.LocalPlayer, i );
+						break;
 					}
 				}
 			}

@@ -14,6 +14,35 @@ namespace ExtensibleInventory.Inventory {
 
 		////////////////
 
+		public bool JumpToPage( Player player, int pageNum ) {
+			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
+				LogHelpers.Warn( "World not in play" );
+				return false;
+			}
+			if( Timers.GetTimerTickDuration( InventoryBook.PageScrollTimerName ) > 0 ) {
+				return false;
+			}
+
+			string err;
+
+			if( !this.CanScrollPages( out err ) ) {
+				Main.NewText( err, Color.Red );
+				return false;
+			}
+
+			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
+			this.PushPageToInventory( player, pageNum );
+
+			this.CurrentPageIdx = pageNum;
+
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
+				return false;
+			} );
+
+			return true;
+		}
+
+
 		public bool ScrollPageUp( Player player ) {
 			if( !LoadHelpers.IsWorldSafelyBeingPlayed() ) {
 				LogHelpers.Warn( "World not in play" );
