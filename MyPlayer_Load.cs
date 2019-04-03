@@ -13,6 +13,8 @@ namespace ExtensibleInventory {
 				mymod.ConfigJson.SaveFile();
 				LogHelpers.Log( "Extensible Inventory config " + mymod.Version.ToString() + " created." );
 			}
+
+			mymod.Config.ReadyingForLocalPlayerUse();
 		}
 
 		private void OnConnectClient() {

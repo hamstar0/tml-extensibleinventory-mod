@@ -25,6 +25,7 @@ namespace ExtensibleInventory {
 				if( !mymod.ConfigJson.LoadFile() ) {
 					mymod.ConfigJson.SaveFile();
 				}
+				mymod.Config.ReadyingForLocalPlayerUse();
 			}
 
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
@@ -42,6 +43,7 @@ namespace ExtensibleInventory {
 
 			mymod.ConfigJson.SetData( newConfig );
 			mymod.ConfigJson.SaveFile();
+			mymod.Config.ReadyingForLocalPlayerUse();
 
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			myplayer.Library.CurrentBook.IsEnabled = newConfig.DefaultBookEnabled;

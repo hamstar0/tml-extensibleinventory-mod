@@ -1,5 +1,5 @@
 using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers;
+using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
 using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;

@@ -1,5 +1,10 @@
 ﻿using HamstarHelpers.Components.Config;
+using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
+using HamstarHelpers.Services.ModCompatibilities.ExtensibleInventoryCompat;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Terraria.ModLoader;
 
 
 namespace ExtensibleInventory {
@@ -54,7 +59,24 @@ namespace ExtensibleInventory {
 
 		private void SetDefaults() { }
 
-		////
+		////////////////
+
+		public void ReadyingForLocalPlayerUse() {
+			ExtensibleInventoryCompatibilities.ApplyCompats();
+
+			IDictionary<string, ISet<Mod>> modsByAuthor = ModListHelpers.GetModsByAuthor();
+			modsByAuthor.Remove( "hamstar" );
+			ISet<Mod> mods = new HashSet<Mod>( modsByAuthor.Values.SelectMany( m=>m ) );
+
+			foreach( Mod mod in mods ) {
+				try {
+					mod.Call( "ExtensibleInventoryReadyingSettingsForLocalPlayerUse", this );
+				} catch { }
+			}
+		}
+
+
+		////////////////
 
 		public bool CanUpdateVersion() {
 			if( this.VersionSinceUpdate == "" ) { return true; }
