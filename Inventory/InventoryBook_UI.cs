@@ -1,6 +1,7 @@
 using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
 using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Services.RecipeHack;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -34,6 +35,7 @@ namespace ExtensibleInventory.Inventory {
 			this.PushPageToInventory( player, pageNum );
 
 			this.CurrentPageIdx = pageNum;
+			RecipeHack.ForceRecipeRefresh();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
@@ -65,6 +67,7 @@ namespace ExtensibleInventory.Inventory {
 			
 			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
 			this.PushPageToInventory( player, --this.CurrentPageIdx );
+			RecipeHack.ForceRecipeRefresh();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
@@ -95,6 +98,7 @@ namespace ExtensibleInventory.Inventory {
 
 			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
 			this.PushPageToInventory( player, ++this.CurrentPageIdx );
+			RecipeHack.ForceRecipeRefresh();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
