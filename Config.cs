@@ -21,6 +21,7 @@ namespace ExtensibleInventory {
 		public bool DebugModeReset = false;
 
 		public bool DefaultBookEnabled = true;
+		public bool EnableSharedInventoryRecipesViaRecipeHack = false;
 
 		//public bool HideBookUI = false;
 		//public bool HidePageUI = false;

@@ -46,12 +46,14 @@ namespace ExtensibleInventory {
 		}
 
 		public override void PostAddRecipes() {
-			RecipeHack.RegisterIngredientSource( "ExtensibleInventoryShared", ( plr ) => {
-				if( plr.whoAmI != Main.myPlayer ) { return new Item[0]; }
+			if( this.Config.EnableSharedInventoryRecipesViaRecipeHack ) {
+				RecipeHack.RegisterIngredientSource( "ExtensibleInventoryShared", ( plr ) => {
+					if( plr.whoAmI != Main.myPlayer ) { return new Item[0]; }
 
-				var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
-				return myplayer.Library.CurrentBook.GetSharedItems( plr, false );
-			} );
+					var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
+					return myplayer.Library.CurrentBook.GetSharedItems( plr, false );
+				} );
+			}
 		}
 		
 		////
