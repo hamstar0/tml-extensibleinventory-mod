@@ -65,7 +65,7 @@ namespace ExtensibleInventory {
 		public void ReadyingForLocalPlayerUse() {
 			ExtensibleInventoryCompatibilities.ApplyCompats();
 
-			IDictionary<string, ISet<Mod>> modsByAuthor = ModListHelpers.GetModsByAuthor();
+			/*IDictionary<string, ISet<Mod>> modsByAuthor = ModListHelpers.GetModsByAuthor();
 			modsByAuthor.Remove( "hamstar" );
 			ISet<Mod> mods = new HashSet<Mod>( modsByAuthor.Values.SelectMany( m=>m ) );
 
@@ -73,7 +73,7 @@ namespace ExtensibleInventory {
 				try {
 					mod.Call( "ExtensibleInventoryReadyingSettingsForLocalPlayerUse", this );
 				} catch { }
-			}
+			}*/	// TODO: Implement events as method of hooking. Not Mod.Call()
 		}
 
 
