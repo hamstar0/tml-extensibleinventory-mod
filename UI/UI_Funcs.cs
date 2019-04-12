@@ -12,8 +12,6 @@ namespace ExtensibleInventory.UI {
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
 			if( myplayer.Library.CurrentBook.ScrollPageUp( Main.LocalPlayer ) ) {
-				bool isSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
-				this.TogglePageSharing.SetOn( isSharing, false );
 			}
 		}
 
@@ -22,8 +20,6 @@ namespace ExtensibleInventory.UI {
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
 			if( myplayer.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer ) ) {
-				bool isSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
-				this.TogglePageSharing.SetOn( isSharing, false );
 			}
 		}
 

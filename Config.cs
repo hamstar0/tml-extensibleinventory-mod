@@ -1,10 +1,6 @@
 ﻿using HamstarHelpers.Components.Config;
-using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
 using HamstarHelpers.Services.ModCompatibilities.ExtensibleInventoryCompat;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Terraria.ModLoader;
 
 
 namespace ExtensibleInventory {
@@ -41,7 +37,6 @@ namespace ExtensibleInventory {
 		public bool CanScrollPages = true;
 		public bool CanAddPages = true;
 		public bool CanDeletePages = true;
-		public bool CanTogglePageSharing = true;
 
 		public int MaxPages = 99;
 

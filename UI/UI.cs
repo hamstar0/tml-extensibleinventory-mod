@@ -29,7 +29,6 @@ namespace ExtensibleInventory.UI {
 		private UIInventoryControlButton ButtonPageRight;
 		private UIInventoryControlButton ButtonPageAdd;
 		private UIInventoryControlButton ButtonPageSub;
-		private UIInventoryControlToggle TogglePageSharing;
 
 		private bool IsChest = true;
 
@@ -77,9 +76,6 @@ namespace ExtensibleInventory.UI {
 			if( this.ButtonPageSub.IsMouseHovering && mymod.Config.CanDeletePages ) {
 				return true;
 			}
-			if( this.TogglePageSharing.IsMouseHovering && mymod.Config.CanTogglePageSharing ) {
-				return true;
-			}
 			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var button in this.ButtonBooks.Values ) {
 					if( button.IsMouseHovering ) {
@@ -96,14 +92,6 @@ namespace ExtensibleInventory.UI {
 		public override void Update( GameTime gameTime ) {
 			if( this.ButtonBooks == null && Main.LocalPlayer != null && Main.LocalPlayer.active ) {
 				this.InitializeLibraryBooks();
-			}
-
-			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
-			bool isCurrPageSharing = myplayer.Library.CurrentBook.IsCurrentPageSharing();
-
-			// Update sharing
-			if( this.TogglePageSharing.IsOn != isCurrPageSharing ) {
-				this.TogglePageSharing.SetOn( isCurrPageSharing, false );
 			}
 
 			this.UpdateLayout();

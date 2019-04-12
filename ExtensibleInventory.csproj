@@ -102,8 +102,6 @@
     <Content Include="UI\ButtonSub.png" />
     <Content Include="description.txt" />
     <Content Include="UI\IconScroll.png" />
-    <Content Include="UI\ToggleOffSharing.png" />
-    <Content Include="UI\ToggleOnSharing.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LICENSE" />

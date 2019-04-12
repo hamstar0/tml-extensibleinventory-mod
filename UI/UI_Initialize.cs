@@ -35,14 +35,6 @@ namespace ExtensibleInventory.UI {
 				this.DelPage();
 			};
 
-			this.TogglePageSharing = new UIInventoryControlToggle( this.TogglePageSharingOnTex, this.TogglePageSharingOffTex );
-			this.TogglePageSharing.OnToggleOn += ( evt, elem ) => {
-				this.TogglePageSharingOn();
-			};
-			this.TogglePageSharing.OnToggleOff += ( evt, elem ) => {
-				this.TogglePageSharingOff();
-			};
-
 			this.SetElementPositions( false );
 			this.SetPageTabsPosition( false );
 
@@ -51,7 +43,6 @@ namespace ExtensibleInventory.UI {
 			base.Append( this.ButtonPageRight );
 			base.Append( this.ButtonPageAdd );
 			base.Append( this.ButtonPageSub );
-			base.Append( this.TogglePageSharing );
 		}
 
 

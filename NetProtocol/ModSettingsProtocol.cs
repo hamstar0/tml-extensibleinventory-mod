@@ -8,6 +8,7 @@ namespace ExtensibleInventory.NetProtocol {
 		public ExtensibleInventoryConfigData Settings;
 
 
+
 		////////////////
 
 		private ModSettingsProtocol() { }

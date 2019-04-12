@@ -36,7 +36,7 @@ namespace ExtensibleInventory.Inventory {
 		////////////////
 
 		public Item[] Items;
-		public bool IsSharing = false;
+		public bool IsSharing = true;
 
 
 

@@ -148,10 +148,6 @@ namespace ExtensibleInventory.UI {
 				string text = "Remove current inventory page";
 				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
 			}
-			if( this.TogglePageSharing.IsMouseHovering && mymod.Config.CanTogglePageSharing ) {
-				string text = "Item sharing for this page: " + ( this.TogglePageSharing.IsOn ? "On" : "Off" );
-				sb.DrawString( Main.fontMouseText, text, pos, Color.White );
-			}
 
 			if( this.ButtonBooks != null && mymod.Config.CanSwitchBooks ) {
 				foreach( var kv in this.ButtonBooks ) {

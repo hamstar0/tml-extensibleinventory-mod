@@ -24,7 +24,7 @@ namespace ExtensibleInventory.Inventory {
 
 			this.Pages.Clear();
 
-			bool foundSharing = false;
+			//bool foundSharing = false;
 			int pages = tags.GetInt( prefix + "page_count" );
 			int currPage = tags.GetInt( prefix + "curr_page" );
 
@@ -33,11 +33,12 @@ namespace ExtensibleInventory.Inventory {
 				this.Pages.Add( page );
 
 				string pageNumKey = prefix + "page_" + i;
-				foundSharing = tags.ContainsKey( pageNumKey + "_s" );
 
-				if( foundSharing ) {
-					page.IsSharing = tags.GetBool( pageNumKey + "_s" );
-				}
+				//foundSharing = tags.ContainsKey( pageNumKey + "_s" );
+				//
+				//if( foundSharing ) {
+				//	page.IsSharing = tags.GetBool( pageNumKey + "_s" );
+				//}
 
 				if( i == currPage ) { continue; }
 
@@ -54,10 +55,10 @@ namespace ExtensibleInventory.Inventory {
 						page.Items[j] = new Item();
 					}
 
-					if( !foundSharing && tags.ContainsKey( pageNumItemNumKey+"_s" ) ) { // Oops!
-						foundSharing = true;
-						page.IsSharing = tags.GetBool( pageNumItemNumKey + "_s" );
-					}
+					//if( !foundSharing && tags.ContainsKey( pageNumItemNumKey+"_s" ) ) { // Oops!
+					//	foundSharing = true;
+					//	page.IsSharing = tags.GetBool( pageNumItemNumKey + "_s" );
+					//}
 				}
 			}
 			

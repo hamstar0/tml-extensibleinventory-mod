@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.TmlHelpers;
+﻿using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.TmlHelpers;
 using System;
 using Terraria;
 using Terraria.GameContent.Achievements;
@@ -38,7 +39,19 @@ namespace ExtensibleInventory {
 				}
 			}
 
-			return item.stack > 0;
+			if( item.stack != oldStack ) {
+				Item worldItem = Main.item[item.whoAmI];
+
+				if( worldItem != null && !worldItem.IsAir && !worldItem.IsNotTheSameAs(item) ) {
+LogHelpers.Log("Sync needed?");
+					if( Main.netMode != 0 ) {
+						NetMessage.SendData( MessageID.SyncItem, -1, -1, null, item.whoAmI, 0f, 0f, 0f, 0, 0, 0 );
+					}
+				}
+			}
+
+			return true;
+			//return item.stack > 0;
 		}
 	}
 }
