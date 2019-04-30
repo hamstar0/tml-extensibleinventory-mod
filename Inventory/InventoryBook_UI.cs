@@ -35,7 +35,8 @@ namespace ExtensibleInventory.Inventory {
 			this.PushPageToInventory( player, pageNum );
 
 			this.CurrentPageIdx = pageNum;
-			RecipeHack.ForceRecipeRefresh();
+			//RecipeHack.ForceRecipeRefresh();
+			Recipe.FindRecipes();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;
@@ -67,9 +68,11 @@ namespace ExtensibleInventory.Inventory {
 			
 			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
 			this.PushPageToInventory( player, --this.CurrentPageIdx );
-			RecipeHack.ForceRecipeRefresh();
+			//RecipeHack.ForceRecipeRefresh();
+			Recipe.FindRecipes();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
+				RecipeHack.ForceRecipeRefresh();
 				return false;
 			} );
 
@@ -98,7 +101,8 @@ namespace ExtensibleInventory.Inventory {
 
 			this.PullFromInventoryToPage( player, this.CurrentPageIdx );
 			this.PushPageToInventory( player, ++this.CurrentPageIdx );
-			RecipeHack.ForceRecipeRefresh();
+			//RecipeHack.ForceRecipeRefresh();
+			Recipe.FindRecipes();
 
 			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
 				return false;

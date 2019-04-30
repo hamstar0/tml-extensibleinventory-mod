@@ -33,7 +33,7 @@ namespace ExtensibleInventory {
 		}
 
 		public override void Load() {
-			string depErr = TmlHelpers.ReportBadDependencyMods( this );
+			string depErr = ModIdentityHelpers.FormatBadDependencyModList( this );
 			if( depErr != null ) { throw new HamstarException( depErr ); }
 
 			ExtensibleInventoryMod.Instance = this;

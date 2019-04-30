@@ -1,6 +1,5 @@
 ﻿using ExtensibleInventory.UI.Elements;
 using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.TmlHelpers;
 using HamstarHelpers.Services.Promises;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,8 +19,6 @@ namespace ExtensibleInventory.UI {
 		internal Texture2D ButtonPageLeftTex;
 		internal Texture2D ButtonPageAddTex;
 		internal Texture2D ButtonPageSubTex;
-		internal Texture2D TogglePageSharingOnTex;
-		internal Texture2D TogglePageSharingOffTex;
 
 		private IDictionary<string, UIInventoryControlButton> ButtonBooks = null;
 		private UIText PageDisplay;
@@ -46,8 +43,6 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageLeftTex = mymod.GetTexture( "UI/ButtonLeft" );
 			this.ButtonPageAddTex = mymod.GetTexture( "UI/ButtonAdd" );
 			this.ButtonPageSubTex = mymod.GetTexture( "UI/ButtonSub" );
-			this.TogglePageSharingOnTex = mymod.GetTexture( "UI/ToggleOnSharing" );
-			this.TogglePageSharingOffTex = mymod.GetTexture( "UI/ToggleOffSharing" );
 
 			Promises.AddWorldUnloadEachPromise( () => {
 				this.ButtonBooks = null;

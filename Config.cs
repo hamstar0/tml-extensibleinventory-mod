@@ -41,6 +41,7 @@ namespace ExtensibleInventory {
 		public int MaxPages = 99;
 
 		public bool ScrollModeEnabled = true;
+		public bool HideScrollModeIcon = false;
 
 
 

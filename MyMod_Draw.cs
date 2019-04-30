@@ -50,12 +50,14 @@ namespace ExtensibleInventory {
 					mymod.InvUIMngr?.Update( Main._drawInterfaceGameTime );
 					mymod.InvUI?.Draw( Main.spriteBatch );
 
-					var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
-					if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
-						var pos = new Vector2( Main.mouseX - 24, Main.mouseY );
-						float colorScale = 0.35f * ((float)myplayer.ScrollModeDuration / (float)ExtensibleInventoryPlayer.ScrollModeMaxDuration);
+					if( !this.Config.HideScrollModeIcon ) {
+						var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
+						if( myplayer.ScrollModeOn & this.ScrollIcon != null ) {
+							var pos = new Vector2( Main.mouseX - 24, Main.mouseY );
+							float colorScale = 0.35f * ( (float)myplayer.ScrollModeDuration / (float)ExtensibleInventoryPlayer.ScrollModeMaxDuration );
 
-						Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * colorScale );
+							Main.spriteBatch.Draw( this.ScrollIcon, pos, Color.White * colorScale );
+						}
 					}
 				} catch( Exception e ) {
 					throw new HamstarException( "", e );
