@@ -1,5 +1,6 @@
 using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.DebugHelpers;
+using System;
 using Terraria;
 using Terraria.ModLoader.IO;
 
@@ -48,8 +49,8 @@ namespace ExtensibleInventory.Inventory {
 					if( tags.ContainsKey( pageNumItemNumKey ) ) {
 						try {
 							page.Items[j] = ItemIO.Load( tags.GetCompound( pageNumItemNumKey ) );
-						} catch {
-							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j );
+						} catch( Exception e ) {
+							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j, e );
 						}
 					} else {
 						page.Items[j] = new Item();
@@ -87,7 +88,7 @@ namespace ExtensibleInventory.Inventory {
 					string pageNumItemNumKey = pageNumKey + "_" + j;
 
 					try {
-						tags[pageNumItemNumKey] = ItemIO.Save( this.Pages[i].Items[j] );
+						tags[ pageNumItemNumKey ] = ItemIO.Save( this.Pages[i].Items[j] );
 					} catch {
 						LogHelpers.Warn( "Could not save item for book "+lowercaseBookName+" on page "+i+" at position "+j );
 						continue;

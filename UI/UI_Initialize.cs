@@ -17,21 +17,33 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
 			this.ButtonPageLeft.OnClick += ( evt, elem ) => {
+				if( mymod.Config.DegugModeUI ) {
+					Main.NewText( "clicked ButtonPageLeft" );
+				}
 				this.ScrollPageUp();
 			};
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
 			this.ButtonPageRight.OnClick += ( evt, elem ) => {
+				if( mymod.Config.DegugModeUI ) {
+					Main.NewText( "clicked ButtonPageRight" );
+				}
 				this.ScrollPageDown();
 			};
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += ( evt, elem ) => {
+				if( mymod.Config.DegugModeUI ) {
+					Main.NewText( "clicked ButtonPageAdd" );
+				}
 				this.AddPage();
 			};
 
 			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += ( evt, elem ) => {
+				if( mymod.Config.DegugModeUI ) {
+					Main.NewText( "clicked ButtonPageSub" );
+				}
 				this.DelPage();
 			};
 
@@ -71,6 +83,10 @@ namespace ExtensibleInventory.UI {
 				
 				var button = new UIInventoryControlButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
+					if( mymod.Config.DegugModeUI ) {
+						Main.NewText( "clicked book switch button" );
+					}
+
 					string err;
 					var myplayer2 = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 

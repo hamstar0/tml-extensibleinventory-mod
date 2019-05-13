@@ -38,9 +38,15 @@ namespace ExtensibleInventory {
 			
 			GameInterfaceDrawMethod controlUi = delegate {
 				if( !Main.playerInventory || Main.myPlayer < 0 || Main.LocalPlayer == null || !Main.LocalPlayer.active ) {
-					if( Main.playerInventory ) {
-						LogHelpers.LogOnce( ""+(Main.myPlayer<0)+","+(Main.LocalPlayer == null)+","+(!Main.LocalPlayer.active) );
+					if( Main.LocalPlayer != null && !Main.LocalPlayer.active ) {
+						TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
+						if( !Main.LocalPlayer.active ) {
+							return true;
+						}
 					}
+					//if( Main.playerInventory ) {
+					//	LogHelpers.LogOnce( ""+(Main.myPlayer<0)+","+(Main.LocalPlayer == null)+","+(!Main.LocalPlayer.active) );
+					//}
 					return true;
 				}
 

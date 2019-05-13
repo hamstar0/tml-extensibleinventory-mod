@@ -14,6 +14,7 @@ namespace ExtensibleInventory {
 		public string VersionSinceUpdate = "";
 
 		public bool DebugModeInfo = false;
+		public bool DegugModeUI = false;
 		public bool DebugModeReset = false;
 
 		public bool DefaultBookEnabled = true;
