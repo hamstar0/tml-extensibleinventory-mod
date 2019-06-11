@@ -136,9 +136,9 @@ namespace ExtensibleInventory {
 		////////////////
 
 		public override void SetControls() {
-			if( !this.ScrollModeOn ) { return; }
-
 			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.ScrollModeEnabled || !this.ScrollModeOn ) { return; }
 
 			int scrolled = PlayerInput.ScrollWheelDelta;
 			PlayerInput.ScrollWheelDelta = 0;
