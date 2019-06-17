@@ -47,8 +47,8 @@ namespace ExtensibleInventory.UI {
 				this.DelPage();
 			};
 
-			this.SetElementPositions( false );
-			this.SetPageTabsPosition( false );
+			this.UpdateElementPositions( false );
+			this.UpdatePageTabsPosition( false );
 
 			base.Append( this.PageDisplay );
 			base.Append( this.ButtonPageLeft );

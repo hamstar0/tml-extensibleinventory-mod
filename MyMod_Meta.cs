@@ -30,6 +30,12 @@ namespace ExtensibleInventory {
 
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 			myplayer.Library.CurrentBook.IsEnabled = mymod.Config.DefaultBookEnabled;
+
+			////
+
+			bool isChest = Main.LocalPlayer.chest != -1 || Main.npcShop > 0;
+			mymod.InvUI.UpdateElementPositions( isChest );
+			mymod.InvUI.UpdatePageTabsPosition( isChest );
 		}
 
 		public static void ResetConfigFromDefaults() {

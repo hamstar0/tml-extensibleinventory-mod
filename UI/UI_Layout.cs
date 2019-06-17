@@ -1,4 +1,5 @@
 ﻿using ExtensibleInventory.UI.Elements;
+using HamstarHelpers.Helpers.DebugHelpers;
 using HamstarHelpers.Helpers.TmlHelpers;
 using Terraria;
 using Terraria.UI;
@@ -16,12 +17,12 @@ namespace ExtensibleInventory.UI {
 
 			if( this.IsChest != isChest ) {
 				this.IsChest = isChest;
-
-				this.SetElementPositions( isChest );
+				
+				this.UpdateElementPositions( isChest );
 			}
 
 			if( Main.LocalPlayer != null /*&& Main.LocalPlayer.active*/ ) {
-				this.SetPageTabsPosition( isChest );
+				this.UpdatePageTabsPosition( isChest );
 			}
 
 			this.ButtonPageAdd.IsHidden = !mymod.Config.CanAddPages;
@@ -37,8 +38,8 @@ namespace ExtensibleInventory.UI {
 			this.Recalculate();
 		}
 
-
-		private void SetPageTabsPosition( bool isChest ) {
+		
+		public void UpdatePageTabsPosition( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 			ExtensibleInventoryPlayer myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
@@ -61,7 +62,7 @@ namespace ExtensibleInventory.UI {
 		}
 
 
-		private void SetElementPositions( bool isChest ) {
+		public void UpdateElementPositions( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 
 			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
