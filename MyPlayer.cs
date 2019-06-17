@@ -75,6 +75,15 @@ namespace ExtensibleInventory {
 			if( player.whoAmI != Main.myPlayer ) { return; }
 			if( this.player.whoAmI != Main.myPlayer ) { return; }
 
+			var mymod = (ExtensibleInventoryMod)this.mod;
+
+			if( !mymod.Config.EnableSharedInventoryRecipesViaRecipeHack ) {
+				InboxMessages.SetMessage( "ExtensibleInventoryRecipeHackAlert",
+					"As of v1.4.1.3, Extensible Inventory disables recipes between shared pages, due to compatibility issues. If you want to risk using it, simply enable the EnableSharedInventoryRecipesViaRecipeHack setting.",
+					false
+				);
+			}
+
 			if( Main.netMode == 0 ) {
 				this.OnConnectSingle();
 			} else if( Main.netMode == 1 ) {

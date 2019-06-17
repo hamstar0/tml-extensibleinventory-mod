@@ -101,6 +101,9 @@ namespace ExtensibleInventory {
 					this.PagePositionY = newConfig.PagePositionY;
 				}
 			}
+			if( versSince < new Version( 1, 4, 1, 3) ) {
+				this.EnableSharedInventoryRecipesViaRecipeHack = false;	// safety measure; not ready for use yet
+			}
 
 			this.VersionSinceUpdate = mymod.Version.ToString();
 		}
