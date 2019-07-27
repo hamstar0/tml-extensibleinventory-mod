@@ -1,5 +1,4 @@
-﻿using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.TmlHelpers;
+﻿using HamstarHelpers.Helpers.TModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.UI;

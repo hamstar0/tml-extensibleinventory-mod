@@ -1,6 +1,5 @@
 ﻿using ExtensibleInventory.UI.Elements;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Services.Promises;
+using HamstarHelpers.Services.Hooks.LoadHooks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
@@ -36,15 +35,15 @@ namespace ExtensibleInventory.UI {
 		public InventoryUI() : base() {
 			var mymod = ExtensibleInventoryMod.Instance;
 
-			this.ButtonBookTex = ModLoader.GetTexture( "Terraria/Item_531" );   // Spell Tome
-			this.ButtonBookDimTex = ModLoader.GetTexture( "Terraria/Item_1313" );   // Book of Skulls
-			this.ButtonBookLitTex = ModLoader.GetTexture( "Terraria/Item_1336" );   // Golden Shower
+			this.ButtonBookTex = ModContent.GetTexture( "Terraria/Item_531" );   // Spell Tome
+			this.ButtonBookDimTex = ModContent.GetTexture( "Terraria/Item_1313" );   // Book of Skulls
+			this.ButtonBookLitTex = ModContent.GetTexture( "Terraria/Item_1336" );   // Golden Shower
 			this.ButtonPageRightTex = mymod.GetTexture( "UI/ButtonRight" );
 			this.ButtonPageLeftTex = mymod.GetTexture( "UI/ButtonLeft" );
 			this.ButtonPageAddTex = mymod.GetTexture( "UI/ButtonAdd" );
 			this.ButtonPageSubTex = mymod.GetTexture( "UI/ButtonSub" );
 
-			Promises.AddWorldUnloadEachPromise( () => {
+			LoadHooks.AddWorldUnloadEachHook( () => {
 				this.ButtonBooks = null;
 			} );
 		}

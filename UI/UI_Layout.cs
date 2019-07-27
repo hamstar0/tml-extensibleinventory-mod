@@ -1,6 +1,5 @@
 ﻿using ExtensibleInventory.UI.Elements;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Helpers.TModLoader;
 using Terraria;
 using Terraria.UI;
 

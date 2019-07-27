@@ -1,61 +1,91 @@
-﻿using HamstarHelpers.Components.Config;
-using HamstarHelpers.Services.ModCompatibilities.ExtensibleInventoryCompat;
+﻿using HamstarHelpers.Services.ModCompatibilities.ExtensibleInventoryCompat;
 using System;
+using System.ComponentModel;
+using Terraria.ModLoader.Config;
 
 
 namespace ExtensibleInventory {
-	public class ExtensibleInventoryConfigData : ConfigurationDataBase {
-		public static string ConfigFileName => "Extensible Inventory Config.json";
+	public class ExtensibleInventoryConfigData : ModConfig {
+		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
-
-		////////////////
-
-		public string VersionSinceUpdate = "";
+		////
 
 		public bool DebugModeInfo = false;
+
 		public bool DegugModeUI = false;
+
 		public bool DebugModeReset = false;
 
+
+		[DefaultValue( true )]
 		public bool DefaultBookEnabled = true;
+
 		public bool EnableSharedInventoryRecipesViaRecipeHack = false;
 
+
 		//public bool HideBookUI = false;
+
 		//public bool HidePageUI = false;
+
 		public bool HidePageTicksUI = false;
-		
+
+
+		[Range( -4096, 4096 )]
+		[DefaultValue( 64f )]
 		public float BookPositionX = 64f;
+
+		[Range( -2160, 2160 )]
+		[DefaultValue( 260f )]
 		public float BookPositionY = 260f;
+
+		[Range( -4096, 4096 )]
+		[DefaultValue( 192f )]
 		public float PagePositionX = 192f;
+
+		[Range( -2160, 2160 )]
+		[DefaultValue( 260f )]
 		public float PagePositionY = 260f;
+
+		[Range( -4096, 4096 )]
+		[DefaultValue( 32f )]
 		public float PageTicksPositionX = 32f;
+
+		[Range( -2160, 2160 )]
+		[DefaultValue( 254f )]
 		public float PageTicksPositionY = 254f;
 
+
+		[DefaultValue( 0f )]
 		public float ChestOnOffsetX = 0f;
+
+		[DefaultValue( 168f )]
 		public float ChestOnOffsetY = 168f;
-		
+
+
+		[DefaultValue( true )]
 		public bool CanSwitchBooks = true;
+
+		[DefaultValue( true )]
 		public bool CanScrollPages = true;
+
+		[DefaultValue( true )]
 		public bool CanAddPages = true;
+
+		[DefaultValue( true )]
 		public bool CanDeletePages = true;
 
+
+		[DefaultValue( 99 )]
 		public int MaxPages = 99;
 
+
+		[DefaultValue( true )]
 		public bool ScrollModeEnabled = true;
+
 		public bool HideScrollModeIcon = false;
 
 
-
-		////////////////
-
-		private static float _1_1_BookPositionY = 256f;
-		private static float _1_1_PagePositionY = 256f;
-
-
-
-		////////////////
-
-		private void SetDefaults() { }
 
 		////////////////
 
@@ -71,41 +101,6 @@ namespace ExtensibleInventory {
 					mod.Call( "ExtensibleInventoryReadyingSettingsForLocalPlayerUse", this );
 				} catch { }
 			}*/	// TODO: Implement events as method of hooking. Not Mod.Call()
-		}
-
-
-		////////////////
-
-		public bool CanUpdateVersion() {
-			if( this.VersionSinceUpdate == "" ) { return true; }
-			var versSince = new Version( this.VersionSinceUpdate );
-			return versSince < ExtensibleInventoryMod.Instance.Version;
-		}
-
-		public void UpdateToLatestVersion() {
-			var mymod = ExtensibleInventoryMod.Instance;
-			var newConfig = new ExtensibleInventoryConfigData();
-			var versSince = this.VersionSinceUpdate != "" ?
-				new Version( this.VersionSinceUpdate ) :
-				new Version();
-
-			if( this.VersionSinceUpdate == "" ) {
-				this.SetDefaults();
-			}
-
-			if( versSince < new Version( 1, 2, 0 ) ) {
-				if( this.BookPositionY == ExtensibleInventoryConfigData._1_1_BookPositionY ) {
-					this.BookPositionY = newConfig.BookPositionY;
-				}
-				if( this.PagePositionY == ExtensibleInventoryConfigData._1_1_PagePositionY ) {
-					this.PagePositionY = newConfig.PagePositionY;
-				}
-			}
-			if( versSince < new Version( 1, 4, 1, 3) ) {
-				this.EnableSharedInventoryRecipesViaRecipeHack = false;	// safety measure; not ready for use yet
-			}
-
-			this.VersionSinceUpdate = mymod.Version.ToString();
 		}
 	}
 }

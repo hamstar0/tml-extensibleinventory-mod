@@ -1,5 +1,5 @@
 ﻿using ExtensibleInventory.UI.Elements;
-using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Helpers.TModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;

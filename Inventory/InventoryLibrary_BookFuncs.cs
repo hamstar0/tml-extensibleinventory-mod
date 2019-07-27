@@ -1,5 +1,5 @@
 using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
+using HamstarHelpers.Helpers.DotNET.Reflection;
 using Terraria;
 
 

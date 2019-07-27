@@ -1,6 +1,6 @@
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.DotNetHelpers.Reflection;
-using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.DotNET.Reflection;
+using HamstarHelpers.Helpers.TModLoader;
 using HamstarHelpers.Services.RecipeHack;
 using HamstarHelpers.Services.Timers;
 using Microsoft.Xna.Framework;

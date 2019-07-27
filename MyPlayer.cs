@@ -1,5 +1,5 @@
 using ExtensibleInventory.Inventory;
-using HamstarHelpers.Helpers.DebugHelpers;
+using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Messages;
 using System;
 using Terraria;

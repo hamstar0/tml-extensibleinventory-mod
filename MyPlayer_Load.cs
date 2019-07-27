@@ -1,6 +1,3 @@
-using ExtensibleInventory.NetProtocol;
-using HamstarHelpers.Components.Network;
-using HamstarHelpers.Helpers.DebugHelpers;
 using Terraria.ModLoader;
 
 
@@ -9,18 +6,13 @@ namespace ExtensibleInventory {
 		private void OnConnectSingle() {
 			var mymod = (ExtensibleInventoryMod)this.mod;
 
-			if( !mymod.ConfigJson.LoadFile() ) {
-				mymod.ConfigJson.SaveFile();
-				LogHelpers.Log( "Extensible Inventory config " + mymod.Version.ToString() + " created." );
-			}
-
 			mymod.Config.ReadyingForLocalPlayerUse();
 		}
 
 		private void OnConnectClient() {
-			PacketProtocolRequestToServer.QuickRequest<ModSettingsProtocol>( -1 );
 		}
 
-		private void OnConnectServer() { }
+		private void OnConnectServer() {
+		}
 	}
 }

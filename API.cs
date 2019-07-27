@@ -1,26 +1,11 @@
 ﻿using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Helpers.TmlHelpers;
+using HamstarHelpers.Helpers.TModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
 
 
 namespace ExtensibleInventory {
 	public static partial class ExtensibleInventoryAPI {
-		public static ExtensibleInventoryConfigData GetModSettings() {
-			return ExtensibleInventoryMod.Instance.Config;
-		}
-
-		public static void SaveModSettingsChanges() {
-			if( Main.netMode != 0 ) {
-				throw new HamstarException( "Mod settings may only be saved in single player." );
-			}
-
-			ExtensibleInventoryMod.Instance.ConfigJson.SaveFile();
-		}
-
-
-		////////////////
-
 		public static void AddBook( string bookName, bool userCanAddPages ) {
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 

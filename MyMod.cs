@@ -1,8 +1,6 @@
-using HamstarHelpers.Components.Config;
 using HamstarHelpers.Components.Errors;
-using HamstarHelpers.Helpers.DebugHelpers;
-using HamstarHelpers.Helpers.TmlHelpers;
-using HamstarHelpers.Helpers.TmlHelpers.ModHelpers;
+using HamstarHelpers.Helpers.TModLoader;
+using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.RecipeHack;
 using System;
 using Terraria;
@@ -17,29 +15,17 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public JsonConfig<ExtensibleInventoryConfigData> ConfigJson { get; private set; }
-		public ExtensibleInventoryConfigData Config => this.ConfigJson.Data;
+		public ExtensibleInventoryConfigData Config => this.GetConfig<ExtensibleInventoryConfigData>();
 
 
 
 		////////////////
 
 		public ExtensibleInventoryMod() {
-			this.ConfigJson = new JsonConfig<ExtensibleInventoryConfigData>(
-				ExtensibleInventoryConfigData.ConfigFileName,
-				ConfigurationDataBase.RelativePath,
-				new ExtensibleInventoryConfigData()
-			);
+			ExtensibleInventoryMod.Instance = this;
 		}
 
 		public override void Load() {
-			string depErr = ModIdentityHelpers.FormatBadDependencyModList( this );
-			if( depErr != null ) { throw new HamstarException( depErr ); }
-
-			ExtensibleInventoryMod.Instance = this;
-
-			this.LoadConfig();
-
 			if( !Main.dedServ ) {
 				this.InitializeUI();
 			}
@@ -53,21 +39,6 @@ namespace ExtensibleInventory {
 					var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
 					return myplayer.Library.CurrentBook.GetSharedItems( plr, false );
 				} );
-			}
-		}
-		
-		////
-
-		private void LoadConfig() {
-			if( !this.ConfigJson.LoadFile() ) {
-				this.ConfigJson.SaveFile();
-			}
-
-			if( this.Config.CanUpdateVersion() ) {
-				this.Config.UpdateToLatestVersion();
-
-				LogHelpers.Log( "Extensible Inventory updated to " + this.Version.ToString() );
-				this.ConfigJson.SaveFile();
 			}
 		}
 

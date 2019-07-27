@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.GameContent.UI.Elements;
 using Terraria.UI;
 
+
 namespace ExtensibleInventory.UI.Elements {
 	public class UIInventoryControlButton : UIImageButton {
 		public bool IsHidden = false;
