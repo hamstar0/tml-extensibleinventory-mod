@@ -1,5 +1,4 @@
 ﻿using ExtensibleInventory.Inventory;
-using HamstarHelpers.Components.Errors;
 using HamstarHelpers.Helpers.TModLoader;
 using Terraria;
 

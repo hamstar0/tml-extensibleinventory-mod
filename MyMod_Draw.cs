@@ -1,5 +1,5 @@
 ﻿using ExtensibleInventory.UI;
-using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.TModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -65,7 +65,7 @@ namespace ExtensibleInventory {
 						}
 					}
 				} catch( Exception e ) {
-					throw new HamstarException( "", e );
+					throw new ModHelpersException( "", e );
 				}
 
 				return true;

@@ -1,4 +1,4 @@
-using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.TModLoader;
 using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.RecipeHack;

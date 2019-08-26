@@ -1,4 +1,4 @@
-using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
 using System;
 using Terraria;
@@ -50,7 +50,7 @@ namespace ExtensibleInventory.Inventory {
 						try {
 							page.Items[j] = ItemIO.Load( tags.GetCompound( pageNumItemNumKey ) );
 						} catch( Exception e ) {
-							throw new HamstarException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j, e );
+							throw new ModHelpersException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j, e );
 						}
 					} else {
 						page.Items[j] = new Item();

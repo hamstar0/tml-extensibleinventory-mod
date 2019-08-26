@@ -1,4 +1,4 @@
-using HamstarHelpers.Components.Errors;
+using HamstarHelpers.Classes.Errors;
 using System.Collections.Generic;
 using System.Linq;
 using Terraria;
@@ -30,7 +30,7 @@ namespace ExtensibleInventory.Inventory {
 
 		public bool IsBookEnabled( string bookName ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
+				throw new ModHelpersException( "No such book by name " + bookName );
 			}
 
 			InventoryBook book = this.Books[ bookName ];
@@ -43,7 +43,7 @@ namespace ExtensibleInventory.Inventory {
 
 		public int CountBookPages( string bookName ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
+				throw new ModHelpersException( "No such book by name " + bookName );
 			}
 
 			return this.Books.Count;
@@ -53,7 +53,7 @@ namespace ExtensibleInventory.Inventory {
 		
 		public Item[] GetLatestBookPageItems( Player player, string bookName ) {
 			if( this.Books.ContainsKey( bookName ) ) {
-				throw new HamstarException( "No such book by name " + bookName );
+				throw new ModHelpersException( "No such book by name " + bookName );
 			}
 
 			InventoryBook book = this.Books[bookName];

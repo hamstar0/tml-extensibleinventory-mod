@@ -1,6 +1,6 @@
 using ExtensibleInventory.Inventory;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.Messages;
+using HamstarHelpers.Services.Messages.Inbox;
 using System;
 using Terraria;
 using Terraria.GameInput;
