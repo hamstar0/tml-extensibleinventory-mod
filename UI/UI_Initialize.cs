@@ -17,7 +17,7 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageLeft = new UIInventoryControlButton( this.ButtonPageLeftTex );
 			this.ButtonPageLeft.OnClick += ( evt, elem ) => {
-				if( mymod.Config.DegugModeUI ) {
+				if( mymod.Config.DebugModeUI ) {
 					Main.NewText( "clicked ButtonPageLeft" );
 				}
 				this.ScrollPageUp();
@@ -25,7 +25,7 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageRight = new UIInventoryControlButton( this.ButtonPageRightTex );
 			this.ButtonPageRight.OnClick += ( evt, elem ) => {
-				if( mymod.Config.DegugModeUI ) {
+				if( mymod.Config.DebugModeUI ) {
 					Main.NewText( "clicked ButtonPageRight" );
 				}
 				this.ScrollPageDown();
@@ -33,7 +33,7 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageAdd = new UIInventoryControlButton( this.ButtonPageAddTex );
 			this.ButtonPageAdd.OnClick += ( evt, elem ) => {
-				if( mymod.Config.DegugModeUI ) {
+				if( mymod.Config.DebugModeUI ) {
 					Main.NewText( "clicked ButtonPageAdd" );
 				}
 				this.AddPage();
@@ -41,7 +41,7 @@ namespace ExtensibleInventory.UI {
 
 			this.ButtonPageSub = new UIInventoryControlButton( this.ButtonPageSubTex );
 			this.ButtonPageSub.OnClick += ( evt, elem ) => {
-				if( mymod.Config.DegugModeUI ) {
+				if( mymod.Config.DebugModeUI ) {
 					Main.NewText( "clicked ButtonPageSub" );
 				}
 				this.DelPage();
@@ -83,7 +83,7 @@ namespace ExtensibleInventory.UI {
 				
 				var button = new UIInventoryControlButton( tex );
 				button.OnClick += delegate ( UIMouseEvent evt, UIElement listeningElem ) {
-					if( mymod.Config.DegugModeUI ) {
+					if( mymod.Config.DebugModeUI ) {
 						Main.NewText( "clicked book switch button" );
 					}
 
