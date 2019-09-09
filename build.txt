@@ -1,6 +1,6 @@
 author = hamstar
-version = 1.5.0.1
+version = 1.5.0.2
 displayName = Extensible Inventory
-modReferences = HamstarHelpers@5.0.0
+modReferences = HamstarHelpers@5.0.1
 buildIgnore = *.csproj, *.user, *.bat, obj\*, bin\*, .vs\*, .git\*
 homepage = https://forums.terraria.org/index.php?threads/extensible-inventory-limitless-paginated-inventory.72024/

@@ -26,7 +26,7 @@ namespace ExtensibleInventory.UI {
 		private UIInventoryControlButton ButtonPageAdd;
 		private UIInventoryControlButton ButtonPageSub;
 
-		private bool IsChest = true;
+		public bool IsChest { get; private set; } = true;
 
 
 

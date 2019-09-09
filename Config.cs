@@ -165,6 +165,13 @@ namespace ExtensibleInventory {
 
 		////////////////
 
+		public override void OnChanged() {
+			var mymod = ExtensibleInventoryMod.Instance;
+			mymod.InvUI.UpdateElementPositions( mymod.InvUI.IsChest );
+		}
+
+		////////////////
+
 		public void ReadyingForLocalPlayerUse() {
 			ExtensibleInventoryCompatibilities.ApplyCompats();
 
