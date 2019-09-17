@@ -64,7 +64,7 @@ namespace ExtensibleInventory {
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
 		[DefaultValue( 64 )]
-		public int BookPositionX {
+		public int BookPositionXCoord {
 			get => (int)this._BookPositionX;
 			set => this._BookPositionX = (float)value;
 		}
@@ -74,7 +74,7 @@ namespace ExtensibleInventory {
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
 		[DefaultValue( 260 )]
-		public int BookPositionY {
+		public int BookPositionYCoord {
 			get => (int)this._BookPositionY;
 			set => this._BookPositionY = (float)value;
 		}
@@ -84,7 +84,7 @@ namespace ExtensibleInventory {
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
 		[DefaultValue( 192 )]
-		public int PagePositionX {
+		public int PagePositionXCoord {
 			get => (int)this._PagePositionX;
 			set => this._PagePositionX = (float)value;
 		}
@@ -94,7 +94,7 @@ namespace ExtensibleInventory {
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
 		[DefaultValue( 260 )]
-		public int PagePositionY {
+		public int PagePositionYCoord {
 			get => (int)this._PagePositionY;
 			set => this._PagePositionY = (float)value;
 		}
@@ -105,7 +105,7 @@ namespace ExtensibleInventory {
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
 		[DefaultValue( 32 )]
-		public int PageTicksPositionX {
+		public int PageTicksPositionXCoord {
 			get => (int)this._PageTicksPositionX;
 			set => this._PageTicksPositionX = (float)value;
 		}
@@ -115,7 +115,7 @@ namespace ExtensibleInventory {
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
 		[DefaultValue( 254 )]
-		public int PageTicksPositionY {
+		public int PageTicksPositionYCoord {
 			get => (int)this._PageTicksPositionY;
 			set => this._PageTicksPositionY = (float)value;
 		}
@@ -125,7 +125,7 @@ namespace ExtensibleInventory {
 		[Label( "[i:48] Shop or chest UI X screen coordinate offset" )]
 		[Range( -2048, 2048 )]
 		[DefaultValue( 0 )]
-		public int ChestOnOffsetX {
+		public int ChestOnOffsetXCoord {
 			get => (int)this._ChestOnOffsetX;
 			set => this._ChestOnOffsetX = (float)value;
 		}
@@ -134,7 +134,7 @@ namespace ExtensibleInventory {
 		[Label( "[i:48] Shop or chest UI Y screen coordinate offset" )]
 		[Range( -1080, 1080 )]
 		[DefaultValue( 168 )]
-		public int ChestOnOffsetY {
+		public int ChestOnOffsetYCoord {
 			get => (int)this._ChestOnOffsetY;
 			set => this._ChestOnOffsetY = (float)value;
 		}

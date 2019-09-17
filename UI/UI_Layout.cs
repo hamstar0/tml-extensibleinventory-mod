@@ -42,10 +42,10 @@ namespace ExtensibleInventory.UI {
 			var mymod = ExtensibleInventoryMod.Instance;
 			ExtensibleInventoryPlayer myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( Main.LocalPlayer );
 
-			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
-			float offY = isChest ? mymod.Config.ChestOnOffsetY : 0;
-			float x = mymod.Config.PagePositionX + offX;
-			float y = mymod.Config.PagePositionY + offY;
+			float offX = isChest ? mymod.Config.ChestOnOffsetXCoord : 0;
+			float offY = isChest ? mymod.Config.ChestOnOffsetYCoord : 0;
+			float x = mymod.Config.PagePositionXCoord + offX;
+			float y = mymod.Config.PagePositionYCoord + offY;
 			string pageText = this.PageDisplay.Text;
 
 			if( myplayer != null ) {
@@ -64,10 +64,10 @@ namespace ExtensibleInventory.UI {
 		public void UpdateElementPositions( bool isChest ) {
 			var mymod = ExtensibleInventoryMod.Instance;
 
-			float offX = isChest ? mymod.Config.ChestOnOffsetX : 0;
-			float offY = isChest ? mymod.Config.ChestOnOffsetY : 0;
-			float x = mymod.Config.PagePositionX + offX;
-			float y = mymod.Config.PagePositionY + offY;
+			float offX = isChest ? mymod.Config.ChestOnOffsetXCoord : 0;
+			float offY = isChest ? mymod.Config.ChestOnOffsetYCoord : 0;
+			float x = mymod.Config.PagePositionXCoord + offX;
+			float y = mymod.Config.PagePositionYCoord + offY;
 
 			this.ButtonPageLeft.Top.Set( y, 0f );
 			this.ButtonPageLeft.Left.Set( x, 0f );
@@ -79,8 +79,8 @@ namespace ExtensibleInventory.UI {
 			this.ButtonPageSub.Left.Set( x + 160f, 0f );
 
 			if( this.ButtonBooks != null ) {
-				float bookX = mymod.Config.BookPositionX + offX;
-				float bookY = mymod.Config.BookPositionY + offY;
+				float bookX = mymod.Config.BookPositionXCoord + offX;
+				float bookY = mymod.Config.BookPositionYCoord + offY;
 
 				int i = 0;
 				foreach( var button in this.ButtonBooks.Values ) {

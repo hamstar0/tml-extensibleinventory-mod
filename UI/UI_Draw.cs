@@ -51,7 +51,7 @@ namespace ExtensibleInventory.UI {
 			var mymod = ExtensibleInventoryMod.Instance;
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( plr );
 
-			var pos = new Vector2( mymod.Config.PageTicksPositionX, mymod.Config.PageTicksPositionY );
+			var pos = new Vector2( mymod.Config.PageTicksPositionXCoord, mymod.Config.PageTicksPositionYCoord );
 			int pages = myplayer.Library.CurrentBook.CountPages();
 			int maxPages = pages > 29 ? 28 : pages;
 			var rects = new Rectangle[pages];
