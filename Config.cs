@@ -56,6 +56,7 @@ namespace ExtensibleInventory {
 
 		public bool HideScrollModeIcon { get; set; } = false;
 
+
 		////
 
 		[Header("\n ")]
@@ -63,103 +64,89 @@ namespace ExtensibleInventory {
 		[Label( "[i:149] Book position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
-		public int BookPositionXInput {
-			get => (int)this.BookPositionX;
-			set => this.BookPositionX = (float)value;
+		[DefaultValue( 64 )]
+		public int BookPositionX {
+			get => (int)this._BookPositionX;
+			set => this._BookPositionX = (float)value;
 		}
+		private float _BookPositionX { get; set; } = 64;
+
 		[JsonIgnore]
 		[Label( "[i:149] Book position Y screen coordinate" )]
-		[Range( -1080f, 1080f )]
+		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		public int BookPositionYInput {
-			get => (int)this.BookPositionY;
-			set => this.BookPositionY = (float)value;
+		[DefaultValue( 260 )]
+		public int BookPositionY {
+			get => (int)this._BookPositionY;
+			set => this._BookPositionY = (float)value;
 		}
+		private float _BookPositionY { get; set; } = 260;
 
 		[JsonIgnore]
 		[Label( "[i:903] Page number position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
-		public int PagePositionXInput {
-			get => (int)this.PagePositionX;
-			set => this.PagePositionX = (float)value;
+		[DefaultValue( 192 )]
+		public int PagePositionX {
+			get => (int)this._PagePositionX;
+			set => this._PagePositionX = (float)value;
 		}
+		private float _PagePositionX { get; set; } = 192;
+
 		[JsonIgnore]
 		[Label( "[i:903] Page number position Y screen coordinate" )]
-		[Range( -1080f, 1080f )]
+		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		public int PagePositionYInput {
-			get => (int)this.PagePositionY;
-			set => this.PagePositionY = (float)value;
+		[DefaultValue( 260 )]
+		public int PagePositionY {
+			get => (int)this._PagePositionY;
+			set => this._PagePositionY = (float)value;
 		}
+		private float _PagePositionY { get; set; } = 260;
+
 
 		[JsonIgnore]
 		[Label( "[i:967] Page ticks bar position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
-		public int PageTicksPositionXInput {
-			get => (int)this.PageTicksPositionX;
-			set => this.PageTicksPositionX = (float)value;
+		[DefaultValue( 32 )]
+		public int PageTicksPositionX {
+			get => (int)this._PageTicksPositionX;
+			set => this._PageTicksPositionX = (float)value;
 		}
+		private float _PageTicksPositionX { get; set; } = 32;
+
 		[JsonIgnore]
 		[Label( "[i:967] Page ticks bar position Y screen coordinate" )]
-		[Range( -1080f, 1080f )]
+		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		public int PageTicksPositionYInput {
-			get => (int)this.PageTicksPositionY;
-			set => this.PageTicksPositionY = (float)value;
+		[DefaultValue( 254 )]
+		public int PageTicksPositionY {
+			get => (int)this._PageTicksPositionY;
+			set => this._PageTicksPositionY = (float)value;
 		}
+		private float _PageTicksPositionY { get; set; } = 254;
+
 
 		[JsonIgnore]
 		[Label( "[i:48] Shop or chest UI X screen coordinate offset" )]
 		[Range( -2048, 2048 )]
-		[Increment( 8 )]
-		public int ChestOnOffsetXInput {
-			get => (int)this.ChestOnOffsetX;
-			set => this.ChestOnOffsetX = (float)value;
+		[DefaultValue( 0 )]
+		public int ChestOnOffsetX {
+			get => (int)this._ChestOnOffsetX;
+			set => this._ChestOnOffsetX = (float)value;
 		}
+		private float _ChestOnOffsetX { get; set; } = 0;
+
 		[JsonIgnore]
 		[Label( "[i:48] Shop or chest UI Y screen coordinate offset" )]
-		[Range( -1080f, 1080f )]
-		[Increment( 8 )]
-		public int ChestOnOffsetYInput {
-			get => (int)this.ChestOnOffsetY;
-			set => this.ChestOnOffsetY = (float)value;
+		[Range( -1080, 1080 )]
+		[DefaultValue( 168 )]
+		public int ChestOnOffsetY {
+			get => (int)this._ChestOnOffsetY;
+			set => this._ChestOnOffsetY = (float)value;
 		}
-
-		////
-
-		[Header("\n \n \n \n")]
-		[Range( -2048f, 2048f )]
-		[DefaultValue( 64f )]
-		public float BookPositionX { get; set; } = 64f;
-
-		[Range( -1080f, 1080f )]
-		[DefaultValue( 260f )]
-		public float BookPositionY { get; set; } = 260f;
-
-		[Range( -2048f, 2048f )]
-		[DefaultValue( 192f )]
-		public float PagePositionX { get; set; } = 192f;
-
-		[Range( -1080f, 1080f )]
-		[DefaultValue( 260f )]
-		public float PagePositionY { get; set; } = 260f;
-
-		[Range( -2048f, 2048f )]
-		[DefaultValue( 32f )]
-		public float PageTicksPositionX { get; set; } = 32f;
-
-		[Range( -1080f, 1080f )]
-		[DefaultValue( 254f )]
-		public float PageTicksPositionY { get; set; } = 254f;
-
-
-		[DefaultValue( 0f )]
-		public float ChestOnOffsetX { get; set; } = 0f;
-
-		[DefaultValue( 168f )]
-		public float ChestOnOffsetY { get; set; } = 168f;
+		private float _ChestOnOffsetY { get; set; } = 168;
 
 
 
