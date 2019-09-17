@@ -60,7 +60,6 @@ namespace ExtensibleInventory {
 		////
 
 		[Header("\n ")]
-		[JsonIgnore]
 		[Label( "[i:149] Book position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
@@ -71,7 +70,6 @@ namespace ExtensibleInventory {
 		}
 		private float _BookPositionX { get; set; } = 64;
 
-		[JsonIgnore]
 		[Label( "[i:149] Book position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
@@ -82,7 +80,6 @@ namespace ExtensibleInventory {
 		}
 		private float _BookPositionY { get; set; } = 260;
 
-		[JsonIgnore]
 		[Label( "[i:903] Page number position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
@@ -93,7 +90,6 @@ namespace ExtensibleInventory {
 		}
 		private float _PagePositionX { get; set; } = 192;
 
-		[JsonIgnore]
 		[Label( "[i:903] Page number position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
@@ -105,7 +101,6 @@ namespace ExtensibleInventory {
 		private float _PagePositionY { get; set; } = 260;
 
 
-		[JsonIgnore]
 		[Label( "[i:967] Page ticks bar position X screen coordinate" )]
 		[Range( -2048, 2048 )]
 		[Increment( 8 )]
@@ -116,7 +111,6 @@ namespace ExtensibleInventory {
 		}
 		private float _PageTicksPositionX { get; set; } = 32;
 
-		[JsonIgnore]
 		[Label( "[i:967] Page ticks bar position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
@@ -128,7 +122,6 @@ namespace ExtensibleInventory {
 		private float _PageTicksPositionY { get; set; } = 254;
 
 
-		[JsonIgnore]
 		[Label( "[i:48] Shop or chest UI X screen coordinate offset" )]
 		[Range( -2048, 2048 )]
 		[DefaultValue( 0 )]
@@ -138,7 +131,6 @@ namespace ExtensibleInventory {
 		}
 		private float _ChestOnOffsetX { get; set; } = 0;
 
-		[JsonIgnore]
 		[Label( "[i:48] Shop or chest UI Y screen coordinate offset" )]
 		[Range( -1080, 1080 )]
 		[DefaultValue( 168 )]
