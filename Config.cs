@@ -1,7 +1,8 @@
 ﻿using HamstarHelpers.Services.ModCompatibilities.ExtensibleInventoryCompat;
-using Newtonsoft.Json;
+using Microsoft.Xna.Framework;
 using System;
 using System.ComponentModel;
+using Terraria;
 using Terraria.ModLoader.Config;
 
 
@@ -66,7 +67,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 64 )]
 		public int BookPositionXCoord {
 			get => (int)this._BookPositionX;
-			set => this._BookPositionX = (float)value;
+			set => this._BookPositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
 		private float _BookPositionX { get; set; } = 64;
 
@@ -76,7 +77,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 260 )]
 		public int BookPositionYCoord {
 			get => (int)this._BookPositionY;
-			set => this._BookPositionY = (float)value;
+			set => this._BookPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
 		private float _BookPositionY { get; set; } = 260;
 
@@ -86,7 +87,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 192 )]
 		public int PagePositionXCoord {
 			get => (int)this._PagePositionX;
-			set => this._PagePositionX = (float)value;
+			set => this._PagePositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
 		private float _PagePositionX { get; set; } = 192;
 
@@ -96,7 +97,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 260 )]
 		public int PagePositionYCoord {
 			get => (int)this._PagePositionY;
-			set => this._PagePositionY = (float)value;
+			set => this._PagePositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
 		private float _PagePositionY { get; set; } = 260;
 
@@ -107,19 +108,19 @@ namespace ExtensibleInventory {
 		[DefaultValue( 32 )]
 		public int PageTicksPositionXCoord {
 			get => (int)this._PageTicksPositionX;
-			set => this._PageTicksPositionX = (float)value;
+			set => this._PageTicksPositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
 		private float _PageTicksPositionX { get; set; } = 32;
 
 		[Label( "[i:967] Page ticks bar position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		[DefaultValue( 254 )]
+		[DefaultValue( 255 )]
 		public int PageTicksPositionYCoord {
 			get => (int)this._PageTicksPositionY;
-			set => this._PageTicksPositionY = (float)value;
+			set => this._PageTicksPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
-		private float _PageTicksPositionY { get; set; } = 254;
+		private float _PageTicksPositionY { get; set; } = 255;
 
 
 		[Label( "[i:48] Shop or chest UI X screen coordinate offset" )]
@@ -127,7 +128,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 0 )]
 		public int ChestOnOffsetXCoord {
 			get => (int)this._ChestOnOffsetX;
-			set => this._ChestOnOffsetX = (float)value;
+			set => this._ChestOnOffsetX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
 		private float _ChestOnOffsetX { get; set; } = 0;
 
@@ -136,7 +137,7 @@ namespace ExtensibleInventory {
 		[DefaultValue( 168 )]
 		public int ChestOnOffsetYCoord {
 			get => (int)this._ChestOnOffsetY;
-			set => this._ChestOnOffsetY = (float)value;
+			set => this._ChestOnOffsetY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
 		private float _ChestOnOffsetY { get; set; } = 168;
 
