@@ -19,7 +19,7 @@ namespace ExtensibleInventory.Inventory {
 			if( ExtensibleInventoryMod.Instance.Config.DebugModeReset ) {
 				return;
 			}
-			if( !tags.ContainsKey( prefix + "page_count" ) || !tags.ContainsKey( prefix + "curr_page" ) ) {
+			if( !tags.ContainsKey(prefix + "page_count") || !tags.ContainsKey(prefix + "curr_page") ) {
 				return;
 			}
 
@@ -50,7 +50,14 @@ namespace ExtensibleInventory.Inventory {
 						try {
 							page.Items[j] = ItemIO.Load( tags.GetCompound( pageNumItemNumKey ) );
 						} catch( Exception e ) {
-							throw new ModHelpersException( "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j, e );
+							string err = "Could not load item for book "+lowercaseBookName+" on page "+i+" at position "+j+
+								"; please report this issue in the forum thread with your .tplr file.";
+
+							if( ExtensibleInventoryMod.Instance.Config.DebugModeSkipLoadErrors ) {
+								LogHelpers.Warn( err );
+							} else {
+								throw new ModHelpersException( err, e );
+							}
 						}
 					} else {
 						page.Items[j] = new Item();

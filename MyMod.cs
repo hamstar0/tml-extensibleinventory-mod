@@ -15,7 +15,7 @@ namespace ExtensibleInventory {
 
 		////////////////
 
-		public ExtensibleInventoryConfigData Config => this.GetConfig<ExtensibleInventoryConfigData>();
+		public ExtensibleInventoryConfig Config => ModContent.GetInstance<ExtensibleInventoryConfig>();
 
 
 

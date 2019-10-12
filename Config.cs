@@ -7,7 +7,7 @@ using Terraria.ModLoader.Config;
 
 
 namespace ExtensibleInventory {
-	public class ExtensibleInventoryConfigData : ModConfig {
+	public class ExtensibleInventoryConfig : ModConfig {
 		public override ConfigScope Mode => ConfigScope.ServerSide;
 
 
@@ -18,6 +18,8 @@ namespace ExtensibleInventory {
 		public bool DebugModeUI { get; set; } = false;
 
 		public bool DebugModeReset { get; set; } = false;
+
+		public bool DebugModeSkipLoadErrors { get; set; } = false;
 
 		////
 
@@ -74,12 +76,12 @@ namespace ExtensibleInventory {
 		[Label( "[i:149] Book position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		[DefaultValue( 260 )]
+		[DefaultValue( 262 )]
 		public int BookPositionYCoord {
 			get => (int)this._BookPositionY;
 			set => this._BookPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
-		private float _BookPositionY { get; set; } = 260;
+		private float _BookPositionY { get; set; } = 262;
 
 		[Label( "[i:903] Page number position X screen coordinate" )]
 		[Range( -2048, 2048 )]
@@ -94,12 +96,12 @@ namespace ExtensibleInventory {
 		[Label( "[i:903] Page number position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		[DefaultValue( 260 )]
+		[DefaultValue( 262 )]
 		public int PagePositionYCoord {
 			get => (int)this._PagePositionY;
 			set => this._PagePositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
-		private float _PagePositionY { get; set; } = 260;
+		private float _PagePositionY { get; set; } = 262;
 
 
 		[Label( "[i:967] Page ticks bar position X screen coordinate" )]
@@ -115,12 +117,12 @@ namespace ExtensibleInventory {
 		[Label( "[i:967] Page ticks bar position Y screen coordinate" )]
 		[Range( -1080, 1080 )]
 		[Increment( 8 )]
-		[DefaultValue( 255 )]
+		[DefaultValue( 256 )]
 		public int PageTicksPositionYCoord {
 			get => (int)this._PageTicksPositionY;
 			set => this._PageTicksPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
-		private float _PageTicksPositionY { get; set; } = 255;
+		private float _PageTicksPositionY { get; set; } = 256;
 
 
 		[Label( "[i:48] Shop or chest UI X screen coordinate offset" )]
