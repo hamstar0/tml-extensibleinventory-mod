@@ -43,7 +43,6 @@ namespace ExtensibleInventory {
 				Item worldItem = Main.item[item.whoAmI];
 
 				if( worldItem != null && !worldItem.IsAir && !worldItem.IsNotTheSameAs(item) ) {
-LogHelpers.Log("Sync needed?");
 					if( Main.netMode != 0 ) {
 						NetMessage.SendData( MessageID.SyncItem, -1, -1, null, item.whoAmI, 0f, 0f, 0f, 0, 0, 0 );
 					}

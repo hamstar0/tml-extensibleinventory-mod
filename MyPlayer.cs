@@ -115,8 +115,8 @@ namespace ExtensibleInventory {
 
 				float minX = 20;
 				float minY = 20;
-				float maxX = minX + (14f * 56f) * Main.inventoryScale;
-				float maxY = minY + (8.5f * 56f) * Main.inventoryScale;
+				float maxX = minX + (14f * 56f) * Main.inventoryScale * Main.UIScale;
+				float maxY = minY + (8.5f * 56f) * Main.inventoryScale * Main.UIScale;
 
 				if( Main.mouseX < minX || Main.mouseX >= maxX || Main.mouseY < minY || Main.mouseY >= maxY ) {
 					this.ScrollModeDuration = 0;
@@ -147,9 +147,15 @@ namespace ExtensibleInventory {
 		public override void SetControls() {
 			var mymod = (ExtensibleInventoryMod)this.mod;
 
-			if( !mymod.Config.ScrollModeEnabled || !this.ScrollModeOn ) { return; }
+			if( mymod.Config.ScrollModeEnabled && this.ScrollModeOn && Main.playerInventory ) {
+				this.CaptureMouseScrollForScrollMode();
+			}
+		}
 
+		private void CaptureMouseScrollForScrollMode() {
+			var mymod = (ExtensibleInventoryMod)this.mod;
 			int scrolled = PlayerInput.ScrollWheelDelta;
+
 			PlayerInput.ScrollWheelDelta = 0;
 
 			if( Main.playerInventory ) {
