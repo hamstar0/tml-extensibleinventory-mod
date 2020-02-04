@@ -1,0 +1,3 @@
+C:\Users\Jerome\Documents\My Games\Terraria\ModLoader\Mod Sources\ExtensibleInventory\obj\Debug\net452\ExtensibleInventory.csprojAssemblyReference.cache
+C:\Users\Jerome\Documents\My Games\Terraria\ModLoader\Mod Sources\ExtensibleInventory\obj\Debug\net452\ExtensibleInventory.AssemblyInfoInputs.cache
+C:\Users\Jerome\Documents\My Games\Terraria\ModLoader\Mod Sources\ExtensibleInventory\obj\Debug\net452\ExtensibleInventory.AssemblyInfo.cs
