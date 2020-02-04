@@ -71,7 +71,7 @@ namespace ExtensibleInventory.UI {
 				Color bordColor = (isShared ? sharedColor : unsharedColor) * (isHovering ? 1f : 0.65f);
 				int thickness = isCurrPage ? 2 : 1;
 
-				DrawHelpers.DrawBorderedRect(sb, fillColor, bordColor, rect, thickness);
+				DrawHelpers.DrawBorderedRect( sb, fillColor, bordColor, rect, thickness );
 
 				rects[i] = rect;
 			}

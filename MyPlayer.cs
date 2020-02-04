@@ -125,21 +125,23 @@ namespace ExtensibleInventory {
 			}
 		}
 
-		public override void ProcessTriggers(TriggersSet triggersSet)
-		{
-			if (!ExtensibleInventoryMod.Instance.AllToNewPageHotKey.JustPressed)
+		public override void ProcessTriggers( TriggersSet triggersSet ) {
+			if( !ExtensibleInventoryMod.Instance.NonLockedInventoryToNewPageHotKey.JustPressed ) {
 				return;
+			}
 
-			if (!Library.CurrentBook.InsertAtCurrentPagePosition(Main.LocalPlayer))				
+			if( !this.Library.CurrentBook.InsertAtCurrentPagePosition( Main.LocalPlayer ) ) {
 				return;
+			}
 
 			// Immediately return to original page,
 			// dump unfavorited items to page no. - 1
 			Main.NewText(
-				$"Dumped non-favorited items to {Library.CurrentBook.CurrentPageIdx}.",
-				Color.LimeGreen);
-			Library.CurrentBook.ScrollPageDown(Main.LocalPlayer);
-			Library.CurrentBook.CleanToNewPage(Main.LocalPlayer);
+				$"Dumped non-favorited items to {this.Library.CurrentBook.CurrentPageIdx}.",
+				Color.LimeGreen );
+
+			this.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );
+			this.Library.CurrentBook.PullNonLockedInventoryToLastPage( Main.LocalPlayer );
 			Recipe.FindRecipes();
 		}
 

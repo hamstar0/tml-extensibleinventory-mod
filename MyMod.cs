@@ -17,7 +17,9 @@ namespace ExtensibleInventory {
 
 		public ExtensibleInventoryConfig Config => ModContent.GetInstance<ExtensibleInventoryConfig>();
 
-		internal ModHotKey AllToNewPageHotKey { get; private set; }
+		internal ModHotKey NonLockedInventoryToNewPageHotKey { get; private set; }
+
+
 
 		////////////////
 
@@ -28,7 +30,7 @@ namespace ExtensibleInventory {
 		public override void Load() {
 			if( !Main.dedServ ) {
 				this.InitializeUI();
-				AllToNewPageHotKey = RegisterHotKey("Move All To New Page", "F2");
+				this.NonLockedInventoryToNewPageHotKey = this.RegisterHotKey( "Move All To New Page", "F2" );
 			}
 		}
 
@@ -46,7 +48,7 @@ namespace ExtensibleInventory {
 		////
 
 		public override void Unload() {
-			AllToNewPageHotKey = null;
+			NonLockedInventoryToNewPageHotKey = null;
 			ExtensibleInventoryMod.Instance = null;
 		}
 

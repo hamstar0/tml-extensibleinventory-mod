@@ -39,8 +39,8 @@ namespace ExtensibleInventory.Inventory {
 		public void PushCurrentPageToInventory( Player player ) {
 			this.Pages[ this.CurrentPageIdx ].PushToInventory( player );
 		}
-		public void CleanToNewPage( Player player ) {
-			this.Pages[ this.CurrentPageIdx - 1 ].PullCleanupFromInventory( player );
+		public void PullNonLockedInventoryToLastPage( Player player ) {
+			this.Pages[ this.CurrentPageIdx - 1 ].PullNonLockedItemsFromInventory( player );
 		}
 
 
