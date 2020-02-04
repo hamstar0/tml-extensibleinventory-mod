@@ -1,4 +1,5 @@
-﻿using HamstarHelpers.Helpers.HUD;
+﻿using HamstarHelpers.Helpers.Draw;
+using HamstarHelpers.Helpers.HUD;
 using HamstarHelpers.Helpers.TModLoader;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -70,7 +71,7 @@ namespace ExtensibleInventory.UI {
 				Color bordColor = (isShared ? sharedColor : unsharedColor) * (isHovering ? 1f : 0.65f);
 				int thickness = isCurrPage ? 2 : 1;
 
-				HUDHelpers.DrawBorderedRect( sb, fillColor, bordColor, rect, thickness );
+				DrawHelpers.DrawBorderedRect(sb, fillColor, bordColor, rect, thickness);
 
 				rects[i] = rect;
 			}

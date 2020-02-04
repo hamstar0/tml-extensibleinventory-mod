@@ -75,6 +75,39 @@ namespace ExtensibleInventory.Inventory {
 			}
 		}
 
+		public void PullCleanupFromInventory(Player player)
+		{
+			for( int i = 10; i < 50; i++ ) {
+				Item invItem;
+				if (player.inventory[i] == null ||
+					player.inventory[i].IsAir ||
+					player.inventory[i].favorited)
+				{
+					invItem = new Item();
+				}
+				else
+				{
+					invItem = player.inventory[i].DeepClone();
+					player.inventory[i] = new Item();
+				}
+					
+				this.Items[i - 10] = invItem;
+			}
+		}
+
+		public void FinishCleanup(Player player)
+		{
+			for (int i = 10; i < 50; i++)
+			{
+				if (player.inventory[i] == null ||
+					player.inventory[i].IsAir ||
+					player.inventory[i].favorited)
+					continue;
+				else
+					player.inventory[i].TurnToAir();
+			}
+		}
+
 
 		////////////////
 

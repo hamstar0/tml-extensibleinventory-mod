@@ -38,7 +38,7 @@ namespace ExtensibleInventory.Inventory {
 			//RecipeHack.ForceRecipeRefresh();
 			Recipe.FindRecipes();
 
-			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, true, () => {
 				return false;
 			} );
 
@@ -71,7 +71,7 @@ namespace ExtensibleInventory.Inventory {
 			//RecipeHack.ForceRecipeRefresh();
 			Recipe.FindRecipes();
 
-			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, true, () => {
 				RecipeHack.ForceRecipeRefresh();
 				return false;
 			} );
@@ -104,7 +104,7 @@ namespace ExtensibleInventory.Inventory {
 			//RecipeHack.ForceRecipeRefresh();
 			Recipe.FindRecipes();
 
-			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, () => {
+			Timers.SetTimer( InventoryBook.PageScrollTimerName, 10, true, () => {
 				return false;
 			} );
 

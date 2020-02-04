@@ -1,6 +1,7 @@
 using ExtensibleInventory.Inventory;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Messages.Inbox;
+using Microsoft.Xna.Framework;
 using System;
 using Terraria;
 using Terraria.GameInput;
@@ -122,6 +123,24 @@ namespace ExtensibleInventory {
 					this.ScrollModeDuration = 0;
 				}
 			}
+		}
+
+		public override void ProcessTriggers(TriggersSet triggersSet)
+		{
+			if (!ExtensibleInventoryMod.Instance.AllToNewPageHotKey.JustPressed)
+				return;
+
+			if (!Library.CurrentBook.InsertAtCurrentPagePosition(Main.LocalPlayer))				
+				return;
+
+			// Immediately return to original page,
+			// dump unfavorited items to page no. - 1
+			Main.NewText(
+				$"Dumped non-favorited items to {Library.CurrentBook.CurrentPageIdx}.",
+				Color.LimeGreen);
+			Library.CurrentBook.ScrollPageDown(Main.LocalPlayer);
+			Library.CurrentBook.CleanToNewPage(Main.LocalPlayer);
+			Recipe.FindRecipes();
 		}
 
 
