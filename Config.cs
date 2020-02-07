@@ -71,6 +71,7 @@ namespace ExtensibleInventory {
 			get => (int)this._BookPositionX;
 			set => this._BookPositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
+		[DefaultValue( 64 )]
 		private float _BookPositionX { get; set; } = 64;
 
 		[Label( "[i:149] Book position Y screen coordinate" )]
@@ -81,6 +82,7 @@ namespace ExtensibleInventory {
 			get => (int)this._BookPositionY;
 			set => this._BookPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
+		[DefaultValue( 262 )]
 		private float _BookPositionY { get; set; } = 262;
 
 		[Label( "[i:903] Page number position X screen coordinate" )]
@@ -91,6 +93,7 @@ namespace ExtensibleInventory {
 			get => (int)this._PagePositionX;
 			set => this._PagePositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
+		[DefaultValue( 192 )]
 		private float _PagePositionX { get; set; } = 192;
 
 		[Label( "[i:903] Page number position Y screen coordinate" )]
@@ -101,6 +104,7 @@ namespace ExtensibleInventory {
 			get => (int)this._PagePositionY;
 			set => this._PagePositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
+		[DefaultValue( 262 )]
 		private float _PagePositionY { get; set; } = 262;
 
 
@@ -112,6 +116,7 @@ namespace ExtensibleInventory {
 			get => (int)this._PageTicksPositionX;
 			set => this._PageTicksPositionX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
+		[DefaultValue( 32 )]
 		private float _PageTicksPositionX { get; set; } = 32;
 
 		[Label( "[i:967] Page ticks bar position Y screen coordinate" )]
@@ -122,6 +127,7 @@ namespace ExtensibleInventory {
 			get => (int)this._PageTicksPositionY;
 			set => this._PageTicksPositionY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
+		[DefaultValue( 256 )]
 		private float _PageTicksPositionY { get; set; } = 256;
 
 
@@ -132,6 +138,7 @@ namespace ExtensibleInventory {
 			get => (int)this._ChestOnOffsetX;
 			set => this._ChestOnOffsetX = MathHelper.Clamp( (float)value, -Main.screenWidth, Main.screenWidth );
 		}
+		[DefaultValue( 0 )]
 		private float _ChestOnOffsetX { get; set; } = 0;
 
 		[Label( "[i:48] Shop or chest UI Y screen coordinate offset" )]
@@ -141,6 +148,7 @@ namespace ExtensibleInventory {
 			get => (int)this._ChestOnOffsetY;
 			set => this._ChestOnOffsetY = MathHelper.Clamp( (float)value, -Main.screenHeight, Main.screenHeight );
 		}
+		[DefaultValue( 168 )]
 		private float _ChestOnOffsetY { get; set; } = 168;
 
 

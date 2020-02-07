@@ -1,5 +1,3 @@
 Implements an extensible, paginated inventory for players, able to be scaled endlessly.
 
-Mod recommendations:
-PortableStorage = Very diverse range of extended on-person storage options. Balanced for gameplay.
-MagicStorage = An extensive upgrade to chest-based storage systems for better centralization.
+New (v1.5.2): Now includes a hotkey to create a new page just after the current page.

@@ -2,4 +2,4 @@
 
 Implements an extensible, paginated inventory for players, able to be scaled endlessly.
 
-https://forums.terraria.org/index.php?threads/extensible-inventory-limitless-paginated-inventory.72024/
+New (v1.5.2): Now includes a hotkey to create a new page just after the current page.

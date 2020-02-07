@@ -134,10 +134,9 @@ namespace ExtensibleInventory {
 				return;
 			}
 
-			// Immediately return to original page,
-			// dump unfavorited items to page no. - 1
+			// Immediately return to original page, dump unfavorited items to new page
 			Main.NewText(
-				$"Dumped non-favorited items to {this.Library.CurrentBook.CurrentPageIdx}.",
+				"Dumped non-favorited items to page "+(this.Library.CurrentBook.CurrentPageIdx+2)+".",
 				Color.LimeGreen );
 
 			this.Library.CurrentBook.ScrollPageDown( Main.LocalPlayer );

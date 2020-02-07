@@ -30,7 +30,7 @@ namespace ExtensibleInventory {
 		public override void Load() {
 			if( !Main.dedServ ) {
 				this.InitializeUI();
-				this.NonLockedInventoryToNewPageHotKey = this.RegisterHotKey( "Move All To New Page", "F2" );
+				this.NonLockedInventoryToNewPageHotKey = this.RegisterHotKey( "Create Page After (brings locked)", "F2" );
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace ExtensibleInventory {
 		////
 
 		public override void Unload() {
-			NonLockedInventoryToNewPageHotKey = null;
+			this.NonLockedInventoryToNewPageHotKey = null;
 			ExtensibleInventoryMod.Instance = null;
 		}
 
