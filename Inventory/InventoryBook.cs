@@ -59,31 +59,43 @@ namespace ExtensibleInventory.Inventory {
 
 		public int Share( Player player, Item item ) {
 			// Do not share singular items
-			if( item.maxStack == 1 ) { return 0; }
+			if( item.maxStack == 1 ) {
+				return 0;
+			}
 
 			int totalShared = 0;
 
 			for( int i = 0; i < this.Pages.Count; i++ ) {
 				InventoryPage page = this.Pages[i];
-				if( !page.IsSharing ) { continue; }
+				if( !page.IsSharing ) {
+					continue;
+				}
 
 				Item[] items = this.GetPageItems( player, i );
 				for( int j = 0; j < items.Length; j++ ) {
 					Item dest = items[j];
-					if( dest.type != item.type ) { continue; }
+					if( dest.IsAir || dest.type != item.type ) {
+						continue;
+					}
 
-					int space = dest.maxStack - dest.stack;
-					if( space <= 0 ) { continue; }
+					int availableStackSpace = dest.maxStack - dest.stack;
+					if( availableStackSpace <= 0 ) {
+						continue;
+					}
 
-					int consume = Math.Min( space, item.stack );
-					item.stack -= consume;
-					dest.stack += consume;
-					totalShared += consume;
+					int transferAmt = Math.Min( availableStackSpace, item.stack );
+					item.stack -= transferAmt;
+					dest.stack += transferAmt;
+					totalShared += transferAmt;
 
-					if( item.stack == 0 ) {
+					if( item.stack <= 0 ) {
 						item.active = false;
 						break;
 					}
+				}
+
+				if( !item.active ) {
+					break;
 				}
 			}
 

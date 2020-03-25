@@ -27,11 +27,12 @@ namespace ExtensibleInventory {
 					item.stack = oldStack;
 					item.active = true;
 
-					ItemText.NewText( item, oldStack, false, false );
-					Main.PlaySound( 7, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f );
 					if( player.whoAmI == Main.myPlayer ) {
 						Recipe.FindRecipes();
 					}
+
+					ItemText.NewText( item, oldStack, false, false );
+					Main.PlaySound( 7, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f );
 					AchievementsHelper.NotifyItemPickup( player, item );
 
 					item.stack = 0;
