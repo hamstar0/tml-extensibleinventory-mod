@@ -51,6 +51,14 @@ namespace ExtensibleInventory {
 			}
 		}
 
+		////////////////
+
+		public static Item[] GetBookPageItems( Player player, string bookName, int pageIdx ) {
+			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( player );
+
+			return myplayer.Library.GetBookPageItems( player, bookName, pageIdx );
+		}
+
 		public static Item[] GetLatestBookPageItems( Player player, string bookName ) {
 			var myplayer = TmlHelpers.SafelyGetModPlayer<ExtensibleInventoryPlayer>( player );
 

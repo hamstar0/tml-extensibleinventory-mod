@@ -64,7 +64,7 @@ namespace ExtensibleInventory.Inventory {
 
 
 		////////////////
-		
+
 		public bool AddBookPage( Player player, string bookName, out string err ) {
 			if( !this.Books.ContainsKey( bookName ) ) {
 				throw new ModHelpersException( "No such book by name " + bookName );
@@ -83,6 +83,19 @@ namespace ExtensibleInventory.Inventory {
 			InventoryBook book = this.Books[ bookName ];
 
 			return book.DeleteEmptyPage( player, book.CountPages() - 1, out err );
+		}
+
+
+		////////////////
+
+		public Item[] GetBookPageItems( Player player, string bookName, int pageIdx ) {
+			if( !this.Books.ContainsKey( bookName ) ) {
+				throw new ModHelpersException( "No such book by name " + bookName );
+			}
+
+			InventoryBook book = this.Books[bookName];
+
+			return book.GetPageItems( player, pageIdx );
 		}
 	}
 }
